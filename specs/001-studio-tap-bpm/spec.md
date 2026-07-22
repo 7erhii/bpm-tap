@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-22
 
-**Status**: Draft
+**Status**: Approved
 
 **Input**: User description: "Clone-and-surpass beatsperminuteonline.com as a free studio-grade online Tap BPM / tap tempo product. SEO-first information architecture. Full MVP: core tap with confidence, ÷2/×2, copy, reset, keyboard/touch, fullscreen; metronome confirm; delay/ms table; session history; share URL; genre BPM SEO hub; EN+RU; PWA-ready. No accounts, no premium. Monetization later via ads that never cover the tool."
 
