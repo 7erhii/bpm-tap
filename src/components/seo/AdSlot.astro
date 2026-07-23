@@ -1,0 +1,39 @@
+---
+import { t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  slotId: 'below-tool' | 'footer';
+}
+
+const { locale, slotId } = Astro.props;
+const enabled = import.meta.env.PUBLIC_ADS_ENABLED === 'true';
+---
+
+{
+  enabled ? (
+    <aside class="ad-slot" data-ad-slot={slotId} aria-label={t(locale, 'ads.reserved')}>
+      <div class="ad-slot__box">{t(locale, 'ads.reserved')}</div>
+    </aside>
+  ) : (
+    <aside class="ad-slot ad-slot--reserved" data-ad-slot={slotId} hidden={!enabled}></aside>
+  )
+}
+
+<style>
+  .ad-slot {
+    margin: var(--space-5) 0;
+  }
+  .ad-slot__box {
+    min-height: 90px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .ad-slot--reserved {
+    min-height: 0;
+  }
+</style>

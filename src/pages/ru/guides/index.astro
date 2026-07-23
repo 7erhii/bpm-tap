@@ -1,0 +1,66 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { guides } from '@/content/guides';
+import { localizedPath, t } from '@/i18n/utils';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+
+const locale = 'ru' as const;
+const list = [...guides].sort((a, b) => a.order - b.order);
+---
+
+<ToolLayout
+  locale={locale}
+  title={t(locale, 'guides.indexTitle')}
+  description={t(locale, 'guides.indexDescription')}
+  canonicalPath="/ru/guides/"
+  heading={t(locale, 'guides.indexH1')}
+  lead={t(locale, 'guides.indexLead')}
+>
+  <div slot="tool" class="guide-index">
+    <ul>
+      {
+        list.map((guide) => (
+          <li>
+            <a href={localizedPath(locale, `guides/${guide.slug}`)}>
+              <strong>{guide.ru.h1}</strong>
+              <span>{guide.ru.description}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <RelatedTools locale={locale} current="guides" />
+</ToolLayout>
+
+<style>
+  .guide-index ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .guide-index a {
+    display: grid;
+    gap: 0.35rem;
+    text-decoration: none;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-tap);
+    color: var(--text);
+  }
+  .guide-index a:hover {
+    border-color: var(--accent);
+  }
+  .guide-index strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+  .guide-index span {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+</style>

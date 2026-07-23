@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bpm-tap.com/sitemap-index.xml

@@ -1,0 +1,143 @@
+---
+import type { Genre } from '@/content/genres';
+import { genres } from '@/content/genres';
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+
+interface Props {
+  locale: Locale;
+  genre: Genre;
+  bpm: number;
+}
+
+const { locale, genre, bpm } = Astro.props;
+const copy = genre[locale];
+const related = genre.related
+  .map((slug) => genres.find((g) => g.slug === slug))
+  .filter((g): g is Genre => Boolean(g));
+const delayHref = `${localizedPath(locale, 'delay')}?bpm=${bpm}`;
+---
+
+<section class="genre-body stack">
+  <h2>{t(locale, 'genres.aboutTitle', { name: copy.name })}</h2>
+  <p>{copy.summary}</p>
+  <p class="tip"><strong>{t(locale, 'genres.tipLabel')}</strong> {copy.tip}</p>
+
+  <h2>{t(locale, 'genres.subgenresTitle')}</h2>
+  <ul class="chips">
+    {copy.subgenres.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <h2>{t(locale, 'genres.examplesTitle')}</h2>
+  <ul class="examples">
+    {copy.examples.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <p class="cross">
+    <a href={delayHref}>{t(locale, 'genres.delayCta')}</a>
+  </p>
+
+  {
+    related.length > 0 ? (
+      <>
+        <h2>{t(locale, 'genres.relatedTitle')}</h2>
+        <ul class="related">
+          {related.map((item) => (
+            <li>
+              <a href={localizedPath(locale, `genres/${item.slug}`)}>
+                {item[locale].name}
+                <span>
+                  {t(locale, 'genres.range', { min: item.bpmMin, max: item.bpmMax })}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    ) : null
+  }
+
+  <RelatedTools locale={locale} current="genres" bpm={bpm} />
+</section>
+
+<style>
+  .genre-body {
+    max-width: 40rem;
+  }
+  .genre-body h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+  }
+  .genre-body p,
+  .examples li {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .tip {
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-dim);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .tip strong {
+    color: var(--text);
+  }
+  .chips {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chips li {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .examples {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .cross a {
+    color: var(--accent);
+    font-weight: 650;
+    text-decoration: none;
+  }
+  .cross a:hover {
+    text-decoration: underline;
+  }
+  .related {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .related a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    background: var(--bg-elevated);
+  }
+  .related span {
+    color: var(--text-muted);
+    font-family: var(--font-bpm);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .related a:hover {
+    border-color: var(--accent);
+  }
+</style>

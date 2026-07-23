@@ -93,7 +93,7 @@
 
 ## 9. Visual design system
 
-**Decision**: Custom “studio night” tokens in CSS variables — near-black base, single acid/amber accent, distinctive display font for BPM digits, purposeful motion (tap pulse, settle). No generic purple SaaS / cream-terracotta / broadsheet kits.
+**Decision**: Custom “studio night” tokens in CSS variables — near-black base, single acid/amber accent, distinctive display font for BPM digits, purposeful motion (tap pulse, settle). No generic purple SaaS / cream-terracotta / broadsheet kits. Icons via **Lucide** (SVG), never emoji-as-UI; primary controls keep text labels.
 
 **Rationale**: Spec + constitution design bar; brand differentiation vs orange-ad competitor.
 

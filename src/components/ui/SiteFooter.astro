@@ -1,0 +1,105 @@
+---
+import { genres } from '@/content/genres';
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  theme?: 'studio' | 'pulse';
+}
+
+const { locale, theme = 'studio' } = Astro.props;
+const genreList = [...genres].sort((a, b) => a.order - b.order);
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    {
+      theme === 'pulse' ? (
+        <div class="site-footer__row">
+          <p>{t(locale, 'pulse.footer.privacy')}</p>
+          <a href={localizedPath(locale)}>{t(locale, 'nav.musicTools')}</a>
+        </div>
+      ) : (
+        <>
+          <div class="site-footer__row">
+            <p>{t(locale, 'footer.privacy')}</p>
+            <nav class="site-footer__tools" aria-label={t(locale, 'related.toolsLabel')}>
+              <a href={localizedPath(locale)}>{t(locale, 'nav.home')}</a>
+              <a href={localizedPath(locale, 'delay')}>{t(locale, 'nav.delay')}</a>
+              <a href={localizedPath(locale, 'metronome')}>{t(locale, 'nav.metronome')}</a>
+              <a href={localizedPath(locale, 'genres')}>{t(locale, 'nav.genres')}</a>
+              <a href={localizedPath(locale, 'guides')}>{t(locale, 'nav.guides')}</a>
+              <a href={localizedPath(locale, 'pulse')}>{t(locale, 'footer.pulse')}</a>
+            </nav>
+          </div>
+          <div class="site-footer__genres">
+            <p class="site-footer__genres-title">{t(locale, 'footer.genresTitle')}</p>
+            <ul>
+              {genreList.map((genre) => (
+                <li>
+                  <a href={localizedPath(locale, `genres/${genre.slug}`)}>{genre[locale].name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )
+    }
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-8);
+    padding: var(--space-6) 0;
+    border-top: 1px solid var(--line);
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .site-footer__inner {
+    display: grid;
+    gap: 1.35rem;
+  }
+  .site-footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+  }
+  .site-footer__row p {
+    margin: 0;
+  }
+  .site-footer__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.9rem;
+  }
+  .site-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .site-footer a:hover {
+    color: var(--text);
+    border-bottom-color: var(--line);
+  }
+  .site-footer__genres-title {
+    margin: 0 0 0.55rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .site-footer__genres ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.85rem;
+  }
+  .site-footer__genres a {
+    font-size: 0.88rem;
+  }
+</style>

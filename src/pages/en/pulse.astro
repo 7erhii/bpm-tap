@@ -1,0 +1,195 @@
+---
+import PulseLayout from '@/layouts/PulseLayout.astro';
+import TapApp from '@/components/tool/TapApp';
+import FaqSection from '@/components/seo/FaqSection.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import { t } from '@/i18n/utils';
+import { absoluteUrl } from '@/lib/site';
+import { pulseLabels } from '@/lib/ui/pulseLabels';
+
+const locale = 'en' as const;
+const pageUrl = absoluteUrl('/en/pulse/');
+const faqs = [
+  { q: t(locale, 'pulse.faq.q1'), a: t(locale, 'pulse.faq.a1') },
+  { q: t(locale, 'pulse.faq.q2'), a: t(locale, 'pulse.faq.a2') },
+  { q: t(locale, 'pulse.faq.q3'), a: t(locale, 'pulse.faq.a3') },
+  { q: t(locale, 'pulse.faq.q4'), a: t(locale, 'pulse.faq.a4') },
+  { q: t(locale, 'pulse.faq.q5'), a: t(locale, 'pulse.faq.a5') },
+  { q: t(locale, 'pulse.faq.q6'), a: t(locale, 'pulse.faq.a6') },
+];
+const howToSteps = [
+  t(locale, 'pulse.howto.1'),
+  t(locale, 'pulse.howto.2'),
+  t(locale, 'pulse.howto.3'),
+];
+---
+
+<PulseLayout
+  locale={locale}
+  title={t(locale, 'pulse.title')}
+  description={t(locale, 'pulse.description')}
+  keywords={t(locale, 'pulse.keywords')}
+  canonicalPath="/en/pulse/"
+  heading={t(locale, 'pulse.h1')}
+  lead={t(locale, 'pulse.lead')}
+>
+  <JsonLd
+    slot="head"
+    data={[
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Online Pulse / Heart Rate Counter',
+        alternateName: ['Pulse tap counter', 'Heart rate BPM tap tool'],
+        applicationCategory: 'HealthApplication',
+        operatingSystem: 'Any',
+        browserRequirements: 'Requires JavaScript',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        description: t(locale, 'pulse.description'),
+        url: pageUrl,
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: t(locale, 'pulse.howto.title'),
+        description: t(locale, 'pulse.lead'),
+        totalTime: 'PT1M',
+        tool: {
+          '@type': 'HowToTool',
+          name: 'Online pulse counter',
+        },
+        step: howToSteps.map((text, index) => ({
+          '@type': 'HowToStep',
+          position: index + 1,
+          name: `Step ${index + 1}`,
+          text,
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'BPM Tap',
+            item: absoluteUrl('/en/'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Pulse / Heart rate',
+            item: pageUrl,
+          },
+        ],
+      },
+    ]}
+  />
+
+  <TapApp
+    client:idle={{ timeout: 200 }}
+    slot="tool"
+    locale={locale}
+    labels={pulseLabels(locale)}
+    mode="pulse"
+  />
+
+  <aside class="disclaimer" role="note">
+    <p>{t(locale, 'pulse.disclaimer')}</p>
+  </aside>
+
+  <section class="content-block">
+    <h2>{t(locale, 'pulse.howto.title')}</h2>
+    <ol>
+      {howToSteps.map((step) => <li>{step}</li>)}
+    </ol>
+  </section>
+
+  <section class="content-block rules">
+    <h2>{t(locale, 'pulse.rules.title')}</h2>
+    <ul>
+      <li>{t(locale, 'pulse.rules.1')}</li>
+      <li>{t(locale, 'pulse.rules.2')}</li>
+      <li>{t(locale, 'pulse.rules.3')}</li>
+      <li>{t(locale, 'pulse.rules.4')}</li>
+      <li>{t(locale, 'pulse.rules.5')}</li>
+    </ul>
+  </section>
+
+  <section class="content-block">
+    <h2>{t(locale, 'pulse.zones.title')}</h2>
+    <p>{t(locale, 'pulse.zones.lead')}</p>
+    <ul class="zones">
+      <li>{t(locale, 'pulse.zones.rest')}</li>
+      <li>{t(locale, 'pulse.zones.light')}</li>
+      <li>{t(locale, 'pulse.zones.exercise')}</li>
+    </ul>
+  </section>
+
+  <section class="content-block">
+    <h2>Heart rate FAQ</h2>
+    <FaqSection items={faqs} />
+  </section>
+</PulseLayout>
+
+<style>
+  .disclaimer {
+    max-width: 42rem;
+    padding: 0.95rem 1.1rem;
+    border-left: 3px solid var(--accent);
+    background: rgba(217, 43, 58, 0.07);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .disclaimer p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+  .content-block {
+    max-width: 42rem;
+  }
+  .content-block h2 {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .content-block p,
+  .content-block li {
+    color: var(--text-muted);
+  }
+  .content-block ol,
+  .content-block ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .rules {
+    padding: 1.15rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+  }
+  .zones {
+    list-style: none;
+    padding-left: 0;
+  }
+  .zones li {
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: rgba(217, 43, 58, 0.06);
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+import '@/styles/global.css';
+import type { Locale } from '@/i18n/utils';
+import { SITE_ORIGIN, absoluteUrl } from '@/lib/site';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  alternateEn?: string;
+  alternateRu?: string;
+  theme?: 'studio' | 'pulse';
+  themeColor?: string;
+  keywords?: string;
+}
+
+const {
+  locale,
+  title,
+  description,
+  canonicalPath,
+  alternateEn,
+  alternateRu,
+  theme = 'studio',
+  themeColor,
+  keywords,
+} = Astro.props;
+
+function withTrailingSlash(path: string): string {
+  if (!path || path === '/') return '/';
+  return path.endsWith('/') ? path : `${path}/`;
+}
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? SITE_ORIGIN;
+const canonicalPathNorm = withTrailingSlash(canonicalPath);
+const enPath = withTrailingSlash(alternateEn ?? canonicalPathNorm.replace(/^\/ru/, '/en'));
+const ruPath = withTrailingSlash(alternateRu ?? canonicalPathNorm.replace(/^\/en/, '/ru'));
+const canonical = `${site}${canonicalPathNorm}`;
+const enUrl = `${site}${enPath}`;
+const ruUrl = `${site}${ruPath}`;
+const ogImage = absoluteUrl('/og.png');
+const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C10');
+---
+
+<!doctype html>
+<html lang={locale} data-theme={theme}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="ru" href={ruUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BPM Tap" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="BPM Tap — free online tap tempo" />
+    <meta property="og:locale" content={locale === 'ru' ? 'ru_RU' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'ru' ? 'en_US' : 'ru_RU'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" content={resolvedThemeColor} />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

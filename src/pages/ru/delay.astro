@@ -1,0 +1,80 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import TapApp from '@/components/tool/TapApp';
+import FaqSection from '@/components/seo/FaqSection.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+import { t } from '@/i18n/utils';
+import { absoluteUrl } from '@/lib/site';
+import { tapLabels } from '@/lib/ui/tapLabels';
+
+const locale = 'ru' as const;
+const pageUrl = absoluteUrl('/ru/delay/');
+const faqs = [
+  { q: t(locale, 'delay.faq.q1'), a: t(locale, 'delay.faq.a1') },
+  { q: t(locale, 'delay.faq.q2'), a: t(locale, 'delay.faq.a2') },
+  { q: t(locale, 'delay.faq.q3'), a: t(locale, 'delay.faq.a3') },
+];
+---
+
+<ToolLayout
+  locale={locale}
+  title={t(locale, 'delay.title')}
+  description={t(locale, 'delay.description')}
+  canonicalPath="/ru/delay/"
+  heading={t(locale, 'delay.h1')}
+  lead={t(locale, 'delay.lead')}
+>
+  <JsonLd
+    slot="head"
+    data={[
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'BPM Delay Calculator',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        description: t(locale, 'delay.description'),
+        url: pageUrl,
+        isAccessibleForFree: true,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+    ]}
+  />
+  <TapApp client:idle={{ timeout: 200 }} slot="tool" locale={locale} labels={tapLabels(locale)} mode="delay" />
+
+  <section class="prose stack">
+    <h2>{t(locale, 'delay.prose.title')}</h2>
+    <p>{t(locale, 'delay.prose.1')}</p>
+    <p>{t(locale, 'delay.prose.2')}</p>
+    <p>{t(locale, 'delay.prose.3')}</p>
+  </section>
+
+  <FaqSection items={faqs} />
+  <RelatedTools locale={locale} current="delay" bpm={120} />
+</ToolLayout>
+
+<style>
+  .prose {
+    max-width: 40rem;
+  }
+  .prose h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+  }
+  .prose p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+</style>

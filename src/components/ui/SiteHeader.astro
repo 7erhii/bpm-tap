@@ -1,0 +1,148 @@
+---
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  theme?: 'studio' | 'pulse';
+}
+
+const { locale, theme = 'studio' } = Astro.props;
+const other = locale === 'en' ? 'ru' : 'en';
+const pathAfterLocale = Astro.url.pathname.replace(/^\/(en|ru)/, '') || '/';
+const onPulse = pathAfterLocale === '/pulse' || pathAfterLocale.startsWith('/pulse/');
+const brandHref = theme === 'pulse' ? localizedPath(locale, 'pulse') : localizedPath(locale);
+const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'brand');
+---
+
+<header class={`site-header${theme === 'pulse' ? ' site-header--pulse' : ''}`}>
+  <div class="container site-header__inner">
+    <a class="brand" href={brandHref}>
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span>{brandLabel}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {
+        theme === 'pulse' ? (
+          <a href={localizedPath(locale)}>{t(locale, 'nav.musicTools')}</a>
+        ) : (
+          <>
+            <a href={localizedPath(locale)}>{t(locale, 'nav.home')}</a>
+            <a href={localizedPath(locale, 'delay')}>{t(locale, 'nav.delay')}</a>
+            <a href={localizedPath(locale, 'metronome')}>{t(locale, 'nav.metronome')}</a>
+            <a href={localizedPath(locale, 'genres')}>{t(locale, 'nav.genres')}</a>
+            <a href={localizedPath(locale, 'guides')}>{t(locale, 'nav.guides')}</a>
+          </>
+        )
+      }
+      <a
+        class={`nav-pulse${onPulse ? ' is-active' : ''}`}
+        href={localizedPath(locale, 'pulse')}
+        aria-current={onPulse ? 'page' : undefined}
+      >
+        {t(locale, 'nav.pulse')}
+      </a>
+    </nav>
+    <a
+      class="nav-pulse nav-pulse--mobile"
+      href={localizedPath(locale, 'pulse')}
+      aria-current={onPulse ? 'page' : undefined}
+    >
+      {t(locale, 'nav.pulse')}
+    </a>
+    <a class="locale" href={localizedPath(other, pathAfterLocale.replace(/^\//, ''))}>
+      {other.toUpperCase()}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+    background: rgba(11, 12, 16, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header__inner {
+    min-height: var(--header-h);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 750;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .brand__mark {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .nav {
+    display: none;
+    gap: 1rem;
+    margin-left: auto;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    align-items: center;
+  }
+  .nav a {
+    text-decoration: none;
+  }
+  .nav-pulse {
+    --pulse-nav: #d92b3a;
+    --pulse-nav-dim: rgba(217, 43, 58, 0.14);
+    text-decoration: none;
+    color: var(--pulse-nav);
+    font-weight: 700;
+    border: 1px solid var(--pulse-nav-dim);
+    background: var(--pulse-nav-dim);
+    border-radius: 999px;
+    padding: 0.32rem 0.75rem;
+    font-size: 0.88rem;
+  }
+  .nav-pulse.is-active,
+  .nav-pulse[aria-current='page'] {
+    background: var(--pulse-nav);
+    color: #fff;
+    border-color: var(--pulse-nav);
+  }
+  .site-header--pulse .nav-pulse {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-dim);
+  }
+  .site-header--pulse .nav-pulse.is-active,
+  .site-header--pulse .nav-pulse[aria-current='page'] {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .nav-pulse--mobile {
+    margin-left: auto;
+  }
+  .locale {
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  @media (min-width: 820px) {
+    .nav {
+      display: inline-flex;
+    }
+    .nav-pulse--mobile {
+      display: none;
+    }
+  }
+</style>

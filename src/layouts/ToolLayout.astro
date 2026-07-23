@@ -1,0 +1,84 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '@/components/ui/SiteHeader.astro';
+import SiteFooter from '@/components/ui/SiteFooter.astro';
+import AdSlot from '@/components/seo/AdSlot.astro';
+import type { Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  heading: string;
+  lead?: string;
+}
+
+const { locale, title, description, canonicalPath, heading, lead } = Astro.props;
+---
+
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+>
+  <slot name="head" slot="head" />
+  <SiteHeader locale={locale} />
+  <main class="container tool-page">
+    <header class="tool-intro">
+      <p class="eyebrow">BPM Tap</p>
+      <h1>{heading}</h1>
+      {lead ? <p class="lead">{lead}</p> : null}
+    </header>
+
+    <slot name="pretool" />
+
+    <div class="tool-slot">
+      <slot name="tool" />
+    </div>
+
+    <AdSlot locale={locale} slotId="below-tool" />
+
+    <section class="below">
+      <slot />
+    </section>
+  </main>
+  <SiteFooter locale={locale} />
+</BaseLayout>
+
+<style>
+  .tool-page {
+    padding: var(--space-5) 0 var(--space-8);
+  }
+  .tool-intro {
+    margin-bottom: var(--space-5);
+    max-width: 40rem;
+  }
+  .eyebrow {
+    margin: 0 0 0.4rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .lead {
+    margin: 0.85rem 0 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+  .tool-slot {
+    margin-bottom: var(--space-4);
+  }
+  .below {
+    margin-top: var(--space-6);
+  }
+</style>

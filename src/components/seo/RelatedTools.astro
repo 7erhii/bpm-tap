@@ -1,0 +1,71 @@
+---
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  /** Current page — omitted from the link row */
+  current: 'home' | 'delay' | 'metronome' | 'genres' | 'guides';
+  bpm?: number;
+}
+
+const { locale, current, bpm } = Astro.props;
+const q = bpm != null ? `?bpm=${bpm}` : '';
+
+const links = [
+  { id: 'home' as const, href: `${localizedPath(locale)}${q}`, label: t(locale, 'nav.home') },
+  { id: 'delay' as const, href: `${localizedPath(locale, 'delay')}${q}`, label: t(locale, 'nav.delay') },
+  {
+    id: 'metronome' as const,
+    href: `${localizedPath(locale, 'metronome')}${q}`,
+    label: t(locale, 'nav.metronome'),
+  },
+  { id: 'genres' as const, href: localizedPath(locale, 'genres'), label: t(locale, 'nav.genres') },
+  { id: 'guides' as const, href: localizedPath(locale, 'guides'), label: t(locale, 'nav.guides') },
+].filter((link) => link.id !== current);
+---
+
+<nav class="related-tools" aria-label={t(locale, 'related.toolsLabel')}>
+  <p class="related-tools__title">{t(locale, 'related.toolsTitle')}</p>
+  <ul>
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .related-tools {
+    margin-top: var(--space-5);
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+    max-width: 40rem;
+  }
+  .related-tools__title {
+    margin: 0 0 0.65rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.85rem;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 650;
+    font-size: 0.95rem;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

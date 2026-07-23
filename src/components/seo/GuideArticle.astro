@@ -1,0 +1,91 @@
+---
+import type { Guide } from '@/content/guides';
+import FaqSection from '@/components/seo/FaqSection.astro';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  guide: Guide;
+}
+
+const { locale, guide } = Astro.props;
+const copy = guide[locale];
+const homeHref = `${localizedPath(locale)}?bpm=${guide.ctaBpm}`;
+const metroHref = `${localizedPath(locale, 'metronome')}?bpm=${guide.ctaBpm}`;
+const delayHref = `${localizedPath(locale, 'delay')}?bpm=${guide.ctaBpm}`;
+---
+
+<article class="guide stack">
+  {
+    copy.sections.map((section) => (
+      <section>
+        <h2>{section.h2}</h2>
+        {section.paragraphs.map((p) => (
+          <p>{p}</p>
+        ))}
+      </section>
+    ))
+  }
+
+  <section class="cta-box">
+    <h2>{t(locale, 'guides.tryTitle')}</h2>
+    <p>{t(locale, 'guides.tryLead', { bpm: guide.ctaBpm })}</p>
+    <div class="cta-row">
+      <a class="cta" href={homeHref}>{t(locale, 'guides.ctaTap')}</a>
+      <a class="cta cta--ghost" href={metroHref}>{t(locale, 'guides.ctaMetronome')}</a>
+      <a class="cta cta--ghost" href={delayHref}>{t(locale, 'guides.ctaDelay')}</a>
+    </div>
+  </section>
+
+  <h2>{t(locale, 'guides.faqTitle')}</h2>
+  <FaqSection items={copy.faqs} />
+
+  <RelatedTools locale={locale} current="guides" bpm={guide.ctaBpm} />
+</article>
+
+<style>
+  .guide {
+    max-width: 40rem;
+  }
+  .guide h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+  }
+  .guide p {
+    margin: 0.55rem 0 0;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .guide section {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .cta-box {
+    padding: 1.15rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+  }
+  .cta {
+    text-decoration: none;
+    background: var(--accent);
+    color: #10120a;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    font-size: 0.92rem;
+  }
+  .cta--ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+import { popularTempos } from '@/lib/metronome/popularTempos';
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const genresHref = localizedPath(locale, 'genres');
+---
+
+<section class="popular-tempos">
+  <div class="popular-tempos__head">
+    <h2>{t(locale, 'popular.title')}</h2>
+    <p>{t(locale, 'popular.blurb')}</p>
+  </div>
+
+  <div class="popular-tempos__chips">
+    {
+      popularTempos.map((item) => (
+        <a
+          class="tempo-chip"
+          href={`${localizedPath(locale, 'metronome')}?bpm=${item.bpm}`}
+        >
+          <span class="tempo-chip__bpm">{item.bpm}</span>
+          <span class="tempo-chip__label">{item.label[locale]}</span>
+        </a>
+      ))
+    }
+  </div>
+
+  <p class="popular-tempos__cta">
+    <a href={genresHref}>{t(locale, 'popular.genresCta')}</a>
+  </p>
+</section>
+
+<style>
+  .popular-tempos {
+    margin-bottom: var(--space-5);
+    padding: 1.1rem 1.2rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(18, 20, 26, 0.75);
+  }
+  .popular-tempos__head h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  .popular-tempos__head p {
+    margin: 0.35rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    max-width: 40rem;
+  }
+  .popular-tempos__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 0.95rem;
+  }
+  .tempo-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    min-height: 40px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    text-decoration: none;
+    color: var(--text);
+  }
+  .tempo-chip:hover {
+    border-color: rgba(200, 245, 66, 0.5);
+    color: var(--accent);
+  }
+  .tempo-chip__bpm {
+    font-family: var(--font-bpm);
+    font-weight: 600;
+  }
+  .tempo-chip__label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .tempo-chip:hover .tempo-chip__label {
+    color: rgba(200, 245, 66, 0.75);
+  }
+  .popular-tempos__cta {
+    margin: 0.95rem 0 0;
+    font-size: 0.92rem;
+  }
+  .popular-tempos__cta a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .popular-tempos__cta a:hover {
+    text-decoration: underline;
+  }
+</style>

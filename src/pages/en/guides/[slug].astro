@@ -1,0 +1,52 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import GuideArticle from '@/components/seo/GuideArticle.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import { guides, getGuide } from '@/content/guides';
+import { absoluteUrl } from '@/lib/site';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({ params: { slug: guide.slug } }));
+}
+
+const locale = 'en' as const;
+const { slug } = Astro.params;
+const guide = getGuide(slug!);
+if (!guide) throw new Error('Guide not found');
+const copy = guide.en;
+const pageUrl = absoluteUrl(`/en/guides/${guide.slug}/`);
+---
+
+<ToolLayout
+  locale={locale}
+  title={`${copy.title} | BPM Tap`}
+  description={copy.description}
+  canonicalPath={`/en/guides/${guide.slug}/`}
+  heading={copy.h1}
+  lead={copy.lead}
+>
+  <JsonLd
+    slot="head"
+    data={[
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: copy.h1,
+        description: copy.description,
+        url: pageUrl,
+        inLanguage: 'en',
+        isAccessibleForFree: true,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: copy.faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+    ]}
+  />
+  <GuideArticle slot="tool" locale={locale} guide={guide} />
+</ToolLayout>
