@@ -1,7 +1,8 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
 import TapApp from '@/components/tool/TapApp';
-import WeeklyLeaderboard from '@/components/tool/WeeklyLeaderboard';
+// TODO: re-enable when we have a writable board backend
+// import WeeklyLeaderboard from '@/components/tool/WeeklyLeaderboard';
 import FaqSection from '@/components/seo/FaqSection.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import RelatedTools from '@/components/seo/RelatedTools.astro';
@@ -19,17 +20,18 @@ const faqs = [
   { q: t(locale, 'faq.q4'), a: t(locale, 'faq.a4') },
   { q: t(locale, 'faq.q5'), a: t(locale, 'faq.a5') },
 ];
-const boardLabels = {
-  title: t(locale, 'leaderboard.title'),
-  blurb: t(locale, 'leaderboard.blurb'),
-  week: t(locale, 'leaderboard.week'),
-  resets: t(locale, 'leaderboard.resets'),
-  you: t(locale, 'leaderboard.you'),
-  handlePlaceholder: t(locale, 'leaderboard.handlePlaceholder'),
-  empty: t(locale, 'leaderboard.empty'),
-  ms: t(locale, 'leaderboard.ms'),
-  funNote: t(locale, 'leaderboard.funNote'),
-};
+// TODO: re-enable when we have a writable board backend
+// const boardLabels = {
+//   title: t(locale, 'leaderboard.title'),
+//   blurb: t(locale, 'leaderboard.blurb'),
+//   week: t(locale, 'leaderboard.week'),
+//   resets: t(locale, 'leaderboard.resets'),
+//   you: t(locale, 'leaderboard.you'),
+//   handlePlaceholder: t(locale, 'leaderboard.handlePlaceholder'),
+//   empty: t(locale, 'leaderboard.empty'),
+//   ms: t(locale, 'leaderboard.ms'),
+//   funNote: t(locale, 'leaderboard.funNote'),
+// };
 const guideList = [...guides].sort((a, b) => a.order - b.order);
 ---
 
@@ -69,7 +71,8 @@ const guideList = [...guides].sort((a, b) => a.order - b.order);
   />
   <TapApp client:load slot="tool" locale={locale} labels={labels} mode="full" />
 
-  <WeeklyLeaderboard client:visible labels={boardLabels} />
+  {/* TODO: re-enable when we have a writable board backend */}
+  {/* <WeeklyLeaderboard client:visible labels={boardLabels} /> */}
 
   <section class="howto stack">
     <h2>{t(locale, 'howto.title')}</h2>

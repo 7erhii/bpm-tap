@@ -161,8 +161,9 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
   const [meterId, setMeterId] = useState<TimeSignatureId>('4/4');
   const [activeBeat, setActiveBeat] = useState<number | null>(null);
   const lastSavedBpm = useRef<number | null>(null);
-  const challengeStartRef = useRef<number | null>(null);
-  const challengePostedRef = useRef(false);
+  // TODO: re-enable when we have a writable board backend
+  // const challengeStartRef = useRef<number | null>(null);
+  // const challengePostedRef = useRef(false);
 
   const showSidePanels =
     !isPulse && (mode === 'full' || mode === 'metronome' || mode === 'delay') && !fullscreen;
@@ -172,7 +173,8 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
   const showFavorites = !isPulse && (mode === 'full' || mode === 'metronome');
   const showGenreHint = !isPulse && (mode === 'full' || mode === 'metronome');
   const showFactor = !isPulse;
-  const trackChallenge = !isPulse;
+  // TODO: re-enable when we have a writable board backend
+  // const trackChallenge = !isPulse;
   const idleMark: IdleMark =
     mode === 'pulse'
       ? 'dot'
@@ -203,26 +205,27 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
 
   const registerTap = () => {
     const next = engineRef.current.tap();
-    if (trackChallenge) {
-      if (next.tapCount === 1) {
-        challengeStartRef.current = performance.now();
-        challengePostedRef.current = false;
-      }
-      if (
-        next.confidence === 'high' &&
-        next.source === 'tap' &&
-        next.bpm != null &&
-        challengeStartRef.current != null &&
-        !challengePostedRef.current
-      ) {
-        challengePostedRef.current = true;
-        window.dispatchEvent(
-          new CustomEvent('bpm-tap:speed-score', {
-            detail: { ms: performance.now() - challengeStartRef.current, bpm: next.bpm },
-          }),
-        );
-      }
-    }
+    // TODO: re-enable when we have a writable board backend
+    // if (trackChallenge) {
+    //   if (next.tapCount === 1) {
+    //     challengeStartRef.current = performance.now();
+    //     challengePostedRef.current = false;
+    //   }
+    //   if (
+    //     next.confidence === 'high' &&
+    //     next.source === 'tap' &&
+    //     next.bpm != null &&
+    //     challengeStartRef.current != null &&
+    //     !challengePostedRef.current
+    //   ) {
+    //     challengePostedRef.current = true;
+    //     window.dispatchEvent(
+    //       new CustomEvent('bpm-tap:speed-score', {
+    //         detail: { ms: performance.now() - challengeStartRef.current, bpm: next.bpm },
+    //       }),
+    //     );
+    //   }
+    // }
     setSnapshot(next);
     setPulseToken((n) => n + 1);
   };
@@ -390,8 +393,9 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
             setMetroOn(false);
             setActiveBeat(null);
             lastSavedBpm.current = null;
-            challengeStartRef.current = null;
-            challengePostedRef.current = false;
+            // TODO: re-enable when we have a writable board backend
+            // challengeStartRef.current = null;
+            // challengePostedRef.current = false;
             setSnapshot(engineRef.current.reset());
           }}
           onHalf={() => setSnapshot(engineRef.current.half())}
