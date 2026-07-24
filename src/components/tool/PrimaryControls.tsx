@@ -46,16 +46,33 @@ export function PrimaryControls({
 }: Props) {
   return (
     <div className="controls" role="toolbar" aria-label="BPM controls">
-      <button type="button" className="btn" onClick={onReset}>
+      <button
+        type="button"
+        className="btn"
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={onReset}
+      >
         <RotateCcw size={16} />
         {labels.reset}
       </button>
       {showFactor ? (
         <>
-          <button type="button" className="btn" onClick={onHalf} disabled={!canUseBpm}>
+          <button
+            type="button"
+            className="btn"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={onHalf}
+            disabled={!canUseBpm}
+          >
             {labels.half}
           </button>
-          <button type="button" className="btn" onClick={onDouble} disabled={!canUseBpm}>
+          <button
+            type="button"
+            className="btn"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={onDouble}
+            disabled={!canUseBpm}
+          >
             {labels.double}
           </button>
         </>
@@ -63,6 +80,7 @@ export function PrimaryControls({
       <button
         type="button"
         className="btn btn--accent"
+        onMouseDown={(event) => event.preventDefault()}
         onClick={onCopy}
         disabled={!canUseBpm}
       >
@@ -73,6 +91,7 @@ export function PrimaryControls({
         <button
           type="button"
           className={`btn${isFavorite ? ' is-fav' : ''}`}
+          onMouseDown={(event) => event.preventDefault()}
           onClick={onToggleFavorite}
           disabled={!canUseBpm && !isFavorite}
           aria-pressed={isFavorite}
@@ -82,11 +101,22 @@ export function PrimaryControls({
           {isFavorite ? labels.saved : labels.save}
         </button>
       ) : null}
-      <button type="button" className="btn btn--ghost" onClick={onShare} disabled={!canUseBpm}>
+      <button
+        type="button"
+        className="btn btn--ghost"
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={onShare}
+        disabled={!canUseBpm}
+      >
         <Link2 size={16} />
         {labels.share}
       </button>
-      <button type="button" className="btn btn--ghost" onClick={onToggleFullscreen}>
+      <button
+        type="button"
+        className="btn btn--ghost"
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={onToggleFullscreen}
+      >
         {fullscreen ? <Shrink size={16} /> : <Expand size={16} />}
         {fullscreen ? labels.exitFullscreen : labels.fullscreen}
       </button>

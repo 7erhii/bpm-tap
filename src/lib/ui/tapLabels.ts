@@ -12,6 +12,8 @@ export function tapLabels(locale: Locale): TapAppLabels {
     confidenceMedium: t(locale, 'confidence.medium'),
     confidenceHigh: t(locale, 'confidence.high'),
     confidenceShared: t(locale, 'confidence.shared'),
+    confidenceManual: t(locale, 'confidence.manual'),
+    enterBpm: t(locale, 'tap.enterBpm'),
     reset: t(locale, 'control.reset'),
     half: t(locale, 'control.half'),
     double: t(locale, 'control.double'),

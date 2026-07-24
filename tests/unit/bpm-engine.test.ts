@@ -53,4 +53,12 @@ describe('createTapEngine', () => {
     expect(snap.source).toBe('share');
     expect(snap.confidence).toBe('none');
   });
+
+  it('hydrates manual BPM without taps', () => {
+    const engine = createTapEngine();
+    const snap = engine.hydrateBpm(123, 'manual');
+    expect(snap.bpm).toBe(123);
+    expect(snap.source).toBe('manual');
+    expect(snap.inRange).toBe(true);
+  });
 });

@@ -33,6 +33,7 @@ export function MetronomeBar({
         <button
           type="button"
           className={`btn${running ? ' btn--accent' : ''}`}
+          onMouseDown={(event) => event.preventDefault()}
           onClick={onToggle}
           disabled={disabled && !running}
         >

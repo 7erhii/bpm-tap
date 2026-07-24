@@ -24,6 +24,6 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4.5rem;
-  --tap-min-h: min(58vh, 520px);
-  --header-h: 64px;
+  --tap-min-h: min(36vh, 340px);
+  --header-h: 56px;
 }

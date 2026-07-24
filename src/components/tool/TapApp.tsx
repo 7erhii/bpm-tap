@@ -14,7 +14,6 @@ import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler
 import { buildShareUrl, displayBpmInteger, parseBpmParam } from '@/lib/share/url';
 import { localizedPath } from '@/i18n/utils';
 import { BpmReadout, type IdleMark } from './BpmReadout';
-import { ConfidenceCue } from './ConfidenceCue';
 import { MetronomeBar } from './MetronomeBar';
 import { PrimaryControls } from './PrimaryControls';
 import { PulseSaveLog, type PulseSaveLabels } from '@/components/pulse/PulseSaveLog';
@@ -32,6 +31,8 @@ export interface TapAppLabels {
   confidenceMedium: string;
   confidenceHigh: string;
   confidenceShared: string;
+  confidenceManual: string;
+  enterBpm: string;
   reset: string;
   half: string;
   double: string;
@@ -73,7 +74,8 @@ interface Props {
 }
 
 function confidenceLabel(snapshot: EngineSnapshot, labels: TapAppLabels): string {
-  if (snapshot.source === 'share' && snapshot.tapCount === 0) return labels.confidenceShared;
+  if (snapshot.tapCount === 0 && snapshot.source === 'share') return labels.confidenceShared;
+  if (snapshot.tapCount === 0 && snapshot.source === 'manual') return labels.confidenceManual;
   switch (snapshot.confidence) {
     case 'high':
       return labels.confidenceHigh;
@@ -247,7 +249,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
   useEffect(() => {
     if (isPulse) return;
     if (snapshot.bpm == null) return;
-    if (snapshot.confidence !== 'high' && snapshot.confidence !== 'medium' && snapshot.source !== 'share') {
+    if (snapshot.confidence !== 'high' && snapshot.confidence !== 'medium' && snapshot.source !== 'share' && snapshot.source !== 'manual') {
       return;
     }
     const rounded = Math.round(snapshot.bpm);
@@ -256,7 +258,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
     setHistory(
       saveHistoryItem({
         bpm: rounded,
-        source: snapshot.source === 'share' ? 'share' : 'tap',
+        source: snapshot.source === 'tap' ? 'tap' : snapshot.source === 'manual' ? 'manual' : 'share',
         locale,
       }),
     );
@@ -354,11 +356,14 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
           live={snapshot.tapCount > 0}
           outOfRange={snapshot.bpm != null && !snapshot.inRange}
           outOfRangeLabel={labels.outOfRange}
-        />
-        <ConfidenceCue
-          level={snapshot.confidence}
-          label={confidenceLabel(snapshot, labels)}
+          confidenceLevel={snapshot.confidence}
+          confidenceLabel={confidenceLabel(snapshot, labels)}
           deviationBpm={snapshot.deviationBpm}
+          editable
+          enterLabel={labels.enterBpm}
+          onCommitBpm={(value) => {
+            setSnapshot(engineRef.current.hydrateBpm(value, 'manual'));
+          }}
         />
 
         <TapTarget
