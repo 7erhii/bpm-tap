@@ -410,7 +410,9 @@
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  /* none: keep the finger on the pad from turning into a page scroll / cancelled tap */
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
   isolation: isolate;
   background: transparent;

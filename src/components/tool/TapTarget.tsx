@@ -9,10 +9,18 @@ interface Props {
   hintBelow?: boolean;
 }
 
+/**
+ * Mobile Safari is unreliable with React pointer/click combos on a large pad:
+ * ghost clicks, scroll cancellation, and passive listeners cause missed or
+ * double-counted taps. Bind native non-passive touchstart + mousedown instead.
+ */
 export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }: Props) {
   const [pulse, setPulse] = useState(false);
-  /** Suppress the compatibility `click` after a pointer-handled tap (avoid double count). */
-  const ignoreClickUntil = useRef(0);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const onTapRef = useRef(onTap);
+  const lastTapAt = useRef(0);
+
+  onTapRef.current = onTap;
 
   useEffect(() => {
     if (!pulseToken) return;
@@ -21,29 +29,56 @@ export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }:
     return () => window.clearTimeout(id);
   }, [pulseToken]);
 
-  const fireTap = () => {
-    ignoreClickUntil.current = performance.now() + 500;
-    onTap();
-  };
+  useEffect(() => {
+    const el = buttonRef.current;
+    if (!el) return;
+
+    const fireTap = () => {
+      const now = performance.now();
+      // Collapse only true duplicate deliveries (touch + compatibility mouse).
+      if (now - lastTapAt.current < 35) return;
+      lastTapAt.current = now;
+      onTapRef.current();
+    };
+
+    const onTouchStart = (event: TouchEvent) => {
+      // One finger = one beat. Extra contacts are ignored.
+      if (event.touches.length !== 1) return;
+      // Non-passive: stop scroll + synthetic mouse so we count exactly once.
+      event.preventDefault();
+      fireTap();
+    };
+
+    const onMouseDown = (event: MouseEvent) => {
+      if (event.button !== 0) return;
+      // Skip compatibility mouse events that some WebViews still emit after touch.
+      if (performance.now() - lastTapAt.current < 35) return;
+      event.preventDefault();
+      fireTap();
+    };
+
+    // Keyboard activation (Enter) when the pad is focused — Space is handled globally.
+    const onClick = (event: MouseEvent) => {
+      if (event.detail !== 0) return; // real pointer clicks already counted above
+      fireTap();
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    el.addEventListener('mousedown', onMouseDown);
+    el.addEventListener('click', onClick);
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('mousedown', onMouseDown);
+      el.removeEventListener('click', onClick);
+    };
+  }, []);
 
   return (
     <div className={`tap-pad-wrap${hintBelow ? ' tap-pad-wrap--hint-below' : ''}`}>
       <button
+        ref={buttonRef}
         type="button"
         className={`tap-pad${pulse ? ' is-pulse' : ''}`}
-        onPointerDown={(event) => {
-          if (event.button !== 0) return;
-          // iOS Safari: preventDefault on touch pointerdown can swallow the gesture /
-          // suppress follow-up input. Only block default for mouse (focus + ghost click).
-          if (event.pointerType === 'mouse' && event.cancelable) {
-            event.preventDefault();
-          }
-          fireTap();
-        }}
-        onClick={() => {
-          if (performance.now() < ignoreClickUntil.current) return;
-          fireTap();
-        }}
         aria-label={title}
       >
         <span className="tap-pad__chassis" aria-hidden="true">
