@@ -386,7 +386,7 @@
 }
 
 .tap-pad {
-  --pad-radius: 22px;
+  --pad-radius: 32px;
   --pad-face: #151922;
   --chassis: #1a1e28;
   --bay-gap: 16px;
