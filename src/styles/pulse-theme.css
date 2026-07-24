@@ -271,6 +271,16 @@ html[data-theme='pulse'] .tap-pad__content {
   padding: 2rem 1.4rem;
 }
 
+@media (max-width: 819px) {
+  html[data-theme='pulse'] .tap-pad,
+  html[data-theme='pulse'] .tap-pad__content {
+    min-height: min(44vw, 230px);
+  }
+  html[data-theme='pulse'] .tap-pad__content {
+    padding: 1.25rem 1rem;
+  }
+}
+
 /* Heart mark on the sensor pad */
 html[data-theme='pulse'] .tap-pad__content::before {
   content: '';

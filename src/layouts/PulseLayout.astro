@@ -85,4 +85,24 @@ const { locale, title, description, canonicalPath, heading, lead, keywords } = A
     display: grid;
     gap: var(--space-6);
   }
+
+  @media (max-width: 819px) {
+    .pulse-page {
+      padding-top: var(--space-2);
+    }
+    .pulse-intro {
+      margin-bottom: var(--space-2);
+    }
+    .eyebrow {
+      margin-bottom: 0.15rem;
+      font-size: 0.68rem;
+    }
+    h1 {
+      font-size: clamp(1.25rem, 5vw, 1.55rem);
+      line-height: 1.2;
+    }
+    .lead {
+      display: none;
+    }
+  }
 </style>

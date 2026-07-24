@@ -583,6 +583,52 @@
   transform: scaleX(0.997) scaleY(0.988);
 }
 
+@media (max-width: 819px) {
+  .tap-app {
+    gap: var(--space-2);
+  }
+  .tap-stage {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: 0.55rem 0.7rem 0.7rem;
+    min-height: 0;
+  }
+  /* Compact BPM strip, then a large easy-to-hit pad */
+  .bpm-readout {
+    gap: 0.2rem;
+  }
+  .bpm-display {
+    width: min(100%, 11.5rem);
+  }
+  .bpm-display__screen {
+    min-height: 3.5rem;
+    padding: 0.22rem 0.65rem 0.3rem;
+  }
+  .bpm-display__label {
+    font-size: 0.6rem;
+  }
+  .bpm-value {
+    font-size: clamp(1.9rem, 10vw, 2.75rem);
+  }
+  .tap-pad-wrap {
+    order: 0;
+  }
+  .bpm-readout {
+    order: -1;
+  }
+  .controls {
+    order: 1;
+  }
+  .metro-bar {
+    order: 2;
+  }
+  .tap-pad,
+  .tap-pad__content {
+    min-height: min(42vw, 220px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tap-pad__plunger {
     transition: none;
