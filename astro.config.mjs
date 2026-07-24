@@ -5,11 +5,14 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 
+import cloudflare from "@astrojs/cloudflare";
+
 const root = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   site: 'https://bpm-tap.com',
   trailingSlash: 'always',
+
   integrations: [
     react(),
     sitemap({
@@ -55,6 +58,7 @@ export default defineConfig({
       },
     }),
   ],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'ru'],
@@ -63,6 +67,7 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+
   vite: {
     resolve: {
       alias: {
@@ -70,4 +75,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: cloudflare()
 });
