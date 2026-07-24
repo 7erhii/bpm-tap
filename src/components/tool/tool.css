@@ -409,6 +409,8 @@
   color: var(--text);
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   isolation: isolate;
   background: transparent;
@@ -418,6 +420,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  pointer-events: none;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 38%),
     linear-gradient(145deg, #222733 0%, var(--chassis) 42%, #12151c 100%);

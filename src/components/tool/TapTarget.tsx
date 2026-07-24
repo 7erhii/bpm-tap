@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   title: string;
@@ -11,6 +11,8 @@ interface Props {
 
 export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }: Props) {
   const [pulse, setPulse] = useState(false);
+  /** Suppress the compatibility `click` after a pointer-handled tap (avoid double count). */
+  const ignoreClickUntil = useRef(0);
 
   useEffect(() => {
     if (!pulseToken) return;
@@ -19,14 +21,28 @@ export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }:
     return () => window.clearTimeout(id);
   }, [pulseToken]);
 
+  const fireTap = () => {
+    ignoreClickUntil.current = performance.now() + 500;
+    onTap();
+  };
+
   return (
     <div className={`tap-pad-wrap${hintBelow ? ' tap-pad-wrap--hint-below' : ''}`}>
       <button
         type="button"
         className={`tap-pad${pulse ? ' is-pulse' : ''}`}
         onPointerDown={(event) => {
-          event.preventDefault();
-          onTap();
+          if (event.button !== 0) return;
+          // iOS Safari: preventDefault on touch pointerdown can swallow the gesture /
+          // suppress follow-up input. Only block default for mouse (focus + ghost click).
+          if (event.pointerType === 'mouse' && event.cancelable) {
+            event.preventDefault();
+          }
+          fireTap();
+        }}
+        onClick={() => {
+          if (performance.now() < ignoreClickUntil.current) return;
+          fireTap();
         }}
         aria-label={title}
       >
