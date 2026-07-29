@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Curated context for AI assistants (prefer this over scraping random pages)
+# https://bpm-tap.com/llms.txt
+
 Sitemap: https://bpm-tap.com/sitemap-index.xml

@@ -1,0 +1,4 @@
+Contact: https://github.com/7erhii/bpm-tap/security/advisories/new
+Expires: 2027-07-28T23:59:59.000Z
+Preferred-Languages: en, ru
+Canonical: https://bpm-tap.com/.well-known/security.txt
