@@ -1,0 +1,109 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import TapApp from '@/components/tool/TapApp';
+import PopularTempos from '@/components/seo/PopularTempos.astro';
+import FaqSection from '@/components/seo/FaqSection.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import RelatedTools from '@/components/seo/RelatedTools.astro';
+import { t } from '@/i18n/utils';
+import { absoluteUrl } from '@/lib/site';
+import { tapLabels } from '@/lib/ui/tapLabels';
+
+const locale = 'es' as const;
+const pageUrl = absoluteUrl('/es/metronome/');
+const faqs = [
+  { q: t(locale, 'metronome.faq.q1'), a: t(locale, 'metronome.faq.a1') },
+  { q: t(locale, 'metronome.faq.q2'), a: t(locale, 'metronome.faq.a2') },
+  { q: t(locale, 'metronome.faq.q3'), a: t(locale, 'metronome.faq.a3') },
+];
+---
+
+<ToolLayout
+  locale={locale}
+  title={t(locale, 'metronome.title')}
+  description={t(locale, 'metronome.description')}
+  canonicalPath="/es/metronome/"
+  heading={t(locale, 'metronome.h1')}
+  lead={t(locale, 'metronome.lead')}
+>
+  <JsonLd
+    slot="head"
+    data={[
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: 'Online Metronome',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        description: t(locale, 'metronome.description'),
+        url: pageUrl,
+        isAccessibleForFree: true,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+    ]}
+  />
+  <PopularTempos slot="pretool" locale={locale} />
+  <TapApp client:idle={{ timeout: 200 }} slot="tool" locale={locale} labels={tapLabels(locale)} mode="metronome" />
+
+  <section class="explain stack">
+    <h2>{t(locale, 'meter.explainTitle')}</h2>
+    <p>{t(locale, 'meter.explain')}</p>
+    <ul>
+      <li><strong>4/4</strong> — common time: ONE-two-three-four</li>
+      <li><strong>3/4</strong> — waltz: ONE-two-three</li>
+      <li><strong>2/4</strong> — march / short bars: ONE-two</li>
+      <li><strong>5/4</strong> — odd meter: five beats per bar</li>
+      <li><strong>6/8 · 9/8 · 12/8</strong> — compound feels (grouped in threes)</li>
+      <li><strong>7/8</strong> — uneven bar (often 3+4 or 2+2+3)</li>
+    </ul>
+    <p class="note">These are the common practice meters — not every possible signature in music theory.</p>
+  </section>
+
+  <section class="explain stack">
+    <h2>{t(locale, 'metronome.tipsTitle')}</h2>
+    <ul>
+      <li>{t(locale, 'metronome.tips.1')}</li>
+      <li>{t(locale, 'metronome.tips.2')}</li>
+      <li>{t(locale, 'metronome.tips.3')}</li>
+    </ul>
+  </section>
+
+  <FaqSection items={faqs} />
+  <RelatedTools locale={locale} current="metronome" />
+</ToolLayout>
+
+<style>
+  .explain {
+    max-width: 40rem;
+  }
+  .explain h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+  }
+  .explain p,
+  .explain li {
+    color: var(--text-muted);
+  }
+  .explain ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .explain strong {
+    color: var(--text);
+  }
+  .note {
+    font-size: 0.92rem;
+  }
+</style>

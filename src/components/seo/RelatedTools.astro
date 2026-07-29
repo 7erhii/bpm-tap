@@ -5,23 +5,21 @@ interface Props {
   locale: Locale;
   /** Current page — omitted from the link row */
   current: 'home' | 'delay' | 'metronome' | 'listen' | 'genres' | 'guides';
-  bpm?: number;
 }
 
-const { locale, current, bpm } = Astro.props;
-const q = bpm != null ? `?bpm=${bpm}` : '';
+const { locale, current } = Astro.props;
 
 const links = [
-  { id: 'home' as const, href: `${localizedPath(locale)}${q}`, label: t(locale, 'nav.home') },
-  { id: 'delay' as const, href: `${localizedPath(locale, 'delay')}${q}`, label: t(locale, 'nav.delay') },
+  { id: 'home' as const, href: localizedPath(locale), label: t(locale, 'nav.home') },
+  { id: 'delay' as const, href: localizedPath(locale, 'delay'), label: t(locale, 'nav.delay') },
   {
     id: 'metronome' as const,
-    href: `${localizedPath(locale, 'metronome')}${q}`,
+    href: localizedPath(locale, 'metronome'),
     label: t(locale, 'nav.metronome'),
   },
   {
     id: 'listen' as const,
-    href: `${localizedPath(locale, 'listen')}${q}`,
+    href: localizedPath(locale, 'listen'),
     label: t(locale, 'nav.listen'),
   },
   { id: 'genres' as const, href: localizedPath(locale, 'genres'), label: t(locale, 'nav.genres') },

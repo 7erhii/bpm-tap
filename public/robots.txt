@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /*?bpm=
+Disallow: /*?*
 
 # Curated context for AI assistants (prefer this over scraping random pages)
 # https://bpm-tap.com/llms.txt

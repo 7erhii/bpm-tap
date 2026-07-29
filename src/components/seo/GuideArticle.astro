@@ -11,10 +11,10 @@ interface Props {
 
 const { locale, guide } = Astro.props;
 const copy = guide[locale];
-const homeHref = `${localizedPath(locale)}?bpm=${guide.ctaBpm}`;
-const listenHref = `${localizedPath(locale, 'listen')}?bpm=${guide.ctaBpm}`;
-const metroHref = `${localizedPath(locale, 'metronome')}?bpm=${guide.ctaBpm}`;
-const delayHref = `${localizedPath(locale, 'delay')}?bpm=${guide.ctaBpm}`;
+const homeHref = localizedPath(locale);
+const listenHref = localizedPath(locale, 'listen');
+const metroHref = localizedPath(locale, 'metronome');
+const delayHref = localizedPath(locale, 'delay');
 ---
 
 <article class="guide stack">
@@ -43,7 +43,7 @@ const delayHref = `${localizedPath(locale, 'delay')}?bpm=${guide.ctaBpm}`;
   <h2>{t(locale, 'guides.faqTitle')}</h2>
   <FaqSection items={copy.faqs} />
 
-  <RelatedTools locale={locale} current="guides" bpm={guide.ctaBpm} />
+  <RelatedTools locale={locale} current="guides" />
 </article>
 
 <style>

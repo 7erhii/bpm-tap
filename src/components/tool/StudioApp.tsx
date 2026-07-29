@@ -10,7 +10,7 @@ import {
 } from '@/lib/favorites/storage';
 import { closestGenres } from '@/lib/genres/match';
 import { loadHistory, saveHistoryItem, type HistoryItem } from '@/lib/history/storage';
-import { localizedPath } from '@/i18n/utils';
+import { localizedPath, type Locale } from '@/i18n/utils';
 import { createListenSession } from '@/lib/listen/session';
 import type { ListenStatus, TempoCandidate, TempoEstimate } from '@/lib/listen/types';
 import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler';
@@ -54,7 +54,7 @@ export interface StudioAppLabels extends TapAppLabels {
 }
 
 interface Props {
-  locale: 'en' | 'ru';
+  locale: Locale;
   labels: StudioAppLabels;
   /** Home defaults to tap; /listen/ opens in listen */
   defaultMode?: StudioMode;

@@ -6,6 +6,7 @@ import { genres, getGenre } from '@/content/genres';
 import { suggestedBpmForGenre } from '@/lib/genres/match';
 import { absoluteUrl } from '@/lib/site';
 import { localizedPath, t } from '@/i18n/utils';
+import { trimMetaDescription, trimTitle } from '@/lib/seo/meta';
 
 export function getStaticPaths() {
   return genres.map((genre) => ({ params: { slug: genre.slug } }));
@@ -16,18 +17,23 @@ const { slug } = Astro.params;
 const genre = getGenre(slug!);
 if (!genre) throw new Error('Genre not found');
 const bpm = suggestedBpmForGenre(genre);
-const homeHref = `${localizedPath(locale)}?bpm=${bpm}`;
-const metroHref = `${localizedPath(locale, 'metronome')}?bpm=${bpm}`;
+const copy = genre.en;
+const homeHref = localizedPath(locale);
+const metroHref = localizedPath(locale, 'metronome');
 const pageUrl = absoluteUrl(`/en/genres/${genre.slug}/`);
+const pageTitle = trimTitle(`${copy.name} BPM (${genre.bpmMin}–${genre.bpmMax}) | BPM Tap`);
+const pageDescription = trimMetaDescription(
+  `${copy.name} typically runs ${genre.bpmMin}–${genre.bpmMax} BPM. ${copy.summary}`,
+);
 ---
 
 <ToolLayout
   locale={locale}
-  title={`${genre.en.name} BPM Range — Genre Tempo Guide | BPM Tap`}
-  description={`${genre.en.name} typically runs ${genre.bpmMin}–${genre.bpmMax} BPM. ${genre.en.summary}`}
+  title={pageTitle}
+  description={pageDescription}
   canonicalPath={`/en/genres/${genre.slug}/`}
-  heading={`${genre.en.name} BPM`}
-  lead={genre.en.summary}
+  heading={`${copy.name} BPM`}
+  lead={copy.summary}
 >
   <JsonLd
     slot="head"

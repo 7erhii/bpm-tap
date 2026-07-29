@@ -23,6 +23,9 @@ export interface Guide {
   ctaBpm: number;
   en: GuideLocale;
   ru: GuideLocale;
+  es: GuideLocale;
+  fr: GuideLocale;
+  pt: GuideLocale;
 }
 
 export const guides: Guide[] = [
@@ -113,6 +116,135 @@ export const guides: Guide[] = [
         {
           q: 'Почему BPM вдвое меньше или больше?',
           a: 'Возможно, ты в half-time или double-time. После стабилизации жми ÷2 / ×2.',
+        },
+      ],
+    },
+    es: {
+      title: 'Cómo encontrar el BPM de una canción con tap tempo',
+      description: 'Encuentra el BPM de cualquier canción en segundos: toca al ritmo, estabiliza la lectura y cópialo en tu DAW o metrónomo.',
+      h1: 'Cómo encontrar el BPM de una canción',
+      lead: 'No necesitas subir un archivo. Reproduce la pista, toca el beat y deja que el tap tempo promedie tu timing en pulsos por minuto.',
+      sections: [
+        {
+          h2: 'Toca el pulso que contarías',
+          paragraphs: [
+            'Inicia la canción y encuentra el pulso estable — normalmente el kick, o el backbeat del snare en grooves sincopados.',
+            'Abre la herramienta Tap BPM y toca con el ratón, el dedo o cualquier tecla en cada beat. Tras 8–12 toques estables la lectura debería asentarse. ¿Prefieres manos libres? Cambia a Listen y deja que el micrófono estime el tempo.',
+          ],
+        },
+        {
+          h2: 'Confirma antes de comprometerte',
+          paragraphs: [
+            'Cuando la confianza muestre Stable, copia el BPM o abre el metrónomo con el mismo tempo para oír si encaja.',
+            'Si el click se siente el doble de rápido o la mitad de lento, usa ×2 / ÷2 — común en trap, dubstep, DnB y sensaciones de salsa.',
+          ],
+        },
+        {
+          h2: 'Usa el número en tu sesión',
+          paragraphs: [
+            'Pega el BPM en tu DAW, configura tiempos de delay en la calculadora o comparte un enlace con ?bpm= para un colaborador.',
+            'Las páginas de género ayudan cuando solo conoces el estilo: empieza por un rango típico y luego toca la pista real para afinar.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: '¿Cuántos taps necesito?',
+          a: 'Cuatro taps dan una estimación aproximada. Ocho a doce toques estables suelen bastar para configurar el DAW y preparar un set de DJ.',
+        },
+        {
+          q: '¿El tap tempo puede reemplazar el análisis de audio?',
+          a: 'Para una sola pista en reproducción, tocar suele ser más rápido. Los analizadores de archivos ayudan con lotes; el tap tempo gana cuando solo escuchas la canción.',
+        },
+        {
+          q: '¿Por qué mi BPM parece la mitad o el doble?',
+          a: 'Puede que estés tocando una sensación half-time o double-time. Usa ÷2 / ×2 después de que la lectura se estabilice.',
+        },
+      ],
+    },
+    fr: {
+      title: 'Comment trouver le BPM d’une chanson avec le tap tempo',
+      description: 'Trouvez le BPM de n’importe quelle chanson en quelques secondes : tapez sur le beat, stabilisez la lecture, puis copiez-la dans votre DAW ou métronome.',
+      h1: 'Comment trouver le BPM d’une chanson',
+      lead: 'Pas besoin d’envoyer de fichier. Lancez le morceau, tapez le beat, et laissez l’outil tap tempo moyenner votre timing en battements par minute.',
+      sections: [
+        {
+          h2: 'Tapez le pulse que vous compteriez',
+          paragraphs: [
+            'Lancez la chanson et trouvez le pulse régulier — en général le kick, ou le backbeat de la caisse claire dans les grooves syncopés.',
+            'Ouvrez l’outil Tap BPM et tapez souris, toucher ou n’importe quelle touche à chaque temps. Après 8–12 taps réguliers la lecture devrait se stabiliser. Mains occupées ? Passez en Listen et laissez le micro estimer le tempo.',
+          ],
+        },
+        {
+          h2: 'Confirmez avant de valider',
+          paragraphs: [
+            'Quand la confiance affiche Stable, copiez le BPM ou ouvrez le métronome au même tempo pour vérifier l’alignement.',
+            'Si le clic semble deux fois plus rapide ou deux fois plus lent, utilisez ×2 / ÷2 — fréquent avec trap, dubstep, DnB et les feels salsa.',
+          ],
+        },
+        {
+          h2: 'Utilisez le chiffre dans votre session',
+          paragraphs: [
+            'Collez le BPM dans votre DAW, réglez les temps de delay sur le calculateur, ou partagez un lien avec ?bpm= pour un collaborateur.',
+            'Les pages genre aident quand vous ne connaissez que le style : partez d’une plage typique, puis tapez le morceau réel pour affiner.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Combien de taps faut-il ?',
+          a: 'Quatre taps donnent une estimation grossière. Huit à douze taps réguliers suffisent généralement pour le DAW et la préparation DJ.',
+        },
+        {
+          q: 'Le tap tempo remplace-t-il l’analyse audio ?',
+          a: 'Pour un seul morceau en lecture, taper est souvent plus rapide. Les analyseurs de fichiers aident pour des lots ; le tap tempo gagne quand vous n’entendez que la chanson.',
+        },
+        {
+          q: 'Pourquoi mon BPM semble-t-il divisé ou doublé ?',
+          a: 'Vous tapez peut-être un feel half-time ou double-time. Utilisez ÷2 / ×2 une fois la lecture stabilisée.',
+        },
+      ],
+    },
+    pt: {
+      title: 'Como descobrir o BPM de uma música com tap tempo',
+      description: 'Descubra o BPM de qualquer música em segundos: toque no ritmo, estabilize a leitura e copie para o seu DAW ou metrônomo.',
+      h1: 'Como descobrir o BPM de uma música',
+      lead: 'Você não precisa enviar arquivo. Reproduza a faixa, toque o beat e deixe o tap tempo calcular a média do seu timing em batidas por minuto.',
+      sections: [
+        {
+          h2: 'Toque o pulso que você contaria',
+          paragraphs: [
+            'Inicie a música e encontre o pulso constante — geralmente o kick, ou o backbeat da caixa em grooves sincopados.',
+            'Abra a ferramenta Tap BPM e toque com o mouse, o dedo ou qualquer tecla a cada beat. Após 8–12 toques estáveis a leitura deve se estabilizar. Prefere mãos livres? Mude para Listen e deixe o microfone estimar o tempo.',
+          ],
+        },
+        {
+          h2: 'Confirme antes de usar no projeto',
+          paragraphs: [
+            'Quando a confiança mostrar Stable, copie o BPM ou abra o metrônomo no mesmo tempo para ouvir se encaixa.',
+            'Se o clique parecer o dobro de rápido ou metade de lento, use ×2 / ÷2 — comum em trap, dubstep, DnB e sensações de salsa.',
+          ],
+        },
+        {
+          h2: 'Use o número na sua sessão',
+          paragraphs: [
+            'Cole o BPM no seu DAW, configure tempos de delay na calculadora ou compartilhe um link com ?bpm= para um colaborador.',
+            'As páginas de gênero ajudam quando você só conhece o estilo: comece por uma faixa típica e depois toque a faixa real para refinar.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Quantos toques preciso?',
+          a: 'Quatro toques dão uma estimativa aproximada. Oito a doze toques estáveis costumam bastar para configurar o DAW e preparar sets de DJ.',
+        },
+        {
+          q: 'O tap tempo substitui análise de áudio?',
+          a: 'Para uma única faixa em reprodução, tocar costuma ser mais rápido. Analisadores de arquivo ajudam em lotes; o tap tempo ganha quando você só ouve a música.',
+        },
+        {
+          q: 'Por que meu BPM parece metade ou o dobro?',
+          a: 'Você pode estar tocando uma sensação half-time ou double-time. Use ÷2 / ×2 depois que a leitura estabilizar.',
         },
       ],
     },
@@ -207,6 +339,135 @@ export const guides: Guide[] = [
         },
       ],
     },
+    es: {
+      title: 'Precisión del tap tempo — cómo obtener un BPM estable',
+      description: '¿Qué tan preciso es el tap tempo? Consejos prácticos para reducir la inestabilidad y caer dentro de unos ±1–2 BPM del tempo real.',
+      h1: '¿Qué tan preciso es el tap tempo?',
+      lead: 'El tap tempo mide tus toques, no el archivo de audio. Una técnica constante suele acercarse lo suficiente para producción y práctica.',
+      sections: [
+        {
+          h2: 'Qué significa «suficientemente bueno»',
+          paragraphs: [
+            'Con 8–12 toques estables, la mayoría cae dentro de unos ±1–2 BPM del tempo real — suficiente para cuadrículas del DAW, sync de delay y ensayo.',
+            'El timing humano siempre fluctúa unos milisegundos; el promedio cancela errores pequeños si mantienes el mismo pulso.',
+          ],
+        },
+        {
+          h2: 'Técnica que estabiliza la lectura',
+          paragraphs: [
+            'Toca una capa consistente (kick o snare). Ignora fills, rolls y el ritmo vocal.',
+            'Sigue hasta que la interfaz diga Stable. Si tropiezas, Reset y empieza de nuevo en lugar de «luchar» contra un mal promedio.',
+          ],
+        },
+        {
+          h2: 'Verifica como en estudio',
+          paragraphs: [
+            'Inicia el metrónomo con el BPM medido. Si el click se desvía del tema, ajusta con ÷2/×2 o vuelve a tocar.',
+            'Con swing o bandas en vivo, espera más variación — haz más taps o acepta el BPM entero más cercano y afina a oído.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: '¿El tap tempo es exacto?',
+          a: 'Es una estimación de tu timing. Las cuadrículas electrónicas limpias son las más fáciles; swing y batería en vivo necesitan más toques.',
+        },
+        {
+          q: '¿Debo usar el teclado o el pad?',
+          a: 'El que puedas golpear con más regularidad. Mucha gente es más estable con Space que con un objetivo táctil pequeño.',
+        },
+        {
+          q: '¿Por qué el número sigue moviéndose?',
+          a: 'Los primeros taps tienen alta varianza. Mantén un pulso estable — el promedio móvil se asienta a medida que sube la confianza.',
+        },
+      ],
+    },
+    fr: {
+      title: 'Précision du tap tempo — comment obtenir un BPM stable',
+      description: 'Quelle est la précision du tap tempo ? Conseils pratiques pour réduire les fluctuations et viser environ ±1–2 BPM du vrai tempo.',
+      h1: 'Quelle est la précision du tap tempo ?',
+      lead: 'Le tap tempo mesure vos taps, pas le fichier audio. Une technique régulière suffit généralement pour la production et la pratique.',
+      sections: [
+        {
+          h2: 'Ce que signifie « assez bon »',
+          paragraphs: [
+            'Avec 8–12 taps réguliers, la plupart des gens tombent à environ ±1–2 BPM du vrai tempo — suffisant pour les grilles DAW, le sync delay et les répétitions.',
+            'Le timing humain tremble toujours de quelques millisecondes ; la moyenne annule les petites erreurs si vous gardez le même pulse.',
+          ],
+        },
+        {
+          h2: 'Technique qui stabilise la lecture',
+          paragraphs: [
+            'Tapez une couche cohérente (kick ou snare). Ignorez fills, roulements et rythme vocal.',
+            'Continuez jusqu’à ce que l’interface affiche Stable. Si vous trébuchez, Reset et recommencez plutôt que de « combattre » une mauvaise moyenne.',
+          ],
+        },
+        {
+          h2: 'Vérifiez comme en studio',
+          paragraphs: [
+            'Lancez le métronome sur le BPM mesuré. Si le clic dérive par rapport au morceau, ajustez avec ÷2/×2 ou retapez.',
+            'Pour le swing ou les groupes live, attendez plus de variance — faites plus de taps ou acceptez le BPM entier le plus proche et affinez à l’oreille.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Le tap tempo est-il exact ?',
+          a: 'C’est une estimation de votre timing. Les grilles électroniques propres sont les plus faciles ; swing et batterie live demandent plus de taps.',
+        },
+        {
+          q: 'Clavier ou pad ?',
+          a: 'Celui sur lequel vous frappez le plus régulièrement. Beaucoup sont plus stables sur Espace qu’une petite zone tactile.',
+        },
+        {
+          q: 'Pourquoi le chiffre bouge-t-il encore ?',
+          a: 'Les premiers taps ont une forte variance. Gardez un pulse régulier — la moyenne glissante se stabilise avec la confiance.',
+        },
+      ],
+    },
+    pt: {
+      title: 'Precisão do tap tempo — como obter um BPM estável',
+      description: 'Qual a precisão do tap tempo? Dicas práticas para reduzir a instabilidade e ficar em torno de ±1–2 BPM do tempo real.',
+      h1: 'Qual a precisão do tap tempo?',
+      lead: 'O tap tempo mede seus toques, não o arquivo de áudio. Técnica constante costuma ser precisa o suficiente para produção e prática.',
+      sections: [
+        {
+          h2: 'O que significa «bom o suficiente»',
+          paragraphs: [
+            'Com 8–12 toques estáveis, a maioria fica em torno de ±1–2 BPM do tempo real — suficiente para grades do DAW, sync de delay e ensaio.',
+            'O timing humano sempre oscila alguns milissegundos; a média cancela erros pequenos se você mantiver o mesmo pulso.',
+          ],
+        },
+        {
+          h2: 'Técnica que estabiliza a leitura',
+          paragraphs: [
+            'Toque uma camada consistente (kick ou snare). Ignore fills, rolls e ritmo vocal.',
+            'Continue até a interface mostrar Stable. Se tropeçar, Reset e comece de novo em vez de «lutar» contra uma média ruim.',
+          ],
+        },
+        {
+          h2: 'Confira como em estúdio',
+          paragraphs: [
+            'Inicie o metrônomo no BPM medido. Se o clique desviar da faixa, ajuste com ÷2/×2 ou toque de novo.',
+            'Com swing ou bandas ao vivo, espere mais variação — faça mais toques ou aceite o BPM inteiro mais próximo e ajuste de ouvido.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'O tap tempo é exato?',
+          a: 'É uma estimativa do seu timing. Grades eletrônicas limpas são as mais fáceis; swing e bateria ao vivo precisam de mais toques.',
+        },
+        {
+          q: 'Devo usar o teclado ou o pad?',
+          a: 'O que você conseguir bater com mais regularidade. Muita gente é mais estável no Space do que em um alvo touch pequeno.',
+        },
+        {
+          q: 'Por que o número continua se movendo?',
+          a: 'Os primeiros toques têm alta variância. Mantenha um pulso estável — a média móvel se estabiliza conforme a confiança sobe.',
+        },
+      ],
+    },
   },
   {
     slug: 'bpm-to-milliseconds',
@@ -295,6 +556,135 @@ export const guides: Guide[] = [
         {
           q: 'Считать вручную?',
           a: 'Не нужно. Калькулятор delay показывает длительности и копирует в один клик.',
+        },
+      ],
+    },
+    es: {
+      title: 'BPM a milisegundos — calculadora de delay y duraciones de nota',
+      description: 'Convierte BPM a milisegundos para delay y duraciones de nota. Negras, valores con punto, tresillos — con tap tempo integrado.',
+      h1: 'BPM a milisegundos',
+      lead: 'Un beat en ms es 60.000 ÷ BPM. A partir de la duración de la negra puedes derivar cada subdivisión común de delay.',
+      sections: [
+        {
+          h2: 'La fórmula central',
+          paragraphs: [
+            'Milisegundos por negra = 60.000 ÷ BPM. A 120 BPM son 500 ms; a 100 BPM son 600 ms.',
+            'Divide a la mitad para corcheas, otra vez para semicorcheas. Multiplica por 1,5 para valores con punto; los tresillos dividen el beat en tres.',
+          ],
+        },
+        {
+          h2: 'Usos en estudio',
+          paragraphs: [
+            'Sincroniza delays, slapback y tiempos cercanos al sidechain con la cuadrícula de la canción sin adivinar.',
+            'Toca el tema en la página de delay y copia la celda que necesites — 1/8, 1/8 con punto o tresillo de 1/4 son opciones habituales.',
+          ],
+        },
+        {
+          h2: 'Combina con metrónomo y tap',
+          paragraphs: [
+            'Mide el BPM en la herramienta principal, confirma con el metrónomo y salta a delay con el mismo valor ?bpm=.',
+            'Cuando la sensación es half-time, convierte después de ÷2/×2 para que la tabla de ms coincida con la cuadrícula que realmente quieres.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: '¿Cuál es el tiempo de delay de una corchea a 128 BPM?',
+          a: 'Negra ≈ 468,75 ms, así que una 1/8 recta ≈ 234,4 ms. Usa la tabla de delay para copiar valores exactos.',
+        },
+        {
+          q: '¿Con punto o tresillo — cuál debo usar?',
+          a: 'La 1/8 con punto es un delay clásico de slapback/groove. Los tresillos encajan en partes con swing o basadas en tresillos. Confía en tu oído después de copiar.',
+        },
+        {
+          q: '¿Tengo que calcular a mano?',
+          a: 'No. La calculadora de delay BPM lista duraciones comunes y copia en un clic.',
+        },
+      ],
+    },
+    fr: {
+      title: 'BPM en millisecondes — calculateur de delay et de durées de note',
+      description: 'Convertissez le BPM en millisecondes pour le delay et les durées de note. Noires, valeurs pointées, triolets — avec tap tempo intégré.',
+      h1: 'BPM en millisecondes',
+      lead: 'Un temps en ms vaut 60 000 ÷ BPM. À partir de la durée de la noire, vous dérivez chaque subdivision de delay courante.',
+      sections: [
+        {
+          h2: 'La formule de base',
+          paragraphs: [
+            'Millisecondes par noire = 60 000 ÷ BPM. À 120 BPM c’est 500 ms ; à 100 BPM c’est 600 ms.',
+            'Divisez par deux pour les croches, encore pour les doubles croches. Multipliez par 1,5 pour les pointées ; les triolets divisent le temps en trois.',
+          ],
+        },
+        {
+          h2: 'Usages en studio',
+          paragraphs: [
+            'Synchronisez delays, slapback et timings proches du sidechain sur la grille du morceau sans deviner.',
+            'Tapez le morceau sur la page delay, puis copiez la cellule voulue — 1/8, 1/8 pointée ou triolet de 1/4 sont des choix fréquents.',
+          ],
+        },
+        {
+          h2: 'Associez métronome et tap',
+          paragraphs: [
+            'Mesurez le BPM sur l’outil d’accueil, confirmez avec le métronome, puis passez au delay avec la même valeur ?bpm=.',
+            'Quand le feel est half-time, convertissez après ÷2/×2 pour que le tableau ms corresponde à la grille que vous voulez vraiment.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Quel est le temps de delay d’une croche à 128 BPM ?',
+          a: 'Noire ≈ 468,75 ms, donc une 1/8 droite ≈ 234,4 ms. Utilisez le tableau delay pour copier les valeurs exactes.',
+        },
+        {
+          q: 'Pointée ou triolet — lequel choisir ?',
+          a: 'La 1/8 pointée est un delay slapback/groove classique. Les triolets conviennent aux parties swingées ou en triolet. Fiez-vous à votre oreille après copie.',
+        },
+        {
+          q: 'Faut-il calculer à la main ?',
+          a: 'Non. Le calculateur delay BPM liste les durées courantes et copie en un clic.',
+        },
+      ],
+    },
+    pt: {
+      title: 'BPM em milissegundos — calculadora de delay e durações de nota',
+      description: 'Converta BPM em milissegundos para delay e durações de nota. Semínimas, valores com ponto, tercinas — com tap tempo integrado.',
+      h1: 'BPM em milissegundos',
+      lead: 'Um beat em ms é 60.000 ÷ BPM. A partir da duração da semínima você deriva cada subdivisão comum de delay.',
+      sections: [
+        {
+          h2: 'A fórmula central',
+          paragraphs: [
+            'Milissegundos por semínima = 60.000 ÷ BPM. A 120 BPM são 500 ms; a 100 BPM são 600 ms.',
+            'Divida pela metade para colcheias, de novo para semicolcheias. Multiplique por 1,5 para valores com ponto; tercinas dividem o beat em três.',
+          ],
+        },
+        {
+          h2: 'Usos em estúdio',
+          paragraphs: [
+            'Sincronize delays, slapback e tempos próximos ao sidechain com a grade da música sem chutar.',
+            'Toque a faixa na página de delay e copie a célula que precisar — 1/8, 1/8 com ponto ou tercina de 1/4 são escolhas comuns.',
+          ],
+        },
+        {
+          h2: 'Combine com metrônomo e tap',
+          paragraphs: [
+            'Meça o BPM na ferramenta principal, confirme com o metrônomo e vá para delay com o mesmo valor ?bpm=.',
+            'Quando a sensação for half-time, converta depois de ÷2/×2 para a tabela de ms bater com a grade que você realmente quer.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Qual o tempo de delay de uma colchea a 128 BPM?',
+          a: 'Semínima ≈ 468,75 ms, então uma 1/8 reta ≈ 234,4 ms. Use a tabela de delay para copiar valores exatos.',
+        },
+        {
+          q: 'Com ponto ou tercina — qual devo usar?',
+          a: 'A 1/8 com ponto é um delay clássico de slapback/groove. Tercinas encaixam em partes com swing ou baseadas em tercinas. Confie no ouvido depois de copiar.',
+        },
+        {
+          q: 'Preciso calcular na mão?',
+          a: 'Não. A calculadora de delay BPM lista durações comuns e copia em um clique.',
         },
       ],
     },
@@ -389,6 +779,135 @@ export const guides: Guide[] = [
         },
       ],
     },
+    es: {
+      title: 'BPM half-time y double-time — cuándo usar ÷2 y ×2',
+      description: 'Por qué tu tap BPM parece la mitad o el doble — y cómo elegir el tempo escrito frente al pulso sentido para DAW y DJ.',
+      h1: 'BPM half-time y double-time',
+      lead: 'El BPM «correcto» es el que coincide con la cuadrícula que quieres. ÷2 y ×2 alternan entre pulso sentido y tempo escrito.',
+      sections: [
+        {
+          h2: 'Pulso sentido vs tempo escrito',
+          paragraphs: [
+            'Dubstep y trap suelen sentirse como ~70–80 BPM pero se escriben a ~140–160. El DnB puede sentirse como la mitad de 170+. La salsa puede sentirse como la mitad de ~200.',
+            'Ningún número está mal — los productores eligen la cuadrícula que facilita la edición y la programación de batería.',
+          ],
+        },
+        {
+          h2: 'Cómo decidir en 10 segundos',
+          paragraphs: [
+            'Toca lo que asientes naturalmente. Inicia el metrónomo. Si el click es el doble de activo que el groove de la canción, pulsa ÷2; si se siente lento, pulsa ×2.',
+            'Revisa hi-hats y percusión: si claramente subdividen tus taps por dos, probablemente estás en el feel más lento.',
+          ],
+        },
+        {
+          h2: 'Flujo de trabajo en BPM Tap',
+          paragraphs: [
+            'Estabiliza una lectura en la herramienta principal, cambia ÷2/×2 y salta al metrónomo o delay con ?bpm= para que todas las páginas compartan la elección.',
+            'Las páginas de género anotan hábitos comunes de half-time — úsalas como pista y luego confía en el metrónomo contra la pista.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: '¿Los DJs deben usar BPM sentido o escrito?',
+          a: 'Coincide con lo que esperan tu biblioteca y herramientas de sync. La consistencia en tu crate importa más que la teoría.',
+        },
+        {
+          q: '¿Por qué importa ×2 para el delay?',
+          a: 'Los ms de delay siguen el BPM que elijas. Octava de tempo incorrecta = duraciones de nota incorrectas en la tabla.',
+        },
+        {
+          q: '¿Puede la confianza ser alta en la octava «incorrecta»?',
+          a: 'Sí — puedes tocar un pulso half-time estable. Estabilidad ≠ cuadrícula correcta. Confirma con metrónomo y necesidades de arreglo.',
+        },
+      ],
+    },
+    fr: {
+      title: 'BPM half-time et double-time — quand utiliser ÷2 et ×2',
+      description: 'Pourquoi votre tap BPM semble divisé ou doublé — et comment choisir le tempo noté vs le pulse ressenti pour le DAW et le DJ.',
+      h1: 'BPM half-time et double-time',
+      lead: 'Le « bon » BPM est celui qui correspond à la grille voulue. ÷2 et ×2 basculent entre pulse ressenti et tempo noté.',
+      sections: [
+        {
+          h2: 'Pulse ressenti vs tempo noté',
+          paragraphs: [
+            'Dubstep et trap se ressentent souvent ~70–80 BPM mais s’écrivent ~140–160. Le DnB peut sembler la moitié de 170+. La salsa peut sembler la moitié de ~200.',
+            'Aucun chiffre n’est faux — les producteurs choisissent la grille qui facilite l’édition et la programmation batterie.',
+          ],
+        },
+        {
+          h2: 'Comment décider en 10 secondes',
+          paragraphs: [
+            'Tapez ce sur quoi vous hochez naturellement la tête. Lancez le métronome. Si le clic est deux fois plus occupé que le groove, appuyez sur ÷2 ; s’il traîne, appuyez sur ×2.',
+            'Regardez hi-hats et percussion : s’ils subdivisent clairement vos taps par deux, vous êtes probablement sur le feel plus lent.',
+          ],
+        },
+        {
+          h2: 'Workflow sur BPM Tap',
+          paragraphs: [
+            'Stabilisez une lecture sur l’outil d’accueil, basculez ÷2/×2, puis passez au métronome ou delay avec ?bpm= pour que chaque page partage le choix.',
+            'Les pages genre notent les habitudes half-time courantes — utilisez-les comme indice, puis fiez-vous au métronome face au morceau.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Les DJ doivent-ils utiliser le BPM ressenti ou noté ?',
+          a: 'Alignez-vous sur ce qu’attendent votre bibliothèque et vos outils de sync. La cohérence dans votre crate compte plus que la théorie.',
+        },
+        {
+          q: 'Pourquoi ×2 compte pour le delay ?',
+          a: 'Les ms de delay suivent le BPM choisi. Mauvaise octave de tempo = mauvaises durées de note dans le tableau.',
+        },
+        {
+          q: 'La confiance peut-elle être haute sur la « mauvaise » octave ?',
+          a: 'Oui — vous pouvez taper un pulse half-time stable. Stabilité ≠ bonne grille. Confirmez avec le métronome et les besoins d’arrangement.',
+        },
+      ],
+    },
+    pt: {
+      title: 'BPM half-time e double-time — quando usar ÷2 e ×2',
+      description: 'Por que seu tap BPM parece metade ou o dobro — e como escolher o tempo escrito vs o pulso sentido para DAW e DJ.',
+      h1: 'BPM half-time e double-time',
+      lead: 'O BPM «certo» é o que bate com a grade que você quer. ÷2 e ×2 alternam entre pulso sentido e tempo escrito.',
+      sections: [
+        {
+          h2: 'Pulso sentido vs tempo escrito',
+          paragraphs: [
+            'Dubstep e trap costumam parecer ~70–80 BPM mas são escritos em ~140–160. DnB pode parecer metade de 170+. Salsa pode parecer metade de ~200.',
+            'Nenhum número está errado — produtores escolhem a grade que facilita edição e programação de bateria.',
+          ],
+        },
+        {
+          h2: 'Como decidir em 10 segundos',
+          paragraphs: [
+            'Toque o que você balança a cabeça naturalmente. Inicie o metrônomo. Se o clique estiver o dobro de ativo que o groove da música, pressione ÷2; se parecer lento, pressione ×2.',
+            'Observe hi-hats e percussão: se claramente subdividem seus toques por dois, você provavelmente está no feel mais lento.',
+          ],
+        },
+        {
+          h2: 'Fluxo de trabalho no BPM Tap',
+          paragraphs: [
+            'Estabilize uma leitura na ferramenta principal, alterne ÷2/×2 e vá para metrônomo ou delay com ?bpm= para todas as páginas compartilharem a escolha.',
+            'As páginas de gênero anotam hábitos comuns de half-time — use como dica e depois confie no metrônomo contra a faixa.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'DJs devem usar BPM sentido ou escrito?',
+          a: 'Combine com o que sua biblioteca e ferramentas de sync esperam. Consistência no seu acervo importa mais que teoria.',
+        },
+        {
+          q: 'Por que ×2 importa para delay?',
+          a: 'Os ms de delay seguem o BPM que você escolhe. Octava de tempo errada = durações de nota erradas na tabela.',
+        },
+        {
+          q: 'A confiança pode estar alta na octava «errada»?',
+          a: 'Sim — você pode tocar um pulso half-time estável. Estabilidade ≠ grade correta. Confirme com metrônomo e necessidades de arranjo.',
+        },
+      ],
+    },
   },
   {
     slug: 'find-bpm-with-microphone',
@@ -479,6 +998,138 @@ export const guides: Guide[] = [
         {
           q: 'Почему BPM вдвое меньше или больше?',
           a: 'Оценщики темпа часто берут другую «октаву» пульса. Жми ÷2 / ×2, выбери альтернативу если есть, затем сверься с метрономом.',
+        },
+      ],
+    },
+    es: {
+      title: 'Cómo encontrar el BPM de una canción con un micrófono',
+      description:
+        'Encuentra el BPM con tu micrófono: abre el modo Listen, apunta a un altavoz, espera una estimación de tempo en vivo y confirma con ÷2/×2, metrónomo o tap. Sin subir archivos.',
+      h1: 'Encontrar el BPM de una canción con un micrófono',
+      lead: 'Cuando no puedes tocar con regularidad — o tienes las manos ocupadas — el modo Listen estima el tempo del audio que capta el micrófono. El mismo escenario BPM que el tap: copiar, metrónomo, delay.',
+      sections: [
+        {
+          h2: 'Abre Listen y permite el micrófono',
+          paragraphs: [
+            'Ve a Listen en bpm-tap.com y empieza a escuchar. Concede acceso al micrófono cuando el navegador lo pida — sin él la herramienta no puede oír la pista.',
+            'El audio permanece en tu navegador. No se sube nada; la página solo usa el stream del micrófono para estimar el BPM en tu dispositivo.',
+          ],
+        },
+        {
+          h2: 'Consigue una señal clara en el micrófono',
+          paragraphs: [
+            'Reproduce la canción en un altavoz o teléfono y acerca el dispositivo a la fuente. Altavoces de portátil débiles y habitaciones ruidosas hacen menos fiable cualquier detector de onset/energía.',
+            'Las pistas electrónicas con kick claro suelen fijarse más rápido. Dale varios segundos hasta que la lectura parezca estable, luego revisa ÷2 / ×2 si la sensación parece la mitad o el doble.',
+          ],
+        },
+        {
+          h2: 'Confirma y usa el número',
+          paragraphs: [
+            'Inicia el metrónomo con el BPM medido. Si el click se desvía de la pista, cambia ÷2/×2 o pasa a Tap y afina a mano.',
+            'Cuando encaje, copia el BPM, abre Delay para valores en ms o comparte un enlace ?bpm= — el mismo flujo que el tap tempo clásico.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: '¿Puedo encontrar el BPM sin tocar?',
+          a: 'Sí. El modo Listen detecta el tempo desde el micrófono. Tap sigue siendo útil para afinar una lectura o cuando la habitación es demasiado ruidosa para una señal limpia.',
+        },
+        {
+          q: '¿El audio del micrófono sale de mi dispositivo?',
+          a: 'No. El análisis se ejecuta en el navegador. BPM Tap no sube audio del micrófono.',
+        },
+        {
+          q: '¿Por qué el BPM es la mitad o el doble de lo esperado?',
+          a: 'Los estimadores de tempo suelen elegir la otra octava del pulso. Usa ÷2 / ×2, prueba un candidato alternativo si aparece y confirma con el metrónomo.',
+        },
+      ],
+    },
+    fr: {
+      title: 'Comment trouver le BPM d’une chanson avec un microphone',
+      description:
+        'Trouvez le BPM avec votre micro : ouvrez le mode Listen, pointez vers un haut-parleur, attendez une estimation live du tempo, puis confirmez avec ÷2/×2, métronome ou tap. Sans envoi de fichier.',
+      h1: 'Trouver le BPM d’une chanson avec un microphone',
+      lead: 'Quand vous ne pouvez pas taper régulièrement — ou que vos mains sont occupées — le mode Listen estime le tempo à partir de l’audio capté par le micro. Même scène BPM que le tap : copier, métronome, delay.',
+      sections: [
+        {
+          h2: 'Ouvrez Listen et autorisez le micro',
+          paragraphs: [
+            'Allez sur Listen sur bpm-tap.com et commencez à écouter. Accordez l’accès au microphone quand le navigateur le demande — sans cela l’outil n’entend pas le morceau.',
+            'L’audio reste dans votre navigateur. Rien n’est envoyé ; la page utilise seulement le flux micro pour estimer le BPM sur votre appareil.',
+          ],
+        },
+        {
+          h2: 'Obtenez un signal clair dans le micro',
+          paragraphs: [
+            'Jouez la chanson sur un haut-parleur ou un téléphone et rapprochez l’appareil de la source. Des enceintes de portable faibles et une pièce bruyante rendent tout détecteur onset/énergie moins fiable.',
+            'Les morceaux électroniques avec un kick net se verrouillent généralement plus vite. Laissez quelques secondes jusqu’à une lecture stable, puis vérifiez ÷2 / ×2 si le feel semble divisé ou doublé.',
+          ],
+        },
+        {
+          h2: 'Confirmez, puis utilisez le chiffre',
+          paragraphs: [
+            'Lancez le métronome sur le BPM mesuré. Si le clic dérive par rapport au morceau, basculez ÷2/×2 ou passez en Tap pour affiner à la main.',
+            'Quand c’est aligné, copiez le BPM, ouvrez Delay pour les valeurs ms, ou partagez un lien ?bpm= — le même workflow que le tap tempo classique.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Puis-je trouver le BPM sans taper ?',
+          a: 'Oui. Le mode Listen détecte le tempo depuis le micro. Le tap reste utile pour affiner une lecture ou quand la pièce est trop bruyante pour un signal propre.',
+        },
+        {
+          q: 'L’audio du micro quitte-t-il mon appareil ?',
+          a: 'Non. L’analyse tourne dans le navigateur. BPM Tap n’envoie pas l’audio du micro.',
+        },
+        {
+          q: 'Pourquoi le BPM est-il la moitié ou le double de ce que j’attends ?',
+          a: 'Les estimateurs de tempo choisissent souvent l’autre octave du pulse. Utilisez ÷2 / ×2, essayez un candidat alternatif si proposé, puis confirmez avec le métronome.',
+        },
+      ],
+    },
+    pt: {
+      title: 'Como descobrir o BPM de uma música com microfone',
+      description:
+        'Descubra o BPM com seu microfone: abra o modo Listen, aponte para um alto-falante, espere uma estimativa de tempo ao vivo e confirme com ÷2/×2, metrônomo ou tap. Sem upload.',
+      h1: 'Descobrir o BPM de uma música com microfone',
+      lead: 'Quando você não consegue tocar com regularidade — ou está com as mãos ocupadas — o modo Listen estima o tempo do áudio que o microfone capta. O mesmo palco BPM do tap: copiar, metrônomo, delay.',
+      sections: [
+        {
+          h2: 'Abra Listen e permita o microfone',
+          paragraphs: [
+            'Vá para Listen no bpm-tap.com e comece a escutar. Conceda acesso ao microfone quando o navegador pedir — sem isso a ferramenta não ouve a faixa.',
+            'O áudio fica no seu navegador. Nada é enviado; a página só usa o stream do microfone para estimar BPM no seu dispositivo.',
+          ],
+        },
+        {
+          h2: 'Obtenha um sinal claro no microfone',
+          paragraphs: [
+            'Reproduza a música em um alto-falante ou celular e aproxime o dispositivo da fonte. Alto-falantes fracos de notebook e ambientes barulhentos tornam qualquer detector de onset/energia menos confiável.',
+            'Faixas eletrônicas com kick claro costumam travar mais rápido. Dê alguns segundos até a leitura parecer estável, depois verifique ÷2 / ×2 se a sensação parecer metade ou o dobro.',
+          ],
+        },
+        {
+          h2: 'Confirme e use o número',
+          paragraphs: [
+            'Inicie o metrônomo no BPM medido. Se o clique desviar da faixa, alterne ÷2/×2 ou mude para Tap e refine manualmente.',
+            'Quando encaixar, copie o BPM, abra Delay para valores em ms ou compartilhe um link ?bpm= — o mesmo fluxo do tap tempo clássico.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Posso descobrir BPM sem tocar?',
+          a: 'Sim. O modo Listen detecta o tempo pelo microfone. Tap ainda é útil para refinar uma leitura ou quando o ambiente está barulhento demais para um sinal limpo.',
+        },
+        {
+          q: 'O áudio do microfone sai do meu dispositivo?',
+          a: 'Não. A análise roda no navegador. O BPM Tap não envia áudio do microfone.',
+        },
+        {
+          q: 'Por que o BPM é metade ou o dobro do esperado?',
+          a: 'Estimadores de tempo costumam escolher a outra octava do pulso. Use ÷2 / ×2, tente um candidato alternativo se aparecer e confirme com o metrônomo.',
         },
       ],
     },

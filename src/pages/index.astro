@@ -1,3 +1,52 @@
 ---
-return Astro.redirect('/en/');
+// Locale redirect runs client-side (see script below) so static hosting works everywhere.
+// Netlify also uses language rules in public/_redirects as a server-side fallback.
 ---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BPM Tap</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="https://bpm-tap.com/en/" />
+  </head>
+  <body>
+    <noscript>
+      <p><a href="/en/">English</a> · <a href="/ru/">Русский</a> · <a href="/es/">Español</a> · <a href="/fr/">Français</a> · <a href="/pt/">Português</a></p>
+    </noscript>
+    <script is:inline>
+      (function () {
+        var LOCALES = ['en', 'ru', 'es', 'fr', 'pt'];
+        var DEFAULT = 'en';
+        var COOKIE = 'locale';
+        var MAX_AGE = 60 * 60 * 24 * 365;
+
+        function readCookie() {
+          var m = document.cookie.match(new RegExp('(?:^|; )' + COOKIE + '=([^;]+)'));
+          return m ? decodeURIComponent(m[1]) : null;
+        }
+
+        function writeCookie(locale) {
+          document.cookie = COOKIE + '=' + encodeURIComponent(locale) + ';path=/;max-age=' + MAX_AGE + ';samesite=lax';
+        }
+
+        function detect() {
+          var saved = readCookie();
+          if (saved && LOCALES.indexOf(saved) !== -1) return saved;
+
+          var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          for (var i = 0; i < langs.length; i++) {
+            var code = String(langs[i]).toLowerCase().split('-')[0];
+            if (LOCALES.indexOf(code) !== -1) return code;
+          }
+          return DEFAULT;
+        }
+
+        var locale = detect();
+        writeCookie(locale);
+        location.replace('/' + locale + '/');
+      })();
+    </script>
+  </body>
+</html>

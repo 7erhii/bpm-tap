@@ -1,5 +1,13 @@
 ---
-import { localizedPath, t, type Locale } from '@/i18n/utils';
+import {
+  localizedPath,
+  t,
+  LOCALES,
+  LOCALE_LABELS,
+  LOCALE_NAMES,
+  localePathRegex,
+  type Locale,
+} from '@/i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -7,11 +15,12 @@ interface Props {
 }
 
 const { locale, theme = 'studio' } = Astro.props;
-const other = locale === 'en' ? 'ru' : 'en';
-const pathAfterLocale = Astro.url.pathname.replace(/^\/(en|ru)/, '') || '/';
+const pathAfterLocale = Astro.url.pathname.replace(localePathRegex(), '') || '/';
 const onPulse = pathAfterLocale === '/pulse' || pathAfterLocale.startsWith('/pulse/');
 const brandHref = theme === 'pulse' ? localizedPath(locale, 'pulse') : localizedPath(locale);
 const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'brand');
+const pathSuffix = pathAfterLocale.replace(/^\//, '');
+const menuId = `locale-menu-${locale}`;
 ---
 
 <header class={`site-header${theme === 'pulse' ? ' site-header--pulse' : ''}`}>
@@ -60,11 +69,80 @@ const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'bra
         </a>
       )
     }
-    <a class="locale" href={localizedPath(other, pathAfterLocale.replace(/^\//, ''))}>
-      {other.toUpperCase()}
-    </a>
+    <div class="locale-dropdown" data-locale-dropdown>
+      <button
+        type="button"
+        class="locale-trigger"
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        aria-controls={menuId}
+        id={`locale-trigger-${locale}`}
+      >
+        <span class="locale-trigger__code">{LOCALE_LABELS[locale]}</span>
+        <svg class="locale-trigger__chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="locale-menu-panel">
+        <ul class="locale-menu" id={menuId} role="listbox" aria-labelledby={`locale-trigger-${locale}`}>
+          {
+            LOCALES.map((code) => (
+              <li role="presentation">
+                <a
+                  class:list={['locale-option', { 'locale-option--active': code === locale }]}
+                  href={localizedPath(code, pathSuffix)}
+                  hreflang={code}
+                  lang={code}
+                  role="option"
+                  aria-selected={code === locale ? 'true' : 'false'}
+                >
+                  <span class="locale-option__code">{LOCALE_LABELS[code]}</span>
+                  <span class="locale-option__name">{LOCALE_NAMES[code]}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
+
+<script>
+  function initLocaleDropdowns() {
+    document.querySelectorAll<HTMLElement>('[data-locale-dropdown]').forEach((root) => {
+      if (root.dataset.localeReady === 'true') return;
+      root.dataset.localeReady = 'true';
+
+      const trigger = root.querySelector<HTMLButtonElement>('.locale-trigger');
+      if (!trigger) return;
+
+      const setOpen = (open: boolean) => {
+        root.classList.toggle('is-open', open);
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+
+      const close = () => setOpen(false);
+      const toggle = () => setOpen(!root.classList.contains('is-open'));
+
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggle();
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!root.contains(event.target as Node)) close();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') close();
+      });
+    });
+  }
+
+  initLocaleDropdowns();
+  document.addEventListener('astro:page-load', initLocaleDropdowns);
+</script>
 
 <style>
   .site-header {
@@ -130,7 +208,6 @@ const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'bra
   .nav-studio--mobile {
     margin-left: auto;
   }
-  /* Studio twin of the Pulse chip — way back to BPM Tap */
   .nav-studio {
     --studio-nav: #c8f542;
     --studio-nav-dim: rgba(200, 245, 66, 0.16);
@@ -156,13 +233,115 @@ const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'bra
     background: #0b0c10;
     flex-shrink: 0;
   }
-  .locale {
-    text-decoration: none;
+  .locale-dropdown {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 30;
+  }
+  .locale-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 0.35rem 0.7rem;
-    font-size: 0.85rem;
+    padding: 0.38rem 0.65rem;
+    font-size: 0.78rem;
+    font-weight: 650;
+    color: var(--text);
+    background: var(--bg-elevated);
+    cursor: pointer;
+    line-height: 1;
+    font-family: inherit;
+    min-height: 2rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .locale-trigger:hover,
+  .locale-dropdown.is-open .locale-trigger,
+  .locale-dropdown:focus-within .locale-trigger {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .locale-trigger__chevron {
+    opacity: 0.65;
+    transition: transform 0.15s ease;
+  }
+  .locale-dropdown.is-open .locale-trigger__chevron,
+  .locale-dropdown:hover .locale-trigger__chevron {
+    transform: rotate(180deg);
+  }
+  .locale-menu-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding-top: 0.4rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease,
+      visibility 0.15s;
+  }
+  .locale-menu {
+    min-width: 9.5rem;
+    margin: 0;
+    padding: 0.3rem;
+    list-style: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(18, 20, 26, 0.98);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+  .locale-dropdown.is-open .locale-menu-panel,
+  .locale-dropdown:focus-within .locale-menu-panel,
+  .locale-dropdown:hover .locale-menu-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  @media (hover: none) {
+    .locale-dropdown:hover .locale-menu-panel {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-4px);
+    }
+    .locale-dropdown.is-open .locale-menu-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+  .locale-option {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: calc(var(--radius-md) - 2px);
+    text-decoration: none;
     color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.2;
+  }
+  .locale-option:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+  }
+  .locale-option--active {
+    color: var(--text);
+    background: var(--accent-dim);
+  }
+  .locale-option__code {
+    min-width: 1.6rem;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .locale-option__name {
+    font-size: 0.86rem;
   }
   @media (min-width: 820px) {
     .nav {

@@ -4,6 +4,7 @@ import SiteHeader from '@/components/ui/SiteHeader.astro';
 import SiteFooter from '@/components/ui/SiteFooter.astro';
 import AdSlot from '@/components/seo/AdSlot.astro';
 import type { Locale } from '@/i18n/utils';
+import { t } from '@/i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -31,7 +32,7 @@ const { locale, title, description, canonicalPath, heading, lead, keywords } = A
   <SiteHeader locale={locale} theme="pulse" />
   <main class="container pulse-page">
     <header class="pulse-intro">
-      <p class="eyebrow">{locale === 'ru' ? 'Пульс · ЧСС' : 'Pulse · Heart rate'}</p>
+      <p class="eyebrow">{t(locale, 'pulse.brand')} · {locale === 'ru' ? 'ЧСС' : locale === 'es' ? 'Frecuencia cardíaca' : locale === 'fr' ? 'Fréquence cardiaque' : 'Heart rate'}</p>
       <h1>{heading}</h1>
       {lead ? <p class="lead">{lead}</p> : null}
     </header>

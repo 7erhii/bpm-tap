@@ -1,8 +1,9 @@
 import type { GenreMatch } from '@/lib/genres/match';
+import type { Locale } from '@/i18n/utils';
 
 interface Props {
   matches: GenreMatch[];
-  locale: 'en' | 'ru';
+  locale: Locale;
   title: string;
   closestLabel: string;
   rangeLabel: (min: number, max: number) => string;

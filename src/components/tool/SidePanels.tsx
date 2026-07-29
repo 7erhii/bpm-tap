@@ -7,8 +7,10 @@ import { FavoritesBar } from './FavoritesBar';
 import { GenreHint } from './GenreHint';
 import { HistoryList } from './HistoryList';
 
+import type { Locale } from '@/i18n/utils';
+
 export interface SidePanelsProps {
-  locale: 'en' | 'ru';
+  locale: Locale;
   showDelay: boolean;
   showFavorites: boolean;
   showGenreHint: boolean;

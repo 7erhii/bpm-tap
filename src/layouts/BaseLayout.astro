@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import type { Locale } from '@/i18n/utils';
+import { LOCALES, OG_LOCALE, localizedPath } from '@/i18n/utils';
 import { SITE_ORIGIN, absoluteUrl } from '@/lib/site';
 
 interface Props {
@@ -8,8 +9,6 @@ interface Props {
   title: string;
   description: string;
   canonicalPath: string;
-  alternateEn?: string;
-  alternateRu?: string;
   theme?: 'studio' | 'pulse';
   themeColor?: string;
   keywords?: string;
@@ -20,8 +19,6 @@ const {
   title,
   description,
   canonicalPath,
-  alternateEn,
-  alternateRu,
   theme = 'studio',
   themeColor,
   keywords,
@@ -34,13 +31,18 @@ function withTrailingSlash(path: string): string {
 
 const site = Astro.site?.toString().replace(/\/$/, '') ?? SITE_ORIGIN;
 const canonicalPathNorm = withTrailingSlash(canonicalPath);
-const enPath = withTrailingSlash(alternateEn ?? canonicalPathNorm.replace(/^\/ru/, '/en'));
-const ruPath = withTrailingSlash(alternateRu ?? canonicalPathNorm.replace(/^\/en/, '/ru'));
 const canonical = `${site}${canonicalPathNorm}`;
-const enUrl = `${site}${enPath}`;
-const ruUrl = `${site}${ruPath}`;
+
+/** Path after locale prefix, e.g. "delay/" or "" for home */
+const pathAfterLocale = canonicalPathNorm.replace(/^\/(en|ru|es|fr|pt)\/?/, '');
+
+const alternateUrls = Object.fromEntries(
+  LOCALES.map((loc) => [loc, `${site}${withTrailingSlash(localizedPath(loc, pathAfterLocale))}`]),
+) as Record<Locale, string>;
+
 const ogImage = absoluteUrl('/og.png');
 const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C10');
+const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOCALE[loc]);
 ---
 
 <!doctype html>
@@ -48,13 +50,28 @@ const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      if (location.search) {
+        var robots = document.querySelector('meta[name="robots"]');
+        if (robots) robots.setAttribute('content', 'noindex, follow');
+        else {
+          var m = document.createElement('meta');
+          m.name = 'robots';
+          m.content = 'noindex, follow';
+          document.head.appendChild(m);
+        }
+      }
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="ru" href={ruUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    {
+      LOCALES.map((loc) => (
+        <link rel="alternate" hreflang={loc} href={alternateUrls[loc]} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -62,8 +79,8 @@ const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C
     <meta property="og:site_name" content="BPM Tap" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content="BPM Tap — free online tap tempo" />
-    <meta property="og:locale" content={locale === 'ru' ? 'ru_RU' : 'en_US'} />
-    <meta property="og:locale:alternate" content={locale === 'ru' ? 'en_US' : 'ru_RU'} />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
+    {ogAlternates.map((alt) => <meta property="og:locale:alternate" content={alt} />)}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -76,6 +93,12 @@ const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C
   <body>
     <slot />
     <script is:inline>
+      (function () {
+        var m = location.pathname.match(/^\/(en|ru|es|fr|pt)(\/|$)/);
+        if (m) {
+          document.cookie = 'locale=' + m[1] + ';path=/;max-age=31536000;samesite=lax';
+        }
+      })();
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js').catch(() => {});

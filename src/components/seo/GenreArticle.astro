@@ -15,7 +15,7 @@ const copy = genre[locale];
 const related = genre.related
   .map((slug) => genres.find((g) => g.slug === slug))
   .filter((g): g is Genre => Boolean(g));
-const delayHref = `${localizedPath(locale, 'delay')}?bpm=${bpm}`;
+const delayHref = localizedPath(locale, 'delay');
 ---
 
 <section class="genre-body stack">
@@ -57,7 +57,7 @@ const delayHref = `${localizedPath(locale, 'delay')}?bpm=${bpm}`;
     ) : null
   }
 
-  <RelatedTools locale={locale} current="genres" bpm={bpm} />
+  <RelatedTools locale={locale} current="genres" />
 </section>
 
 <style>

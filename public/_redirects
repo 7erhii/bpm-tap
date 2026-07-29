@@ -1,1 +1,30 @@
-/ /en/ 301
+/en/  /en/  301
+/ru/  /ru/  301
+/es/  /es/  301
+/fr/  /fr/  301
+/pt/  /pt/  301
+/en   /en/  301
+/ru   /ru/  301
+/es   /es/  301
+/fr   /fr/  301
+/pt   /pt/  301
+/en/delay  /en/delay/  301
+/en/listen  /en/listen/  301
+/en/metronome  /en/metronome/  301
+/ru/delay  /ru/delay/  301
+/ru/listen  /ru/listen/  301
+/ru/metronome  /ru/metronome/  301
+/es/delay  /es/delay/  301
+/es/listen  /es/listen/  301
+/es/metronome  /es/metronome/  301
+/fr/delay  /fr/delay/  301
+/fr/listen  /fr/listen/  301
+/fr/metronome  /fr/metronome/  301
+/pt/delay  /pt/delay/  301
+/pt/listen  /pt/listen/  301
+/pt/metronome  /pt/metronome/  301
+/ /es/ 302! Language=es
+/ /pt/ 302! Language=pt
+/ /fr/ 302! Language=fr
+/ /ru/ 302! Language=ru
+/ /en/ 302

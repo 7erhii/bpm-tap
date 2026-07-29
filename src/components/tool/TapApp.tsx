@@ -12,7 +12,7 @@ import { closestGenres } from '@/lib/genres/match';
 import { loadHistory, saveHistoryItem, type HistoryItem } from '@/lib/history/storage';
 import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler';
 import { buildShareUrl, displayBpmInteger, parseBpmParam } from '@/lib/share/url';
-import { localizedPath } from '@/i18n/utils';
+import { localizedPath, type Locale } from '@/i18n/utils';
 import { BpmReadout, type IdleMark } from './BpmReadout';
 import { MetronomeBar } from './MetronomeBar';
 import { PrimaryControls } from './PrimaryControls';
@@ -68,7 +68,7 @@ export interface TapAppLabels {
 }
 
 interface Props {
-  locale: 'en' | 'ru';
+  locale: Locale;
   labels: TapAppLabels;
   mode?: 'full' | 'tap' | 'delay' | 'metronome' | 'pulse';
 }

@@ -21,7 +21,8 @@ const genresHref = localizedPath(locale, 'genres');
       popularTempos.map((item) => (
         <a
           class="tempo-chip"
-          href={`${localizedPath(locale, 'metronome')}?bpm=${item.bpm}`}
+          href={localizedPath(locale, 'metronome')}
+          title={`${item.bpm} BPM — ${(item.label as Record<string, string>)[locale] ?? item.label.en}`}
         >
           <span class="tempo-chip__bpm">{item.bpm}</span>
           <span class="tempo-chip__label">{item.label[locale]}</span>

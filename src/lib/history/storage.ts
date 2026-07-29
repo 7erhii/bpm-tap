@@ -1,3 +1,5 @@
+import type { Locale } from '@/i18n/utils';
+
 export type HistorySource = 'tap' | 'share' | 'manual' | 'listen';
 
 export interface HistoryItem {
@@ -5,7 +7,7 @@ export interface HistoryItem {
   bpm: number;
   capturedAt: string;
   source: HistorySource;
-  locale?: 'en' | 'ru';
+  locale?: Locale;
 }
 
 const KEY = 'bpm-tap:history';
