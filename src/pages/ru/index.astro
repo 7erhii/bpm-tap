@@ -1,37 +1,24 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
-import TapApp from '@/components/tool/TapApp';
-// TODO: re-enable when we have a writable board backend
-// import WeeklyLeaderboard from '@/components/tool/WeeklyLeaderboard';
+import StudioApp from '@/components/tool/StudioApp';
 import FaqSection from '@/components/seo/FaqSection.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import RelatedTools from '@/components/seo/RelatedTools.astro';
 import { guides } from '@/content/guides';
 import { t, localizedPath } from '@/i18n/utils';
 import { absoluteUrl } from '@/lib/site';
-import { tapLabels } from '@/lib/ui/tapLabels';
+import { studioLabels } from '@/lib/ui/listenLabels';
 
 const locale = 'ru' as const;
-const labels = tapLabels(locale);
+const labels = studioLabels(locale);
 const faqs = [
   { q: t(locale, 'faq.q1'), a: t(locale, 'faq.a1') },
   { q: t(locale, 'faq.q2'), a: t(locale, 'faq.a2') },
   { q: t(locale, 'faq.q3'), a: t(locale, 'faq.a3') },
   { q: t(locale, 'faq.q4'), a: t(locale, 'faq.a4') },
   { q: t(locale, 'faq.q5'), a: t(locale, 'faq.a5') },
+  { q: t(locale, 'faq.q6'), a: t(locale, 'faq.a6') },
 ];
-// TODO: re-enable when we have a writable board backend
-// const boardLabels = {
-//   title: t(locale, 'leaderboard.title'),
-//   blurb: t(locale, 'leaderboard.blurb'),
-//   week: t(locale, 'leaderboard.week'),
-//   resets: t(locale, 'leaderboard.resets'),
-//   you: t(locale, 'leaderboard.you'),
-//   handlePlaceholder: t(locale, 'leaderboard.handlePlaceholder'),
-//   empty: t(locale, 'leaderboard.empty'),
-//   ms: t(locale, 'leaderboard.ms'),
-//   funNote: t(locale, 'leaderboard.funNote'),
-// };
 const guideList = [...guides].sort((a, b) => a.order - b.order);
 ---
 
@@ -50,7 +37,7 @@ const guideList = [...guides].sort((a, b) => a.order - b.order);
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
         name: 'BPM Tap',
-        alternateName: ['Tap BPM', 'Tap Tempo', 'BPM Counter'],
+        alternateName: ['Tap BPM', 'Tap Tempo', 'BPM Counter', 'Listen BPM', 'BPM с микрофона'],
         applicationCategory: 'MultimediaApplication',
         operatingSystem: 'Any',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -69,10 +56,7 @@ const guideList = [...guides].sort((a, b) => a.order - b.order);
       },
     ]}
   />
-  <TapApp client:load slot="tool" locale={locale} labels={labels} mode="full" />
-
-  {/* TODO: re-enable when we have a writable board backend */}
-  {/* <WeeklyLeaderboard client:visible labels={boardLabels} /> */}
+  <StudioApp client:load slot="tool" locale={locale} labels={labels} defaultMode="tap" />
 
   <section class="howto stack">
     <h2>{t(locale, 'howto.title')}</h2>
@@ -80,6 +64,7 @@ const guideList = [...guides].sort((a, b) => a.order - b.order);
       <li>{t(locale, 'howto.1')}</li>
       <li>{t(locale, 'howto.2')}</li>
       <li>{t(locale, 'howto.3')}</li>
+      <li>{t(locale, 'howto.4')}</li>
     </ol>
   </section>
 
@@ -90,7 +75,7 @@ const guideList = [...guides].sort((a, b) => a.order - b.order);
       {
         guideList.map((guide) => (
           <li>
-            <a href={localizedPath(locale, `guides/${guide.slug}`)}>{guide.ru.h1}</a>
+            <a href={localizedPath(locale, `guides/${guide.slug}`)}>{guide[locale].h1}</a>
           </li>
         ))
       }

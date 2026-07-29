@@ -1,6 +1,6 @@
 export type Confidence = 'none' | 'low' | 'medium' | 'high';
 export type EngineStatus = 'idle' | 'measuring' | 'stable';
-export type ReadingSource = 'tap' | 'share' | 'manual';
+export type ReadingSource = 'tap' | 'share' | 'manual' | 'listen';
 export type BpmFactor = 0.5 | 1 | 2;
 
 export interface EngineSnapshot {

@@ -1,4 +1,4 @@
-export type HistorySource = 'tap' | 'share' | 'manual';
+export type HistorySource = 'tap' | 'share' | 'manual' | 'listen';
 
 export interface HistoryItem {
   id: string;

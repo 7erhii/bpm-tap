@@ -158,3 +158,24 @@ export function Metronome(props: IconProps) {
     </Icon>
   );
 }
+
+export function Mic(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M12 19v3" />
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      <rect width="4" height="12" x="10" y="2" rx="2" />
+    </Icon>
+  );
+}
+
+/** Tap / hand gesture for mode switch */
+export function Hand(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M9 11.5V6a2 2 0 0 1 4 0" />
+      <path d="M13 8.5V5a2 2 0 0 1 4 0v7" />
+      <path d="M17 9.5a2 2 0 0 1 4 0V15a7 7 0 0 1-7 7h-2.5a6 6 0 0 1-5-2.7l-3-4.5a1.7 1.7 0 0 1 2.6-2.2L9 15" />
+    </Icon>
+  );
+}

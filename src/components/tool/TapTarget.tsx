@@ -82,10 +82,6 @@ export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }:
         aria-label={title}
       >
         <span className="tap-pad__chassis" aria-hidden="true">
-          <span className="tap-pad__screw tap-pad__screw--tl" />
-          <span className="tap-pad__screw tap-pad__screw--tr" />
-          <span className="tap-pad__screw tap-pad__screw--bl" />
-          <span className="tap-pad__screw tap-pad__screw--br" />
           <span className="tap-pad__bay" />
           <span className="tap-pad__plunger">
             <span className="tap-pad__surface" />

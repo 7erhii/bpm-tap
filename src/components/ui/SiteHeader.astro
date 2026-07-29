@@ -29,18 +29,24 @@ const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'bra
             <a href={localizedPath(locale)}>{t(locale, 'nav.home')}</a>
             <a href={localizedPath(locale, 'delay')}>{t(locale, 'nav.delay')}</a>
             <a href={localizedPath(locale, 'metronome')}>{t(locale, 'nav.metronome')}</a>
+            <a href={localizedPath(locale, 'listen')}>{t(locale, 'nav.listen')}</a>
             <a href={localizedPath(locale, 'genres')}>{t(locale, 'nav.genres')}</a>
             <a href={localizedPath(locale, 'guides')}>{t(locale, 'nav.guides')}</a>
           </>
         )
       }
-      <a
-        class={`nav-pulse${onPulse ? ' is-active' : ''}`}
-        href={localizedPath(locale, 'pulse')}
-        aria-current={onPulse ? 'page' : undefined}
-      >
-        {t(locale, 'nav.pulse')}
-      </a>
+      {
+        onPulse ? (
+          <a class="nav-studio" href={localizedPath(locale)}>
+            <span class="nav-studio__mark" aria-hidden="true"></span>
+            {t(locale, 'brand')}
+          </a>
+        ) : (
+          <a class="nav-pulse" href={localizedPath(locale, 'pulse')}>
+            {t(locale, 'nav.pulse')}
+          </a>
+        )
+      }
     </nav>
     {
       onPulse ? (
@@ -120,22 +126,11 @@ const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'bra
     color: #fff;
     border-color: var(--pulse-nav);
   }
-  .site-header--pulse .nav-pulse {
-    color: var(--accent);
-    border-color: var(--accent-dim);
-    background: var(--accent-dim);
-  }
-  .site-header--pulse .nav-pulse.is-active,
-  .site-header--pulse .nav-pulse[aria-current='page'] {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
   .nav-pulse--mobile,
   .nav-studio--mobile {
     margin-left: auto;
   }
-  /* Studio twin of the Pulse chip — way back to BPM Tap on mobile */
+  /* Studio twin of the Pulse chip — way back to BPM Tap */
   .nav-studio {
     --studio-nav: #c8f542;
     --studio-nav-dim: rgba(200, 245, 66, 0.16);

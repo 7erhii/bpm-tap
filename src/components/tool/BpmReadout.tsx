@@ -221,7 +221,8 @@ export function BpmReadout({
         {outOfRange && outOfRangeLabel ? (
           <span className="bpm-flag">{outOfRangeLabel}</span>
         ) : null}
-        {editable && bpm == null && !focused ? (
+        {/* Idle edit hint only when not live — live listen/tap must show status cue */}
+        {editable && bpm == null && !focused && !live ? (
           <span className="bpm-edit-hint">{enterLabel}</span>
         ) : confidenceLabel ? (
           <ConfidenceCue

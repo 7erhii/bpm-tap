@@ -12,6 +12,7 @@ interface Props {
 const { locale, guide } = Astro.props;
 const copy = guide[locale];
 const homeHref = `${localizedPath(locale)}?bpm=${guide.ctaBpm}`;
+const listenHref = `${localizedPath(locale, 'listen')}?bpm=${guide.ctaBpm}`;
 const metroHref = `${localizedPath(locale, 'metronome')}?bpm=${guide.ctaBpm}`;
 const delayHref = `${localizedPath(locale, 'delay')}?bpm=${guide.ctaBpm}`;
 ---
@@ -33,6 +34,7 @@ const delayHref = `${localizedPath(locale, 'delay')}?bpm=${guide.ctaBpm}`;
     <p>{t(locale, 'guides.tryLead', { bpm: guide.ctaBpm })}</p>
     <div class="cta-row">
       <a class="cta" href={homeHref}>{t(locale, 'guides.ctaTap')}</a>
+      <a class="cta cta--ghost" href={listenHref}>{t(locale, 'guides.ctaListen')}</a>
       <a class="cta cta--ghost" href={metroHref}>{t(locale, 'guides.ctaMetronome')}</a>
       <a class="cta cta--ghost" href={delayHref}>{t(locale, 'guides.ctaDelay')}</a>
     </div>

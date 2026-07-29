@@ -40,7 +40,7 @@ export const guides: Guide[] = [
           h2: 'Tap the pulse you would count',
           paragraphs: [
             'Start the song and find the steady pulse — usually the kick, or the snare backbeat in syncopated grooves.',
-            'Open the Tap BPM tool and tap mouse, touch, or any key on each beat. After 8–12 steady taps the reading should settle.',
+            'Open the Tap BPM tool and tap mouse, touch, or any key on each beat. After 8–12 steady taps the reading should settle. Prefer hands-free? Switch to Listen and let the mic estimate tempo.',
           ],
         },
         {
@@ -83,7 +83,7 @@ export const guides: Guide[] = [
           h2: 'Тапай тот пульс, который считаешь',
           paragraphs: [
             'Найди устойчивую долю — чаще кик, а в синкопах удобнее snare на бэкбит.',
-            'Открой Tap BPM и тапай мышью, пальцем или любой клавишей. После 8–12 ровных ударов значение обычно стабилизируется.',
+            'Открой Tap BPM и тапай мышью, пальцем или любой клавишей. После 8–12 ровных ударов значение обычно стабилизируется. Руки заняты? Переключись на Listen — микрофон оценит темп.',
           ],
         },
         {
@@ -386,6 +386,99 @@ export const guides: Guide[] = [
         {
           q: 'Может ли Stable быть на «неверной октаве»?',
           a: 'Да — half-time тоже стабильно тапается. Stable ≠ нужная сетка. Проверь метрономом и задачей аранжировки.',
+        },
+      ],
+    },
+  },
+  {
+    slug: 'find-bpm-with-microphone',
+    order: 5,
+    ctaBpm: 128,
+    en: {
+      title: 'How to Find a Song’s BPM with a Microphone',
+      description:
+        'Find song BPM with your microphone: open Listen mode, point at a speaker, wait for a live tempo estimate, then confirm with ÷2/×2, metronome, or tap. No upload.',
+      h1: 'Find a song’s BPM with a microphone',
+      lead: 'When you cannot tap evenly — or your hands are busy — Listen mode estimates tempo from the audio your mic hears. Same BPM stage as tap: copy, metronome, delay.',
+      sections: [
+        {
+          h2: 'Open Listen and allow the mic',
+          paragraphs: [
+            'Go to Listen on bpm-tap.com and start listening. Grant microphone access when the browser asks — without it the tool cannot hear the track.',
+            'Audio stays in your browser. Nothing is uploaded; the page only uses the mic stream to estimate BPM on your device.',
+          ],
+        },
+        {
+          h2: 'Get a clear signal into the mic',
+          paragraphs: [
+            'Play the song on a speaker or phone and hold the device closer to the source. Weak laptop speakers and noisy rooms make any onset/energy detector less reliable.',
+            'Electronic tracks with a clear kick usually lock faster. Give it several seconds until the reading looks stable, then check ÷2 / ×2 if the feel seems half or double.',
+          ],
+        },
+        {
+          h2: 'Confirm, then use the number',
+          paragraphs: [
+            'Start the metronome on the measured BPM. If the click drifts against the track, flip ÷2/×2 or switch to Tap and refine by hand.',
+            'When it locks, Copy the BPM, open Delay for ms values, or share a ?bpm= link — the same workflow as classic tap tempo.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Can I find BPM without tapping?',
+          a: 'Yes. Listen mode detects tempo from the mic. Tap is still useful to refine a reading or when the room is too noisy for a clean signal.',
+        },
+        {
+          q: 'Does the microphone audio leave my device?',
+          a: 'No. Analysis runs in the browser. BPM Tap does not upload mic audio.',
+        },
+        {
+          q: 'Why is the BPM half or double what I expect?',
+          a: 'Tempo estimators often pick the other octave of the pulse. Use ÷2 / ×2, try an alternate candidate if shown, then confirm with the metronome.',
+        },
+      ],
+    },
+    ru: {
+      title: 'Как узнать BPM песни через микрофон',
+      description:
+        'Узнать BPM песни через микрофон: открой Listen, наведи на колонку, дождись оценки темпа, проверь ÷2/×2, метрономом или тапом. Без загрузки файла.',
+      h1: 'Узнать BPM песни через микрофон',
+      lead: 'Когда тапать неудобно — Listen оценивает темп по звуку с микрофона. Тот же BPM stage, что и у tap: copy, метроном, delay.',
+      sections: [
+        {
+          h2: 'Открой Listen и разреши микрофон',
+          paragraphs: [
+            'Открой Listen на bpm-tap.com и начни слушать. Разреши доступ к микрофону — без него инструмент не услышит трек.',
+            'Звук остаётся в браузере. Ничего не загружается: страница оценивает BPM только на твоём устройстве.',
+          ],
+        },
+        {
+          h2: 'Дай микрофону чистый сигнал',
+          paragraphs: [
+            'Включи трек на колонке или телефоне и поднеси устройство ближе к источнику. Тихие динамики ноутбука и шум в комнате мешают любому детектору по onset/энергии.',
+            'Электронные треки с явным kick обычно стабилизируются быстрее. Подожди несколько секунд, затем проверь ÷2 / ×2, если пульс кажется вдвое медленнее или быстрее.',
+          ],
+        },
+        {
+          h2: 'Проверь и используй цифру',
+          paragraphs: [
+            'Запусти метроном на измеренном BPM. Если клик плывёт относительно трека — ÷2/×2 или переключись на Tap и уточни руками.',
+            'Когда сошлось — Copy BPM, открой Delay для ms или отправь ссылку с ?bpm= — тот же поток, что у классического tap tempo.',
+          ],
+        },
+      ],
+      faqs: [
+        {
+          q: 'Можно узнать BPM без тапа?',
+          a: 'Да. Listen определяет темп с микрофона. Tap всё равно полезен, чтобы уточнить чтение или когда в комнате слишком шумно.',
+        },
+        {
+          q: 'Звук с микрофона куда-то уходит?',
+          a: 'Нет. Анализ только в браузере. BPM Tap не загружает аудио с микрофона.',
+        },
+        {
+          q: 'Почему BPM вдвое меньше или больше?',
+          a: 'Оценщики темпа часто берут другую «октаву» пульса. Жми ÷2 / ×2, выбери альтернативу если есть, затем сверься с метрономом.',
         },
       ],
     },

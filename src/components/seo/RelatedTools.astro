@@ -4,7 +4,7 @@ import { localizedPath, t, type Locale } from '@/i18n/utils';
 interface Props {
   locale: Locale;
   /** Current page — omitted from the link row */
-  current: 'home' | 'delay' | 'metronome' | 'genres' | 'guides';
+  current: 'home' | 'delay' | 'metronome' | 'listen' | 'genres' | 'guides';
   bpm?: number;
 }
 
@@ -18,6 +18,11 @@ const links = [
     id: 'metronome' as const,
     href: `${localizedPath(locale, 'metronome')}${q}`,
     label: t(locale, 'nav.metronome'),
+  },
+  {
+    id: 'listen' as const,
+    href: `${localizedPath(locale, 'listen')}${q}`,
+    label: t(locale, 'nav.listen'),
   },
   { id: 'genres' as const, href: localizedPath(locale, 'genres'), label: t(locale, 'nav.genres') },
   { id: 'guides' as const, href: localizedPath(locale, 'guides'), label: t(locale, 'nav.guides') },

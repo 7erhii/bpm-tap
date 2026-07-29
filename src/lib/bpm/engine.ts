@@ -119,7 +119,10 @@ export function createTapEngine(options: TapEngineOptions = {}) {
       factor = factor === 0.5 ? 1 : 2;
       return snapshot();
     },
-    hydrateBpm(bpm: number, nextSource: 'share' | 'manual' = 'share'): EngineSnapshot {
+    hydrateBpm(
+      bpm: number,
+      nextSource: 'share' | 'manual' | 'listen' = 'share',
+    ): EngineSnapshot {
       taps = [];
       factor = 1;
       hydratedBpm = roundBpm(bpm);
