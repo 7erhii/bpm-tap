@@ -21,10 +21,18 @@ const copy = genre.es;
 const homeHref = localizedPath(locale);
 const metroHref = localizedPath(locale, 'metronome');
 const pageUrl = absoluteUrl(`/es/genres/${genre.slug}/`);
-const pageTitle = trimTitle(`${copy.name} BPM (${genre.bpmMin}–${genre.bpmMax}) | BPM Tap`);
-const pageDescription = trimMetaDescription(
-  `${copy.name}: normalmente ${genre.bpmMin}–${genre.bpmMax} BPM. ${copy.summary}`,
+const pageTitle = trimTitle(
+  t(locale, 'genres.pageTitle', { name: copy.name, min: genre.bpmMin, max: genre.bpmMax }),
 );
+const pageDescription = trimMetaDescription(
+  t(locale, 'genres.pageDescription', {
+    name: copy.name,
+    min: genre.bpmMin,
+    max: genre.bpmMax,
+    summary: copy.summary,
+  }),
+);
+const pageHeading = t(locale, 'genres.heading', { name: copy.name });
 ---
 
 <ToolLayout
@@ -32,7 +40,7 @@ const pageDescription = trimMetaDescription(
   title={pageTitle}
   description={pageDescription}
   canonicalPath={`/es/genres/${genre.slug}/`}
-  heading={`${copy.name} BPM`}
+  heading={pageHeading}
   lead={copy.summary}
 >
   <JsonLd
@@ -40,10 +48,14 @@ const pageDescription = trimMetaDescription(
     data={{
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: `${genre.en.name} BPM range`,
-      description: `${genre.en.name} typically runs ${genre.bpmMin}–${genre.bpmMax} BPM.`,
+      headline: pageHeading,
+      description: t(locale, 'genres.rangeLead', {
+        name: copy.name,
+        min: genre.bpmMin,
+        max: genre.bpmMax,
+      }),
       url: pageUrl,
-      inLanguage: 'en',
+      inLanguage: 'es',
     }}
   />
   <div slot="tool" class="genre-hero">

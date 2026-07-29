@@ -163,7 +163,7 @@ export const guides: Guide[] = [
       ],
     },
     fr: {
-      title: 'Comment trouver le BPM d’une chanson avec le tap tempo',
+      title: 'Trouver le BPM d’une chanson au tap tempo',
       description: 'Trouvez le BPM de n’importe quelle chanson en quelques secondes : tapez sur le beat, stabilisez la lecture, puis copiez-la dans votre DAW ou métronome.',
       h1: 'Comment trouver le BPM d’une chanson',
       lead: 'Pas besoin d’envoyer de fichier. Lancez le morceau, tapez le beat, et laissez l’outil tap tempo moyenner votre timing en battements par minute.',
@@ -340,7 +340,7 @@ export const guides: Guide[] = [
       ],
     },
     es: {
-      title: 'Precisión del tap tempo — cómo obtener un BPM estable',
+      title: 'Precisión del tap tempo — BPM estable',
       description: '¿Qué tan preciso es el tap tempo? Consejos prácticos para reducir la inestabilidad y caer dentro de unos ±1–2 BPM del tempo real.',
       h1: '¿Qué tan preciso es el tap tempo?',
       lead: 'El tap tempo mide tus toques, no el archivo de audio. Una técnica constante suele acercarse lo suficiente para producción y práctica.',
@@ -383,7 +383,7 @@ export const guides: Guide[] = [
       ],
     },
     fr: {
-      title: 'Précision du tap tempo — comment obtenir un BPM stable',
+      title: 'Précision du tap tempo — BPM stable',
       description: 'Quelle est la précision du tap tempo ? Conseils pratiques pour réduire les fluctuations et viser environ ±1–2 BPM du vrai tempo.',
       h1: 'Quelle est la précision du tap tempo ?',
       lead: 'Le tap tempo mesure vos taps, pas le fichier audio. Une technique régulière suffit généralement pour la production et la pratique.',
@@ -474,7 +474,7 @@ export const guides: Guide[] = [
     order: 3,
     ctaBpm: 120,
     en: {
-      title: 'BPM to Milliseconds — Delay & Note Length Calculator',
+      title: 'BPM to Milliseconds — Delay Calculator',
       description: 'Convert BPM to milliseconds for delay and note lengths. Quarter notes, dotted values, triplets — with tap tempo built in.',
       h1: 'BPM to milliseconds',
       lead: 'One beat in ms is 60,000 ÷ BPM. From that quarter-note length you can derive every common delay subdivision.',
@@ -517,7 +517,7 @@ export const guides: Guide[] = [
       ],
     },
     ru: {
-      title: 'BPM в миллисекунды — калькулятор delay и длительностей',
+      title: 'BPM в миллисекунды — калькулятор delay',
       description: 'Переведи BPM в миллисекунды для delay и нотных длительностей: четверти, пунктир, триоли — с tap tempo внутри.',
       h1: 'BPM в миллисекунды',
       lead: 'Одна доля в ms: 60 000 ÷ BPM. От длины четверти считаются все обычные delay-подразделения.',
@@ -560,7 +560,7 @@ export const guides: Guide[] = [
       ],
     },
     es: {
-      title: 'BPM a milisegundos — calculadora de delay y duraciones de nota',
+      title: 'BPM a milisegundos — calculadora de delay',
       description: 'Convierte BPM a milisegundos para delay y duraciones de nota. Negras, valores con punto, tresillos — con tap tempo integrado.',
       h1: 'BPM a milisegundos',
       lead: 'Un beat en ms es 60.000 ÷ BPM. A partir de la duración de la negra puedes derivar cada subdivisión común de delay.',
@@ -603,7 +603,7 @@ export const guides: Guide[] = [
       ],
     },
     fr: {
-      title: 'BPM en millisecondes — calculateur de delay et de durées de note',
+      title: 'BPM en millisecondes — calculateur de delay',
       description: 'Convertissez le BPM en millisecondes pour le delay et les durées de note. Noires, valeurs pointées, triolets — avec tap tempo intégré.',
       h1: 'BPM en millisecondes',
       lead: 'Un temps en ms vaut 60 000 ÷ BPM. À partir de la durée de la noire, vous dérivez chaque subdivision de delay courante.',
@@ -646,7 +646,7 @@ export const guides: Guide[] = [
       ],
     },
     pt: {
-      title: 'BPM em milissegundos — calculadora de delay e durações de nota',
+      title: 'BPM em milissegundos — calculadora de delay',
       description: 'Converta BPM em milissegundos para delay e durações de nota. Semínimas, valores com ponto, tercinas — com tap tempo integrado.',
       h1: 'BPM em milissegundos',
       lead: 'Um beat em ms é 60.000 ÷ BPM. A partir da duração da semínima você deriva cada subdivisão comum de delay.',
@@ -694,7 +694,7 @@ export const guides: Guide[] = [
     order: 4,
     ctaBpm: 140,
     en: {
-      title: 'Half-Time & Double-Time BPM — When to Use ÷2 and ×2',
+      title: 'Half-Time & Double-Time BPM — ÷2 and ×2',
       description: 'Why your tap BPM looks half or double — and how to choose the written tempo vs the felt pulse for DAW and DJ work.',
       h1: 'Half-time and double-time BPM',
       lead: 'The “right” BPM is the one that matches the grid you want. ÷2 and ×2 flip between felt pulse and written tempo.',
@@ -823,7 +823,7 @@ export const guides: Guide[] = [
       ],
     },
     fr: {
-      title: 'BPM half-time et double-time — quand utiliser ÷2 et ×2',
+      title: 'BPM half-time et double-time — ÷2 et ×2',
       description: 'Pourquoi votre tap BPM semble divisé ou doublé — et comment choisir le tempo noté vs le pulse ressenti pour le DAW et le DJ.',
       h1: 'BPM half-time et double-time',
       lead: 'Le « bon » BPM est celui qui correspond à la grille voulue. ÷2 et ×2 basculent entre pulse ressenti et tempo noté.',
@@ -1002,7 +1002,7 @@ export const guides: Guide[] = [
       ],
     },
     es: {
-      title: 'Cómo encontrar el BPM de una canción con un micrófono',
+      title: 'BPM de una canción con micrófono',
       description:
         'Encuentra el BPM con tu micrófono: abre el modo Listen, apunta a un altavoz, espera una estimación de tempo en vivo y confirma con ÷2/×2, metrónomo o tap. Sin subir archivos.',
       h1: 'Encontrar el BPM de una canción con un micrófono',
@@ -1046,7 +1046,7 @@ export const guides: Guide[] = [
       ],
     },
     fr: {
-      title: 'Comment trouver le BPM d’une chanson avec un microphone',
+      title: 'BPM d’une chanson avec un microphone',
       description:
         'Trouvez le BPM avec votre micro : ouvrez le mode Listen, pointez vers un haut-parleur, attendez une estimation live du tempo, puis confirmez avec ÷2/×2, métronome ou tap. Sans envoi de fichier.',
       h1: 'Trouver le BPM d’une chanson avec un microphone',

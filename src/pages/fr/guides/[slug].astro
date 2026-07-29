@@ -4,6 +4,7 @@ import GuideArticle from '@/components/seo/GuideArticle.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { guides, getGuide } from '@/content/guides';
 import { absoluteUrl } from '@/lib/site';
+import { trimMetaDescription, trimTitle } from '@/lib/seo/meta';
 
 export function getStaticPaths() {
   return guides.map((guide) => ({ params: { slug: guide.slug } }));
@@ -13,14 +14,14 @@ const locale = 'fr' as const;
 const { slug } = Astro.params;
 const guide = getGuide(slug!);
 if (!guide) throw new Error('Guide not found');
-const copy = guide.en;
+const copy = guide.fr;
 const pageUrl = absoluteUrl(`/fr/guides/${guide.slug}/`);
 ---
 
 <ToolLayout
   locale={locale}
-  title={`${copy.title} | BPM Tap`}
-  description={copy.description}
+  title={trimTitle(`${copy.title} | BPM Tap`)}
+  description={trimMetaDescription(copy.description)}
   canonicalPath={`/fr/guides/${guide.slug}/`}
   heading={copy.h1}
   lead={copy.lead}
@@ -34,7 +35,7 @@ const pageUrl = absoluteUrl(`/fr/guides/${guide.slug}/`);
         headline: copy.h1,
         description: copy.description,
         url: pageUrl,
-        inLanguage: 'en',
+        inLanguage: 'fr',
         isAccessibleForFree: true,
       },
       {

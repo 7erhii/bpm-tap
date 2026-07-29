@@ -60,6 +60,11 @@ const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOC
           m.content = 'noindex, follow';
           document.head.appendChild(m);
         }
+        var bpmMatch = location.search.match(/[?&]bpm=(\d{2,3})\b/i);
+        if (bpmMatch) {
+          var baseTitle = document.title.replace(/^\d+\s*BPM\s*[·•|—\-]\s*/i, '');
+          document.title = bpmMatch[1] + ' BPM · ' + baseTitle;
+        }
       }
     </script>
     <title>{title}</title>

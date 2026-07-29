@@ -4,6 +4,7 @@ import GuideArticle from '@/components/seo/GuideArticle.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { guides, getGuide } from '@/content/guides';
 import { absoluteUrl } from '@/lib/site';
+import { trimMetaDescription, trimTitle } from '@/lib/seo/meta';
 
 export function getStaticPaths() {
   return guides.map((guide) => ({ params: { slug: guide.slug } }));
@@ -19,8 +20,8 @@ const pageUrl = absoluteUrl(`/ru/guides/${guide.slug}/`);
 
 <ToolLayout
   locale={locale}
-  title={`${copy.title} | BPM Tap`}
-  description={copy.description}
+  title={trimTitle(`${copy.title} | BPM Tap`)}
+  description={trimMetaDescription(copy.description)}
   canonicalPath={`/ru/guides/${guide.slug}/`}
   heading={copy.h1}
   lead={copy.lead}

@@ -15,6 +15,7 @@ import { createListenSession } from '@/lib/listen/session';
 import type { ListenStatus, TempoCandidate, TempoEstimate } from '@/lib/listen/types';
 import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler';
 import { buildShareUrl, displayBpmInteger, parseBpmParam } from '@/lib/share/url';
+import { getBaseDocumentTitle, setDocumentTitleWithBpm } from '@/lib/seo/documentTitle';
 import type { TapAppLabels } from './TapApp';
 import { BpmReadout } from './BpmReadout';
 import { ListenPad } from './ListenPad';
@@ -242,6 +243,16 @@ export default function StudioApp({
       metroRef.current.stop();
     };
   }, []);
+
+  const baseTitleRef = useRef<string | null>(null);
+  useEffect(() => {
+    baseTitleRef.current = getBaseDocumentTitle();
+  }, []);
+  useEffect(() => {
+    const base = baseTitleRef.current;
+    if (!base) return;
+    setDocumentTitleWithBpm(base, snapshot.bpm != null && snapshot.inRange ? snapshot.bpm : null);
+  }, [snapshot.bpm, snapshot.inRange]);
 
   useEffect(() => {
     if (snapshot.bpm == null) return;

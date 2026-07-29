@@ -12,6 +12,7 @@ import { closestGenres } from '@/lib/genres/match';
 import { loadHistory, saveHistoryItem, type HistoryItem } from '@/lib/history/storage';
 import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler';
 import { buildShareUrl, displayBpmInteger, parseBpmParam } from '@/lib/share/url';
+import { getBaseDocumentTitle, setDocumentTitleWithBpm } from '@/lib/seo/documentTitle';
 import { localizedPath, type Locale } from '@/i18n/utils';
 import { BpmReadout, type IdleMark } from './BpmReadout';
 import { MetronomeBar } from './MetronomeBar';
@@ -204,6 +205,16 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
       metroRef.current.stop();
     };
   }, [isPulse]);
+
+  const baseTitleRef = useRef<string | null>(null);
+  useEffect(() => {
+    baseTitleRef.current = getBaseDocumentTitle();
+  }, []);
+  useEffect(() => {
+    const base = baseTitleRef.current;
+    if (!base) return;
+    setDocumentTitleWithBpm(base, snapshot.bpm != null && snapshot.inRange ? snapshot.bpm : null);
+  }, [snapshot.bpm, snapshot.inRange]);
 
   const registerTap = () => {
     const next = engineRef.current.tap();

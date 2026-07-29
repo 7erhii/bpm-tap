@@ -22,8 +22,8 @@ const list = [...guides].sort((a, b) => a.order - b.order);
         list.map((guide) => (
           <li>
             <a href={localizedPath(locale, `guides/${guide.slug}`)}>
-              <strong>{guide.en.h1}</strong>
-              <span>{guide.en.description}</span>
+              <strong>{guide.es.h1}</strong>
+              <span>{guide.es.description}</span>
             </a>
           </li>
         ))
