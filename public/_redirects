@@ -23,8 +23,3 @@
 /pt/delay  /pt/delay/  301
 /pt/listen  /pt/listen/  301
 /pt/metronome  /pt/metronome/  301
-/ /es/ 302! Language=es
-/ /pt/ 302! Language=pt
-/ /fr/ 302! Language=fr
-/ /ru/ 302! Language=ru
-/ /en/ 302
