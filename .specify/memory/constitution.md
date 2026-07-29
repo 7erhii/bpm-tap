@@ -29,7 +29,7 @@ Follow-up TODOs: none.
 
 # BPM Tap Constitution
 
-BPM Tap is a free, browser-based tap-tempo product: users measure beats per minute
+BPM Tap is a free, browser-based BPM tap product: users measure beats per minute
 instantly, then use the result (copy, metronome, delay times, genre context). The product
 competes on clarity, speed, and search usefulness — not on accounts or paywalls.
 

@@ -31,9 +31,7 @@ const menuId = `locale-menu-${locale}`;
     </a>
     <nav class="nav" aria-label="Primary">
       {
-        theme === 'pulse' ? (
-          <a href={localizedPath(locale)}>{t(locale, 'nav.musicTools')}</a>
-        ) : (
+        theme === 'pulse' ? null : (
           <>
             <a href={localizedPath(locale)}>{t(locale, 'nav.home')}</a>
             <a href={localizedPath(locale, 'delay')}>{t(locale, 'nav.delay')}</a>

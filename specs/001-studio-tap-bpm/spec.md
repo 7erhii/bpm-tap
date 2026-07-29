@@ -6,11 +6,11 @@
 
 **Status**: Approved
 
-**Input**: User description: "Clone-and-surpass beatsperminuteonline.com as a free studio-grade online Tap BPM / tap tempo product. SEO-first information architecture. Full MVP: core tap with confidence, ÷2/×2, copy, reset, keyboard/touch, fullscreen; metronome confirm; delay/ms table; session history; share URL; genre BPM SEO hub; EN+RU; PWA-ready. No accounts, no premium. Monetization later via ads that never cover the tool."
+**Input**: User description: "Clone-and-surpass beatsperminuteonline.com as a free studio-grade online Tap BPM / BPM tap product. SEO-first information architecture. Full MVP: core tap with confidence, ÷2/×2, copy, reset, keyboard/touch, fullscreen; metronome confirm; delay/ms table; session history; share URL; genre BPM SEO hub; EN+RU; PWA-ready. No accounts, no premium. Monetization later via ads that never cover the tool."
 
 ## User Scenarios & Testing *(mandatory)*
 
-### User Story 1 - Instant Tap Tempo (Priority: P1)
+### User Story 1 - Instant Tap BPM (Priority: P1)
 
 A musician, DJ, or casual listener opens the site to measure a song’s tempo. Within the first viewport they see a large tap target and BPM display. They tap (mouse, touch, or Space) along with the beat. After a few taps they see a live BPM; as tapping continues, the reading stabilizes and shows a confidence/stability cue. They can reset, halve/double the reading (÷2 / ×2), and copy the BPM in one action. They can enter a distraction-free fullscreen “studio” mode.
 
@@ -69,7 +69,7 @@ A visitor arrives from search on a long-tail query (e.g. genre BPM, delay calcul
 
 ### User Story 4 - Installable Lightweight App Feel (Priority: P3)
 
-A returning user on mobile wants the tool available like a small app: add to home screen / install prompt where supported, and basic offline ability to tap tempo if the shell was cached.
+A returning user on mobile wants the tool available like a small app: add to home screen / install prompt where supported, and basic offline ability to tap BPM if the shell was cached.
 
 **Why this priority**: Improves retention and perceived quality; secondary to SEO pages.
 
@@ -99,7 +99,7 @@ A returning user on mobile wants the tool available like a small app: add to hom
 
 ### Functional Requirements
 
-- **FR-001**: System MUST provide a tap-tempo measurement on the homepage that accepts pointer tap, touch, and Space key input.
+- **FR-001**: System MUST provide a BPM tap measurement on the homepage that accepts pointer tap, touch, and Space key input.
 - **FR-002**: System MUST compute BPM from intervals between taps and display it after at least 3 taps.
 - **FR-003**: System MUST refine the displayed BPM as more taps arrive using a rolling/averaged approach suitable for live use.
 - **FR-004**: System MUST present a stability/confidence indication that improves with consistent tapping and worsens with inconsistent tapping.

@@ -1,7 +1,7 @@
 # План выхода в топ — BPM Tap
 
 **Домен:** https://bpm-tap.com/  
-**Цель:** органический трафик по music-intent (`tap bpm`, `tap tempo`, delay/metronome/genres) и удержание через продукт.
+**Цель:** органический трафик по music-intent (`tap bpm`, BPM counter, delay/metronome/genres) и удержание через продукт.
 
 Принцип: не бить сразу в head-term `tap bpm`. Сначала индекс + long-tail + кластер, потом усиление money page и ссылки.
 
@@ -51,7 +51,7 @@
 ## Фаза 2 — Кластер под head-term ✅ (в коде)
 
 ```text
-https://bpm-tap.com/en/          ← Tap BPM / tap tempo
+https://bpm-tap.com/en/          ← Tap BPM / BPM counter
   ├── /en/delay/
   ├── /en/metronome/
   ├── /en/genres/ + genre pages
@@ -62,15 +62,16 @@ https://bpm-tap.com/en/          ← Tap BPM / tap tempo
 |---|--------|--------|
 | 2.1 | Перелинковка: guide → tools, genre → home+metronome+siblings+delay, RelatedTools на tool pages | ✅ |
 | 2.2 | Футер: полный список genres + tool links | ✅ |
-| 2.3 | Money page: title/H1/FAQ под `tap bpm` / `tap tempo` / `BPM counter` | ✅ |
+| 2.3 | Money page: title/H1/FAQ под `tap bpm` / `BPM counter` | ✅ |
 | 2.4 | SERP-сниппет vs топ конкурентов | ✅ см. ниже |
 
 ### 2.4 — сниппет (решение)
 
-Конкуренты в выдаче по `tap bpm` / `tap tempo` почти всегда держат exact phrase в title.
-Наш money-page title: **`Tap BPM — Free Online Tap Tempo & BPM Counter`**  
-Description ведёт с `tap BPM / tap tempo` и studio-flow (metronome + delay).  
-H1: **`Tap BPM — free online tap tempo`**.  
+Конкуренты в выдаче по `tap bpm` часто держат exact phrase в title.
+Наш money-page title: **`Tap BPM — Free Online BPM Counter & Mic Listen`**  
+Description ведёт с `tap BPM` и studio-flow (metronome + delay).  
+H1: **`Tap BPM — tap the beat & mic listen`**.  
+Не использовать чужой бренд/фразу «tap tempo» в копирайте.  
 Дальше CTR смотреть в GSC после индексации и при необходимости A/B title.
 
 **KPI фазы:** рост ассоциирования домена с темой; home появляется по более коротким EN-запросам.
@@ -116,7 +117,7 @@ H1: **`Tap BPM — free online tap tempo`**.
 | 2–4 недели | Индекс, первые impressions |
 | 1–3 месяца | Трафик с genres / delay / RU / guides / pulse |
 | 3–6 месяцев | Mid-terms; home иногда топ-20–50 по EN head |
-| 6–12 месяцев | Шанс топ-10 по `tap bpm` / `tap tempo` при росте кластера + ссылок |
+| 6–12 месяцев | Шанс топ-10 по `tap bpm` при росте кластера + ссылок |
 
 ---
 

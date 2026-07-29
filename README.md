@@ -1,6 +1,6 @@
 # BPM Tap
 
-Free studio-grade online tap tempo tool. SEO-first, no accounts, ads never cover the pad.
+Free studio-grade online BPM tap tool. SEO-first, no accounts, ads never cover the pad.
 
 ## Develop
 

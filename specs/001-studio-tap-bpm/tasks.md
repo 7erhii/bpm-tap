@@ -50,7 +50,7 @@
 
 ---
 
-## Phase 3: User Story 1 — Instant Tap Tempo (P1) 🎯 MVP
+## Phase 3: User Story 1 — Instant Tap BPM (P1) 🎯 MVP
 
 **Goal**: Tool-first tap BPM with confidence, ÷2/×2, copy, reset, Space, fullscreen
 

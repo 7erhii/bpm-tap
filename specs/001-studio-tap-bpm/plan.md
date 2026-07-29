@@ -6,7 +6,7 @@
 
 ## Summary
 
-Build a free, SEO-first **BPM Tap** web app: a studio-grade tap-tempo tool above the fold, plus metronome, delay/ms helpers, local history, shareable BPM URLs, genre/intent content hubs, EN+RU routing, and PWA/offline core. No accounts. Ads only in reserved non-tool slots (empty at launch).
+Build a free, SEO-first **BPM Tap** web app: a studio-grade BPM tap tool above the fold, plus metronome, delay/ms helpers, local history, shareable BPM URLs, genre/intent content hubs, EN+RU routing, and PWA/offline core. No accounts. Ads only in reserved non-tool slots (empty at launch).
 
 **Technical approach**: Astro content site (SSG) for crawlable SEO pages + React client islands for interactive tools. Measurement, history, and metronome run entirely in the browser. Deploy as a static (or edge-static) site with excellent Core Web Vitals.
 

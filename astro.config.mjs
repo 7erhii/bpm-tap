@@ -31,7 +31,7 @@ export default defineConfig({
       manifest: {
         name: 'BPM Tap',
         short_name: 'BPM Tap',
-        description: 'Free online tap tempo — find BPM instantly',
+        description: 'Free online BPM counter — find tempo instantly',
         theme_color: '#0B0C10',
         background_color: '#0B0C10',
         display: 'standalone',
