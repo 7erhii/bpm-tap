@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 interface Props {
   title: string;
   hint: string;
+  /** Shorter touch-device hint (no “any key”). Falls back to `hint`. */
+  hintTouch?: string;
   onTap: () => void;
   pulseToken: number;
   /** Render hint under the pad instead of inside the button face. */
@@ -14,11 +16,19 @@ interface Props {
  * ghost clicks, scroll cancellation, and passive listeners cause missed or
  * double-counted taps. Bind native non-passive touchstart + mousedown instead.
  */
-export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }: Props) {
+export function TapTarget({
+  title,
+  hint,
+  hintTouch,
+  onTap,
+  pulseToken,
+  hintBelow = false,
+}: Props) {
   const [pulse, setPulse] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const onTapRef = useRef(onTap);
   const lastTapAt = useRef(0);
+  const touchHint = hintTouch ?? hint;
 
   onTapRef.current = onTap;
 
@@ -73,6 +83,13 @@ export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }:
     };
   }, []);
 
+  const hintNode = (
+    <span className="tap-pad__hint">
+      <span className="tap-pad__hint-desk">{hint}</span>
+      <span className="tap-pad__hint-touch">{touchHint}</span>
+    </span>
+  );
+
   return (
     <div className={`tap-pad-wrap${hintBelow ? ' tap-pad-wrap--hint-below' : ''}`}>
       <button
@@ -89,10 +106,10 @@ export function TapTarget({ title, hint, onTap, pulseToken, hintBelow = false }:
         </span>
         <span className="tap-pad__content">
           <span className="tap-pad__title">{title}</span>
-          {!hintBelow ? <span className="tap-pad__hint">{hint}</span> : null}
+          {!hintBelow ? hintNode : null}
         </span>
       </button>
-      {hintBelow ? <p className="tap-pad__hint-below">{hint}</p> : null}
+      {hintBelow ? <p className="tap-pad__hint-below">{hintNode}</p> : null}
     </div>
   );
 }

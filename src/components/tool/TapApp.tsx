@@ -25,6 +25,7 @@ import './tool.css';
 export interface TapAppLabels {
   tapCta: string;
   tapHint: string;
+  tapHintTouch?: string;
   placeholder: string;
   unit: string;
   confidenceNone: string;
@@ -380,6 +381,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
         <TapTarget
           title={labels.tapCta}
           hint={labels.tapHint}
+          hintTouch={labels.tapHintTouch}
           onTap={handleTap}
           pulseToken={pulseToken}
           hintBelow={isPulse}
@@ -447,6 +449,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
             bpm={snapshot.bpm}
             canSave={!!canUseBpm}
             labels={labels.pulseSave}
+            locale={locale}
           />
         ) : null}
       </div>

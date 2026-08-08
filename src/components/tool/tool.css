@@ -143,9 +143,7 @@
   line-height: 0.92;
   min-height: 1.05em;
   color: var(--display-digit, var(--accent));
-  text-shadow:
-    0 0 10px rgba(200, 245, 66, 0.35),
-    0 0 24px rgba(200, 245, 66, 0.18);
+  text-shadow: 0 0 12px rgba(200, 245, 66, 0.22);
   transition: color 160ms ease, text-shadow 160ms ease;
 }
 
@@ -489,6 +487,19 @@
   font-size: 0.82rem;
 }
 
+.tap-pad__hint-touch {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse), (max-width: 819px) {
+  .tap-pad__hint-desk {
+    display: none;
+  }
+  .tap-pad__hint-touch {
+    display: inline;
+  }
+}
+
 .tap-pad:hover .tap-pad__chassis {
   border-color: rgba(255, 255, 255, 0.12);
 }
@@ -535,6 +546,20 @@
   }
   .controls {
     order: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.4rem;
+    justify-content: stretch;
+  }
+  .controls .btn {
+    min-height: 42px;
+    padding: 0.35rem 0.45rem;
+    justify-content: center;
+    font-size: 0.82rem;
+    gap: 0.3rem;
+  }
+  .controls .btn svg {
+    flex-shrink: 0;
   }
   .metro-bar {
     order: 2;

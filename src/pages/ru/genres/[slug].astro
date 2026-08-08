@@ -60,7 +60,7 @@ const pageHeading = t(locale, 'genres.heading', { name: copy.name });
   />
   <div slot="tool" class="genre-hero">
     <p class="range">{t(locale, 'genres.range', { min: genre.bpmMin, max: genre.bpmMax })}</p>
-    <p class="mid">Стартовый темп: <strong>{bpm} BPM</strong></p>
+    <p class="mid">{t(locale, 'genres.suggestedStart')} <strong>{bpm} BPM</strong></p>
     <div class="cta-row">
       <a class="cta" href={homeHref}>{t(locale, 'genres.tapHome')}</a>
       <a class="cta cta--ghost" href={metroHref}>{t(locale, 'genres.playMetronome')}</a>

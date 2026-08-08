@@ -5,6 +5,7 @@ export function tapLabels(locale: Locale): TapAppLabels {
   return {
     tapCta: t(locale, 'tap.cta'),
     tapHint: t(locale, 'tap.hint'),
+    tapHintTouch: t(locale, 'tap.hintTouch'),
     placeholder: t(locale, 'tap.placeholder'),
     unit: t(locale, 'tap.unit'),
     confidenceNone: t(locale, 'confidence.none'),

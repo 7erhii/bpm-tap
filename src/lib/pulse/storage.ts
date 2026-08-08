@@ -35,6 +35,22 @@ function safeParse(raw: string | null): PulseLogItem[] {
   }
 }
 
+/** Compact local stamp for saved readings, e.g. `8 Aug, 20:31`. */
+export function formatPulseCapturedAt(iso: string, locale?: string): string {
+  const parsed = new Date(iso);
+  if (Number.isNaN(parsed.getTime())) return '';
+  try {
+    return new Intl.DateTimeFormat(locale || undefined, {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(parsed);
+  } catch {
+    return parsed.toLocaleString();
+  }
+}
+
 export function loadPulseLog(): PulseLogItem[] {
   if (typeof localStorage === 'undefined') return [];
   try {
@@ -75,6 +91,8 @@ export function removePulseReading(id: string): PulseLogItem[] {
   return next;
 }
 
-export function formatPulseLine(item: PulseLogItem, unit = 'BPM'): string {
-  return `${item.name} — ${item.bpm} ${unit}`;
+/** Display line: `Alex — 72 BPM · 8 Aug, 20:31` */
+export function formatPulseLine(item: PulseLogItem, unit = 'BPM', locale?: string): string {
+  const when = formatPulseCapturedAt(item.capturedAt, locale);
+  return when ? `${item.name} — ${item.bpm} ${unit} · ${when}` : `${item.name} — ${item.bpm} ${unit}`;
 }

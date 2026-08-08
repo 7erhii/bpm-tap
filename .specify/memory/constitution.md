@@ -1,29 +1,17 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: (template) → 1.0.0
-Bump rationale: Initial ratification for BPM Tap product (not Spec Kit toolkit).
-  Establishes product governance: tool-first UX, SEO-as-product, privacy-local,
-  performance-as-ranking, ads-only monetization with hard UX constraints,
-  no accounts/premium.
+Version change: 1.0.0 → 1.1.0
+Bump rationale: Codify hard brand constraint — never use competitor phrase
+  "tap tempo" / TapTempo on public surfaces (owner directive, repeated).
 
-Principles defined:
-  I.   Tool-First Experience
-  II.  SEO Is a Product Surface
-  III. Performance Is Ranking
-  IV.  Privacy-Local by Default
-  V.   Monetize Without Breaking Trust
+Principles defined: unchanged (I–V).
 
-Added sections:
-  - Product Constraints
-  - Development Workflow & Quality Gates
-  - Governance
+Added/changed:
+  - Product Constraints: Forbidden competitor phrase "tap tempo"
+  - Cursor rule: .cursor/rules/no-tap-tempo-brand.mdc (alwaysApply)
 
-Templates reviewed for alignment:
-  ✅ .specify/templates/plan-template.md — Constitution Check remains valid
-  ✅ .specify/templates/spec-template.md — no constitution-specific tokens
-  ✅ .specify/templates/tasks-template.md — accommodates UX/SEO/perf tasks
-
+Templates reviewed: no template token changes required.
 Follow-up TODOs: none.
 -->
 
@@ -111,6 +99,12 @@ traffic + trust, in that order.
 
 - **Brand (temporary):** BPM Tap (`bpm-tap` / project `bpm-app`). Final naming/domain may
   change without changing these principles.
+- **Forbidden competitor phrase (HARD):** NEVER use **tap tempo** / **Tap Tempo** /
+  **tap-tempo** / **TapTempo** in public copy, titles, meta, FAQ, guides, UI, schema,
+  slugs, or marketing. That phrase is the competitor brand behind
+  [taptempo.io](https://taptempo.io/). Use **Tap BPM**, **BPM counter**, **BPM tap**,
+  or plain **tempo** instead. Do not target their brand as our on-page keyword.
+  Legacy 301s from old `tap-tempo-*` paths may remain; do not recreate those pages.
 - **Audience:** musicians, producers, DJs, dancers, fitness, rhythm gamers, casual listeners.
 - **Explicit non-goals for v1:** user accounts, premium, social feeds, BPM guessing games as
   the core loop, heart-rate as the primary product positioning, BPH/RPS “product zoo”.
@@ -147,6 +141,7 @@ This constitution supersedes ad-hoc product decisions when they conflict.
 - **Versioning.** MAJOR = remove/redefine a principle or change monetization/privacy model;
   MINOR = new principle/section or material expansion; PATCH = clarifications only.
 - **Compliance.** Reviews MUST verify tool-first layout, no account creep, ad safety rules,
-  and SEO/perf definition-of-done for user-facing routes.
+  SEO/perf definition-of-done for user-facing routes, and **zero public use of the
+  competitor phrase «tap tempo»**.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-22 | **Last Amended**: 2026-07-22
+**Version**: 1.1.0 | **Ratified**: 2026-07-22 | **Last Amended**: 2026-08-08

@@ -1,0 +1,40 @@
+---
+description: Never use "tap tempo" / TapTempo branding on BPM Tap
+alwaysApply: true
+---
+
+# No "tap tempo" branding
+
+**Hard rule (product owner, repeated):** BPM Tap must **never** use the phrase **tap tempo** (any casing) in user-facing copy, titles, H1, meta, OG, FAQ, guides, UI labels, schema, `llms.txt`, or marketing.
+
+## Why
+
+- [taptempo.io](https://taptempo.io/) is a **competitor brand / exact-match domain**.
+- Using their phrase on our site dilutes our brand and points users/search toward their name.
+
+## Allowed language
+
+Prefer our terms:
+
+- Tap BPM
+- BPM counter
+- BPM tap
+- find / measure BPM
+- tempo (alone is OK when musical, e.g. “song tempo”)
+- metronome, delay, mic listen
+
+## Forbidden
+
+- `tap tempo`, `Tap Tempo`, `tap-tempo` in copy or new public URLs/slugs
+- Guides or titles like “Tap tempo vs …”
+- Targeting competitor brand as our primary keyword in on-page SEO
+- Mentions of taptempo.io on the **live site** (strategy docs may name competitors for analysis only)
+
+## Exceptions
+
+- Legacy **301 redirects** from old paths that already contain `tap-tempo` in the URL (keep redirecting away; do not recreate those pages).
+- Internal strategy notes may discuss the competitor by domain when analyzing SERP — never as copy to ship.
+
+## Check before shipping
+
+If a change adds copy/meta/slug, search the diff for `tap tempo` / `tap-tempo` / `taptempo`. Zero hits on public surfaces.

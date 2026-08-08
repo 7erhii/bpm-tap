@@ -19,6 +19,7 @@
 /pt/delay  /pt/delay/  301
 /pt/listen  /pt/listen/  301
 /pt/metronome  /pt/metronome/  301
+# Legacy slug redirects (do NOT recreate these pages — "tap tempo" is competitor brand)
 /en/guides/tap-tempo-accuracy/  /en/guides/bpm-accuracy/  301
 /ru/guides/tap-tempo-accuracy/  /ru/guides/bpm-accuracy/  301
 /es/guides/tap-tempo-accuracy/  /es/guides/bpm-accuracy/  301

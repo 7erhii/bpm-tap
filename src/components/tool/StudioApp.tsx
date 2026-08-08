@@ -465,6 +465,7 @@ export default function StudioApp({
             <TapTarget
               title={labels.tapCta}
               hint={labels.tapHint}
+              hintTouch={labels.tapHintTouch}
               onTap={registerTap}
               pulseToken={pulseToken}
             />

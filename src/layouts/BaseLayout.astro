@@ -40,7 +40,12 @@ const alternateUrls = Object.fromEntries(
   LOCALES.map((loc) => [loc, `${site}${withTrailingSlash(localizedPath(loc, pathAfterLocale))}`]),
 ) as Record<Locale, string>;
 
-const ogImage = absoluteUrl('/og.png');
+const ogImage = absoluteUrl(theme === 'pulse' ? '/og-pulse.jpg' : '/og.png');
+const ogImageAlt =
+  theme === 'pulse'
+    ? 'Pulse · online heart rate counter — tap each beat'
+    : 'BPM Tap · free online BPM counter';
+const faviconHref = theme === 'pulse' ? '/favicon-pulse.svg' : '/favicon.svg';
 const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C10');
 const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOCALE[loc]);
 ---
@@ -81,9 +86,9 @@ const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOC
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="BPM Tap" />
+    <meta property="og:site_name" content={theme === 'pulse' ? 'Pulse' : 'BPM Tap'} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="BPM Tap · free online BPM counter" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={OG_LOCALE[locale]} />
     {ogAlternates.map((alt) => <meta property="og:locale:alternate" content={alt} />)}
     <meta name="twitter:card" content="summary_large_image" />
@@ -92,7 +97,7 @@ const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOC
     <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content={resolvedThemeColor} />
     <meta name="robots" content="index,follow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
     <slot name="head" />
   </head>
   <body>

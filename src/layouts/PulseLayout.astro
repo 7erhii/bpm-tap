@@ -60,11 +60,11 @@ const { locale, title, description, canonicalPath, heading, lead, keywords } = A
   }
   .eyebrow {
     margin: 0 0 0.4rem;
-    color: var(--accent);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 0.78rem;
-    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-size: 0.92rem;
+    font-weight: 600;
   }
   h1 {
     margin: 0;
@@ -89,21 +89,31 @@ const { locale, title, description, canonicalPath, heading, lead, keywords } = A
 
   @media (max-width: 819px) {
     .pulse-page {
-      padding-top: var(--space-2);
+      padding: 0.35rem 0 max(2rem, env(safe-area-inset-bottom));
     }
     .pulse-intro {
-      margin-bottom: var(--space-2);
+      margin-bottom: 0.65rem;
+      max-width: none;
     }
     .eyebrow {
-      margin-bottom: 0.15rem;
-      font-size: 0.68rem;
+      margin-bottom: 0.2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
     h1 {
-      font-size: clamp(1.25rem, 5vw, 1.55rem);
-      line-height: 1.2;
+      font-size: clamp(1.45rem, 6.2vw, 1.85rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
     }
     .lead {
       display: none;
+    }
+    .tool-slot {
+      margin-bottom: 0.75rem;
+    }
+    .below {
+      margin-top: 1.35rem;
+      gap: 1.35rem;
     }
   }
 </style>

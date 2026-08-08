@@ -1,7 +1,16 @@
 # План выхода в топ — BPM Tap
 
 **Домен:** https://bpm-tap.com/  
-**Цель:** органический трафик по music-intent (`tap bpm`, BPM counter, delay/metronome/genres) и удержание через продукт.
+**Цель:** органический трафик по music-intent (`tap bpm`, BPM counter, delay/metronome/genres) и удержание через продукт.  
+**Рынок:** **EN first** (ads RPM). Pulse / RU — secondary, не перестраиваем план под единичные pulse-клики.
+
+## HARD RULE — никогда «tap tempo»
+
+**На сайте и в любом публичном копирайте ЗАПРЕЩЕНО:** `tap tempo`, `Tap Tempo`, `tap-tempo`, TapTempo, упоминания [taptempo.io](https://taptempo.io/) как «наш» язык.
+
+Это **чужой бренд / exact-match домен конкурента**. Не ориентируемся на их фразу как keyword. Наши слова: **Tap BPM**, **BPM counter**, **BPM tap**, tempo (в музыкальном смысле).
+
+См. также: constitution § Product Constraints, `.cursor/rules/no-tap-tempo-brand.mdc`.
 
 Принцип: не бить сразу в head-term `tap bpm`. Сначала индекс + long-tail + кластер, потом усиление money page и ссылки.
 
@@ -26,8 +35,19 @@
 - [x] `og:image` + `og:site_name` + large Twitter card
 - [x] JSON-LD `WebApplication` (+ FAQ где есть FAQ UI) на home / delay / metronome
 - [x] FAQ below-fold на delay и metronome
+- [x] HSTS через `public/_headers` (после деплоя; не заменяет редирект)
+- [x] **Cloudflare: Always Use HTTPS** — `http://` → 301 `https://` (проверено авг 2026)
 - [ ] Redirect `bpm-tap.app` → `bpm-tap.com` (когда старый домен ещё жив) — **ops**
-- [ ] Submit sitemap в GSC — **ops**
+- [ ] Submit sitemap в GSC — **ops** (если ещё не)
+
+### GSC Indexing (авг 2026) — разбор
+
+| Причина | Вердикт | Действие |
+|---------|---------|----------|
+| Alternate page with proper canonical (`http://…`) | HTTP без редиректа на HTTPS; canonical уже `https://` | Always Use HTTPS в Cloudflare |
+| Blocked by robots.txt (`?bpm=…`) | Ожидаемо (`Disallow: /*?*`) | Не трогать |
+| Crawled — currently not indexed (`/es/listen/`, `/es/genres/phonk/`, `/fr/genres/pop/`, `/en/genres/jazz/`) | Google прочитал, пока не держит в индексе (тонкий genre / низкий спрос ES) | Позже утолстить genre prose; Request Indexing по желанию |
+| Page with redirect / Discovered not indexed | Норма для молодого домена | Ждать + при необходимости URL Inspection на money pages |
 
 ---
 
@@ -70,8 +90,8 @@ https://bpm-tap.com/en/          ← Tap BPM / BPM counter
 Конкуренты в выдаче по `tap bpm` часто держат exact phrase в title.
 Наш money-page title: **`Tap BPM — Free Online BPM Counter & Mic Listen`**  
 Description ведёт с `tap BPM` и studio-flow (metronome + delay).  
-H1: **`Tap BPM — tap the beat & mic listen`**.  
-Не использовать чужой бренд/фразу «tap tempo» в копирайте.  
+H1: **`Tap BPM · tap & mic`**.  
+Не использовать чужой бренд/фразу «tap tempo» в копирайте — **HARD RULE**, см. шапку документа.  
 Дальше CTR смотреть в GSC после индексации и при необходимости A/B title.
 
 **KPI фазы:** рост ассоциирования домена с темой; home появляется по более коротким EN-запросам.
@@ -107,6 +127,7 @@ H1: **`Tap BPM — tap the beat & mic listen`**.
 - Ждать топ-3 по `tap bpm` за месяц
 - Покупать мусорные ссылки
 - Плодить локали раньше, чем EN+RU кластер стабилен
+- **Писать «tap tempo» / целиться в бренд [taptempo.io](https://taptempo.io/) на нашем сайте**
 
 ---
 
@@ -124,9 +145,11 @@ H1: **`Tap BPM — tap the beat & mic listen`**.
 ## Ближайшие 30 дней (чеклист)
 
 1. [ ] Задеплоить на `bpm-tap.com`, проверить HTTPS
-2. [ ] GSC + Bing + sitemap
-3. [x] Закрыть техдыры в коде (domain, OG, schema, trailing slash, FAQ tool pages)
-4. [x] Утолщить genre pages + добавить жанры
-5. [x] 4 гайда с перелинковкой (+ кластер фазы 2)
-6. [ ] 5–10 ручных упоминаний/outreach
-7. [ ] Еженедельно: GSC queries → докручивать страницы с impressions
+2. [x] **Cloudflare Always Use HTTPS** (`http://bpm-tap.com/en/` → 301 https)
+3. [ ] GSC + Bing + sitemap
+4. [x] Закрыть техдыры в коде (domain, OG, schema, trailing slash, FAQ tool pages, HSTS headers, genre i18n «suggested start»)
+5. [x] Утолщить genre pages + добавить жанры
+6. [x] 4 гайда с перелинковкой (+ кластер фазы 2)
+7. [ ] 5–10 ручных упоминаний/outreach
+8. [ ] Еженедельно: GSC queries → докручивать страницы с impressions
+9. [ ] Опционально: утолстить jazz / phonk / pop (+ ES listen) если Crawled-not-indexed не рассосётся

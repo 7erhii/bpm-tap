@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
+  formatPulseCapturedAt,
   formatPulseLine,
   loadPulseLog,
   removePulseReading,
@@ -32,12 +33,14 @@ describe('pulse storage', () => {
     });
   });
 
-  it('saves name — bpm lines', () => {
+  it('saves name — bpm and stamps local time on save', () => {
     const list = savePulseReading('Alex', 72.4);
     expect(list).toHaveLength(1);
     expect(list[0].name).toBe('Alex');
     expect(list[0].bpm).toBe(72);
-    expect(formatPulseLine(list[0])).toBe('Alex — 72 BPM');
+    expect(list[0].capturedAt).toBeTruthy();
+    expect(formatPulseLine(list[0], 'BPM', 'en-US')).toMatch(/^Alex — 72 BPM · /);
+    expect(formatPulseCapturedAt(list[0].capturedAt, 'en-US').length).toBeGreaterThan(0);
     expect(loadPulseLog()).toHaveLength(1);
   });
 
