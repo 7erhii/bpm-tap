@@ -9,6 +9,8 @@ export function pulseLabels(locale: Locale): TapAppLabels {
     tapCta: t(locale, 'pulse.cta'),
     tapHint: t(locale, 'pulse.hint'),
     tapHintTouch: t(locale, 'pulse.hintTouch'),
+    tapLockedCta: t(locale, 'pulse.lockedCta'),
+    tapLockedHint: t(locale, 'pulse.lockedHint'),
     unit: t(locale, 'pulse.unit'),
     enterBpm: t(locale, 'pulse.enterBpm'),
     confidenceNone: t(locale, 'pulse.confidence.none'),

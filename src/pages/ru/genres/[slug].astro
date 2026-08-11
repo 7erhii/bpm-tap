@@ -1,11 +1,12 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
+import GenreHero from '@/components/seo/GenreHero.astro';
 import GenreArticle from '@/components/seo/GenreArticle.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { genres, getGenre } from '@/content/genres';
 import { suggestedBpmForGenre } from '@/lib/genres/match';
 import { absoluteUrl } from '@/lib/site';
-import { localizedPath, t } from '@/i18n/utils';
+import { t } from '@/i18n/utils';
 import { trimMetaDescription, trimTitle } from '@/lib/seo/meta';
 
 export function getStaticPaths() {
@@ -18,8 +19,6 @@ const genre = getGenre(slug!);
 if (!genre) throw new Error('Genre not found');
 const bpm = suggestedBpmForGenre(genre);
 const copy = genre.ru;
-const homeHref = localizedPath(locale);
-const metroHref = localizedPath(locale, 'metronome');
 const pageUrl = absoluteUrl(`/ru/genres/${genre.slug}/`);
 const pageTitle = trimTitle(
   t(locale, 'genres.pageTitle', { name: copy.name, min: genre.bpmMin, max: genre.bpmMax }),
@@ -58,57 +57,6 @@ const pageHeading = t(locale, 'genres.heading', { name: copy.name });
       inLanguage: 'ru',
     }}
   />
-  <div slot="tool" class="genre-hero">
-    <p class="range">{t(locale, 'genres.range', { min: genre.bpmMin, max: genre.bpmMax })}</p>
-    <p class="mid">{t(locale, 'genres.suggestedStart')} <strong>{bpm} BPM</strong></p>
-    <div class="cta-row">
-      <a class="cta" href={homeHref}>{t(locale, 'genres.tapHome')}</a>
-      <a class="cta cta--ghost" href={metroHref}>{t(locale, 'genres.playMetronome')}</a>
-    </div>
-  </div>
+  <GenreHero slot="tool" locale={locale} genre={genre} bpm={bpm} />
   <GenreArticle locale={locale} genre={genre} bpm={bpm} />
 </ToolLayout>
-
-<style>
-  .genre-hero {
-    display: grid;
-    gap: 1rem;
-    padding: 1.5rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background: var(--bg-tap);
-  }
-  .range {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 3.4rem);
-    color: var(--accent);
-  }
-  .mid {
-    margin: 0;
-    color: var(--text-muted);
-  }
-  .mid strong {
-    color: var(--text);
-    font-family: var(--font-bpm);
-  }
-  .cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-  .cta {
-    width: fit-content;
-    text-decoration: none;
-    background: var(--accent);
-    color: #10120a;
-    font-weight: 700;
-    border-radius: 999px;
-    padding: 0.75rem 1.1rem;
-  }
-  .cta--ghost {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--line);
-  }
-</style>

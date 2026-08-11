@@ -26,6 +26,9 @@ export interface TapAppLabels {
   tapCta: string;
   tapHint: string;
   tapHintTouch?: string;
+  /** Pulse: pad copy after a stable reading (until Reset). */
+  tapLockedCta?: string;
+  tapLockedHint?: string;
   placeholder: string;
   unit: string;
   confidenceNone: string;
@@ -217,7 +220,13 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
     setDocumentTitleWithBpm(base, snapshot.bpm != null && snapshot.inRange ? snapshot.bpm : null);
   }, [snapshot.bpm, snapshot.inRange]);
 
+  const pulseLocked =
+    isPulse && snapshot.confidence === 'high' && snapshot.source === 'tap';
+  const pulseLockedRef = useRef(false);
+  pulseLockedRef.current = pulseLocked;
+
   const registerTap = () => {
+    if (pulseLockedRef.current) return;
     const next = engineRef.current.tap();
     // TODO: re-enable when we have a writable board backend
     // if (trackChallenge) {
@@ -379,12 +388,18 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
         />
 
         <TapTarget
-          title={labels.tapCta}
-          hint={labels.tapHint}
-          hintTouch={labels.tapHintTouch}
+          title={pulseLocked && labels.tapLockedCta ? labels.tapLockedCta : labels.tapCta}
+          hint={pulseLocked && labels.tapLockedHint ? labels.tapLockedHint : labels.tapHint}
+          hintTouch={
+            pulseLocked && labels.tapLockedHint
+              ? labels.tapLockedHint
+              : labels.tapHintTouch
+          }
           onTap={handleTap}
           pulseToken={pulseToken}
           hintBelow={isPulse}
+          scrollSafe={isPulse}
+          locked={pulseLocked}
         />
 
         <PrimaryControls

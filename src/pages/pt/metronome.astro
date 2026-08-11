@@ -32,7 +32,7 @@ const faqs = [
       {
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
-        name: 'Online Metronome',
+        name: 'Metrônomo online',
         applicationCategory: 'MultimediaApplication',
         operatingSystem: 'Any',
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -58,14 +58,14 @@ const faqs = [
     <h2>{t(locale, 'meter.explainTitle')}</h2>
     <p>{t(locale, 'meter.explain')}</p>
     <ul>
-      <li><strong>4/4</strong>: common time: ONE-two-three-four</li>
-      <li><strong>3/4</strong>: waltz: ONE-two-three</li>
-      <li><strong>2/4</strong>: march / short bars: ONE-two</li>
-      <li><strong>5/4</strong>: odd meter: five beats per bar</li>
-      <li><strong>6/8 · 9/8 · 12/8</strong>: compound feels (grouped in threes)</li>
-      <li><strong>7/8</strong>: uneven bar (often 3+4 or 2+2+3)</li>
+      <li><strong>4/4</strong>: {t(locale, 'meter.item.44')}</li>
+      <li><strong>3/4</strong>: {t(locale, 'meter.item.34')}</li>
+      <li><strong>2/4</strong>: {t(locale, 'meter.item.24')}</li>
+      <li><strong>5/4</strong>: {t(locale, 'meter.item.54')}</li>
+      <li><strong>6/8 · 9/8 · 12/8</strong>: {t(locale, 'meter.item.compound')}</li>
+      <li><strong>7/8</strong>: {t(locale, 'meter.item.78')}</li>
     </ul>
-    <p class="note">These are the common practice meters, not every possible signature in music theory.</p>
+    <p class="note">{t(locale, 'meter.itemsNote')}</p>
   </section>
 
   <section class="explain stack">

@@ -97,7 +97,24 @@ const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOC
     <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content={resolvedThemeColor} />
     <meta name="robots" content="index,follow" />
+    {/* PNG first: Google prefers ≥48×48 raster; full-bleed square crops cleanly to their circle */}
+    <link
+      rel="icon"
+      href={theme === 'pulse' ? '/favicon-pulse-48.png' : '/favicon-48.png'}
+      sizes="48x48"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href={theme === 'pulse' ? '/favicon-pulse-192.png' : '/favicon-192.png'}
+      sizes="192x192"
+      type="image/png"
+    />
     <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <link
+      rel="apple-touch-icon"
+      href={theme === 'pulse' ? '/apple-touch-icon-pulse.png' : '/apple-touch-icon.png'}
+    />
     <slot name="head" />
   </head>
   <body>

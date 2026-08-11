@@ -27,7 +27,18 @@ export default defineConfig({
     AstroPWA({
       registerType: 'autoUpdate',
       injectRegister: null,
-      includeAssets: ['favicon.svg', 'icons/*.png', 'icons/*.svg'],
+      includeAssets: [
+        'favicon.svg',
+        'favicon-48.png',
+        'favicon-192.png',
+        'favicon-pulse.svg',
+        'favicon-pulse-48.png',
+        'favicon-pulse-192.png',
+        'apple-touch-icon.png',
+        'apple-touch-icon-pulse.png',
+        'icons/*.png',
+        'icons/*.svg',
+      ],
       manifest: {
         name: 'BPM Tap',
         short_name: 'BPM Tap',

@@ -388,6 +388,9 @@
   --pad-face: #151922;
   --chassis: #1a1e28;
   --bay-gap: 14px;
+  /* Plunger inset from button edge, then extra shrink of the live hit target */
+  --pad-face-inset: calc(var(--bay-gap) + 4px);
+  --hit-inset: calc(var(--pad-face-inset) + 5px);
   position: relative;
   appearance: none;
   border: 0;
@@ -405,6 +408,55 @@
   -webkit-tap-highlight-color: transparent;
   isolation: isolate;
   background: transparent;
+}
+
+/* Live tap zone — pad face only, 5px inside the plunger (frame is scrollable) */
+.tap-pad__hit {
+  position: absolute;
+  inset: var(--hit-inset);
+  z-index: 6;
+  border-radius: calc(var(--pad-radius) - var(--hit-inset));
+  /* Transparent hit layer over the face */
+  background: transparent;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Pulse: chassis/frame lets scroll through; only .tap-pad__hit captures taps */
+.tap-pad--scroll-safe {
+  touch-action: pan-y;
+  pointer-events: none;
+  cursor: default;
+}
+
+.tap-pad--scroll-safe .tap-pad__hit {
+  pointer-events: auto;
+  touch-action: pan-y;
+  cursor: pointer;
+}
+
+.tap-pad--scroll-safe.is-locked .tap-pad__hit {
+  pointer-events: none;
+  cursor: default;
+}
+
+.tap-pad.is-locked {
+  cursor: default;
+  opacity: 0.92;
+}
+
+.tap-pad.is-locked .tap-pad__plunger {
+  transform: none;
+}
+
+/* Hint-below layout; frame around the pad face is the scroll gutter */
+.tap-pad-wrap--scroll-safe.tap-pad-wrap--hint-below {
+  justify-items: stretch;
+}
+
+.tap-pad-wrap--scroll-safe .tap-pad {
+  width: 100%;
 }
 
 .tap-pad__chassis {
@@ -441,8 +493,8 @@
 /* only the face scales — text stays sharp */
 .tap-pad__plunger {
   position: absolute;
-  inset: calc(var(--bay-gap) + 4px);
-  border-radius: calc(var(--pad-radius) - var(--bay-gap) - 4px);
+  inset: var(--pad-face-inset);
+  border-radius: calc(var(--pad-radius) - var(--pad-face-inset));
   transform: scale(1);
   transform-origin: center center;
   transition: transform 90ms cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -474,6 +526,7 @@
   gap: 0.3rem;
   padding: 1rem 1.1rem;
   text-align: center;
+  pointer-events: none;
 }
 
 .tap-pad__title {

@@ -1,0 +1,165 @@
+---
+import type { Genre } from '@/content/genres';
+import { watchOutForGenre } from '@/content/genreWatchOut';
+import { buildShareUrl } from '@/lib/share/url';
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  genre: Genre;
+  bpm: number;
+}
+
+const { locale, genre, bpm } = Astro.props;
+const copy = genre[locale];
+const watchOut = watchOutForGenre(genre.slug, locale);
+const homeHref = buildShareUrl(localizedPath(locale), bpm);
+const metroHref = buildShareUrl(localizedPath(locale, 'metronome'), bpm);
+const delayHref = buildShareUrl(localizedPath(locale, 'delay'), bpm);
+const quarterMs = Math.round(60000 / bpm);
+---
+
+<div class="genre-hero">
+  <p class="range">{t(locale, 'genres.range', { min: genre.bpmMin, max: genre.bpmMax })}</p>
+
+  <div class="start">
+    <p class="start__label">{t(locale, 'genres.startHere')}</p>
+    <p class="start__bpm"><strong>{bpm}</strong> <span>BPM</span></p>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta" href={homeHref}>{t(locale, 'genres.tapHome', { bpm })}</a>
+    <a class="cta cta--ghost" href={metroHref}>{t(locale, 'genres.playMetronome', { bpm })}</a>
+  </div>
+
+  <div class="advice">
+    <p class="advice__item">
+      <strong>{t(locale, 'genres.tapThisLabel')}</strong>
+      {copy.tip}
+    </p>
+    {
+      watchOut ? (
+        <p class="advice__item advice__item--warn">
+          <strong>{t(locale, 'genres.watchOutLabel')}</strong>
+          {watchOut}
+        </p>
+      ) : null
+    }
+  </div>
+
+  <p class="delay-line">
+    <a href={delayHref}>
+      {t(locale, 'genres.delayAtBpm', { bpm, ms: quarterMs })}
+    </a>
+  </p>
+</div>
+
+<style>
+  .genre-hero {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg-tap);
+  }
+  .range {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    color: var(--accent);
+  }
+  .start {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .start__label {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 650;
+  }
+  .start__bpm {
+    margin: 0;
+    font-family: var(--font-bpm);
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .start__bpm span {
+    font-size: 0.55em;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .cta {
+    width: fit-content;
+    text-decoration: none;
+    background: var(--accent);
+    color: #10120a;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.75rem 1.1rem;
+  }
+  .cta--ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .advice {
+    display: grid;
+    gap: 0.65rem;
+  }
+  .advice__item {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-dim);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: var(--text-muted);
+    line-height: 1.45;
+    font-size: 0.95rem;
+  }
+  .advice__item--warn {
+    border-left-color: color-mix(in srgb, var(--accent) 55%, #c45c26);
+    background: color-mix(in srgb, var(--accent-dim) 70%, rgba(196, 92, 38, 0.12));
+  }
+  .advice__item strong {
+    color: var(--text);
+    margin-right: 0.35rem;
+  }
+  .delay-line {
+    margin: 0;
+  }
+  .delay-line a {
+    color: var(--accent);
+    font-weight: 650;
+    text-decoration: none;
+  }
+  .delay-line a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 819px) {
+    .genre-hero {
+      gap: 0.85rem;
+      padding: 1.1rem 1rem;
+    }
+    .range {
+      font-size: clamp(1.75rem, 9vw, 2.4rem);
+    }
+    .cta {
+      padding: 0.7rem 1rem;
+      font-size: 0.92rem;
+    }
+    .advice__item {
+      font-size: 0.9rem;
+      padding: 0.75rem 0.85rem;
+    }
+  }
+</style>
