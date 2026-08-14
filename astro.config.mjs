@@ -13,6 +13,37 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
+      // Root `/` is a locale redirect (301 + noindex) — not an indexable page.
+      filter: (page) => {
+        try {
+          return new URL(page).pathname !== '/';
+        } catch {
+          return page !== 'https://bpm-tap.com/' && page !== 'https://bpm-tap.com';
+        }
+      },
+      serialize(item) {
+        if (!item.links?.length) return item;
+        const seen = new Set();
+        item.links = item.links
+          .map((link) => {
+            try {
+              const u = new URL(link.url);
+              if (u.pathname === '/') {
+                return { ...link, url: `${u.origin}/en/` };
+              }
+            } catch {
+              /* keep original */
+            }
+            return link;
+          })
+          .filter((link) => {
+            const key = `${link.lang ?? link.hreflang ?? ''}:${link.url}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+        return item;
+      },
       i18n: {
         defaultLocale: 'en',
         locales: {
