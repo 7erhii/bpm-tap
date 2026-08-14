@@ -1457,7 +1457,8 @@
   flex-direction: column;
   gap: clamp(0.6rem, 2vw, 1rem);
   min-height: calc(100svh - var(--site-chrome, 7rem));
-  padding: clamp(0.85rem, 3vw, 1.25rem) clamp(0.85rem, 3vw, 1.25rem) 0;
+  padding: clamp(0.85rem, 3vw, 1.25rem) clamp(0.85rem, 3vw, 1.25rem)
+    calc(0.85rem + var(--safe-b, 0px));
 }
 
 .tap-app[data-skin='music'] .readout {
@@ -1724,10 +1725,6 @@
   line-height: 1;
 }
 
-.tap-app[data-skin='music'] .controls--quick .btn__num {
-  font-variant-numeric: tabular-nums;
-}
-
 /* Play triangle is optically left-heavy in the viewBox */
 .tap-app[data-skin='music'] .controls--quick .ico-play {
   width: 14px;
@@ -1737,7 +1734,7 @@
   transform: translateX(1px);
 }
 
-/* Time signature in the quick bar — value only, no “Meter” caption */
+/* Time signature in the quick bar — value only, no chevron */
 .tap-app[data-skin='music'] .controls--quick .meter-select--bar {
   flex: 0 0 auto;
   margin: 0;
@@ -1746,16 +1743,14 @@
 
 .tap-app[data-skin='music'] .controls--quick .meter-select--bar select {
   appearance: none;
+  -webkit-appearance: none;
   box-sizing: border-box;
   min-height: 48px;
   height: 48px;
-  padding: 0 1.7rem 0 0.75rem;
+  padding: 0 0.85rem;
   border: 1px solid var(--line-strong, rgba(232, 234, 239, 0.18));
   border-radius: 14px;
-  background:
-    var(--bg-elevated, #12141a)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b90a0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
-    no-repeat right 0.55rem center;
+  background: var(--bg-elevated, #12141a);
   color: var(--text);
   font: inherit;
   font-weight: 650;
@@ -1793,7 +1788,7 @@
   .tap-app[data-skin='music'] .controls--quick .meter-select--bar select {
     min-height: 44px;
     height: 44px;
-    padding-inline: 0.55rem 1.5rem;
+    padding-inline: 0.7rem;
     font-size: 0.82rem;
   }
 }
@@ -1876,9 +1871,9 @@
   width: 100%;
   height: 100%;
   min-height: inherit;
-  padding: 1rem 1rem calc(1rem + var(--safe-b));
+  padding: 1rem;
   border: 1px solid transparent;
-  border-radius: 24px 24px 0 0;
+  border-radius: 24px;
   color: #0b0c10;
   font: inherit;
   cursor: pointer;
@@ -1891,7 +1886,7 @@
     color 0.25s ease,
     border-color 0.25s ease;
   background: linear-gradient(180deg, #d7ff62, var(--accent) 60%);
-  box-shadow: 0 -18px 60px rgba(200, 245, 66, 0.16);
+  box-shadow: 0 10px 36px rgba(200, 245, 66, 0.14);
 }
 
 .tap-app[data-skin='music'] .tap-pad--music:focus-visible {
@@ -1910,7 +1905,6 @@
     radial-gradient(80% 90% at 50% 100%, rgba(200, 245, 66, 0.12), transparent 70%),
     var(--bg-elevated);
   border-color: var(--line-strong, rgba(232, 234, 239, 0.18));
-  border-bottom-color: transparent;
   color: var(--text);
   box-shadow: none;
 }
@@ -2213,23 +2207,23 @@
   }
 
   .tap-app[data-skin='music'] .controls--quick {
-    margin-inline: 0;
-    padding-inline: 15px;
+    margin-inline: 0.85rem;
+    padding-inline: 0;
   }
 
-  /* Side panels stay inset; only the pad goes edge-to-edge */
+  /* Keep pad inset so it reads as a card, not a dock glued to the edge */
   .tap-app[data-skin='music'] .panels {
     margin-inline: 0.85rem;
   }
 
   .tap-app[data-skin='music'] .studio-interact,
   .tap-app[data-skin='music'] .tap-pad-wrap--music {
-    width: 100%;
-    margin-inline: 0;
+    width: auto;
+    margin-inline: 0.85rem;
   }
 
   .tap-app[data-skin='music'] .tap-pad--music {
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
   }
 
   .tap-app[data-skin='music'] .pad__sub-desk {
@@ -2492,7 +2486,7 @@
 
 .tap-app[data-skin='pulse'] .controls--quick {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: stretch;
   gap: 0.5rem;
   justify-content: stretch;
@@ -2502,9 +2496,10 @@
 
 .tap-app[data-skin='pulse'] .controls--quick .save {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   gap: 0.5rem;
   min-width: 0;
+  width: 100%;
 }
 
 .tap-app[data-skin='pulse'] .controls--quick .save.is-idle .save__name {
@@ -2610,11 +2605,6 @@
   white-space: nowrap;
 }
 
-.tap-app[data-skin='pulse'] .controls--quick .btn__num {
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-}
-
 /* —— Rose flat pad —— */
 
 .tap-app[data-skin='pulse'] .studio-interact {
@@ -2641,9 +2631,9 @@
   box-sizing: border-box;
 }
 
-/* Theme switch sits in the quick bar — match other btn corners */
+/* Theme switch sits in the quick bar — grow to fill row 1 */
 .tap-app[data-skin='pulse'] .controls--quick .pulse-mode--bar {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   align-self: stretch;
   height: 48px;
   box-sizing: border-box;

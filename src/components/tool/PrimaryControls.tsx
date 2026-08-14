@@ -34,7 +34,7 @@ interface Props {
   canUseBpm: boolean;
   copied: boolean;
   fullscreen: boolean;
-  /** BPM integer shown on primary Copy button (V6). */
+  /** Kept for callers; Copy no longer shows the BPM numeral (compact bar). */
   bpm?: number | null;
   showSave?: boolean;
   showFactor?: boolean;
@@ -67,7 +67,6 @@ export function PrimaryControls({
   labels,
   canUseBpm,
   copied,
-  bpm = null,
   showSave = false,
   showFactor = true,
   showShare = true,
@@ -88,49 +87,11 @@ export function PrimaryControls({
 }: Props) {
   if (variant === 'quick') {
     const copyWord = copied ? labels.copied : labels.copy;
-    const showNum = canUseBpm && bpm != null && !copied;
     const pulseBar = !!pulseSave;
 
     return (
       <div className="controls controls--quick" role="toolbar" aria-label="Result actions">
-        {pulseSave ? (
-          <div className={`save${pulseSave.canSave ? '' : ' is-idle'}`}>
-            <label className="sr-only" htmlFor="pulse-save-name">
-              {pulseSave.namePlaceholder}
-            </label>
-            <input
-              className="save__name"
-              id="pulse-save-name"
-              type="text"
-              name="pulse-name"
-              maxLength={40}
-              autoComplete="name"
-              placeholder={pulseSave.namePlaceholder}
-              value={pulseSave.name}
-              disabled={!pulseSave.canSave}
-              onChange={(e) => pulseSave.onNameChange(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  pulseSave.onSave();
-                }
-              }}
-            />
-            <button
-              type="button"
-              className={`btn btn--primary${pulseSave.canSave ? '' : ' is-muted'}`}
-              disabled={!pulseSave.canSave || !pulseSave.name.trim()}
-              title={!pulseSave.canSave ? pulseSave.needBpm : undefined}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={pulseSave.onSave}
-            >
-              <Save size={17} />
-              <span className="btn__label">
-                {pulseSave.justSaved ? pulseSave.savedLabel : pulseSave.saveLabel}
-              </span>
-            </button>
-          </div>
-        ) : (
+        {pulseBar ? null : (
           <button
             type="button"
             className={`btn btn--primary${canUseBpm ? '' : ' is-muted'}`}
@@ -139,10 +100,7 @@ export function PrimaryControls({
             disabled={!canUseBpm}
           >
             <Copy size={17} />
-            <span className="btn__label">
-              <span>{copyWord}</span>
-              {showNum ? <span className="btn__num">{Math.round(bpm)}</span> : null}
-            </span>
+            <span className="btn__label">{copyWord}</span>
           </button>
         )}
         {onMetronome ? (
@@ -227,6 +185,44 @@ export function PrimaryControls({
             lightLabel={pulseTheme.lightLabel}
             darkLabel={pulseTheme.darkLabel}
           />
+        ) : null}
+        {pulseSave ? (
+          <div className={`save${pulseSave.canSave ? '' : ' is-idle'}`}>
+            <label className="sr-only" htmlFor="pulse-save-name">
+              {pulseSave.namePlaceholder}
+            </label>
+            <input
+              className="save__name"
+              id="pulse-save-name"
+              type="text"
+              name="pulse-name"
+              maxLength={40}
+              autoComplete="name"
+              placeholder={pulseSave.namePlaceholder}
+              value={pulseSave.name}
+              disabled={!pulseSave.canSave}
+              onChange={(e) => pulseSave.onNameChange(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  pulseSave.onSave();
+                }
+              }}
+            />
+            <button
+              type="button"
+              className={`btn btn--primary${pulseSave.canSave ? '' : ' is-muted'}`}
+              disabled={!pulseSave.canSave || !pulseSave.name.trim()}
+              title={!pulseSave.canSave ? pulseSave.needBpm : undefined}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={pulseSave.onSave}
+            >
+              <Save size={17} />
+              <span className="btn__label">
+                {pulseSave.justSaved ? pulseSave.savedLabel : pulseSave.saveLabel}
+              </span>
+            </button>
+          </div>
         ) : null}
       </div>
     );
