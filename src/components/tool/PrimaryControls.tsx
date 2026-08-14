@@ -149,13 +149,13 @@ export function PrimaryControls({
         {pulseBar ? (
           <button
             type="button"
-            className={`btn btn--icon${copied ? ' is-ok' : ''}`}
-            aria-label={copied ? labels.copied : labels.copy}
+            className={`btn btn--copy${canUseBpm ? '' : ' is-muted'}${copied ? ' is-ok' : ''}`}
             onMouseDown={(event) => event.preventDefault()}
             onClick={onCopy}
             disabled={!canUseBpm}
           >
             <Copy size={17} />
+            <span className="btn__label">{copyWord}</span>
           </button>
         ) : null}
         <button

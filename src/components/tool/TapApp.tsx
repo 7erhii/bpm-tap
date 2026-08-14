@@ -753,6 +753,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
               beatCount={getMeter(meterId).beatsPerBar}
               activeBeat={metroOn ? activeBeat : null}
               showFlash={showFlash}
+              scrollSafe
             />
           </div>
         </div>

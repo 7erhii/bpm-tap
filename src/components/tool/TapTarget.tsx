@@ -36,7 +36,7 @@ interface Props {
   subTouch?: string;
 }
 
-const SCROLL_CANCEL_PX = 12;
+const SCROLL_CANCEL_PX = 10;
 const LEVEL_BARS = 11;
 
 /**
@@ -155,6 +155,14 @@ export function TapTarget({
       fireTap();
     };
 
+    // Browser aborted the gesture (often to take over scrolling) — never count as a tap.
+    const onTouchCancel = (event: TouchEvent) => {
+      if (!track) return;
+      const ended = Array.from(event.changedTouches).some((t) => t.identifier === track!.id);
+      if (!ended) return;
+      track = null;
+    };
+
     const onMouseDown = (event: MouseEvent) => {
       if (lockedRef.current) return;
       if (event.button !== 0) return;
@@ -175,7 +183,7 @@ export function TapTarget({
     hit.addEventListener('touchstart', onTouchStart, { passive: false });
     hit.addEventListener('touchmove', onTouchMove, { passive: true });
     hit.addEventListener('touchend', finishTouch, { passive: false });
-    hit.addEventListener('touchcancel', finishTouch, { passive: false });
+    hit.addEventListener('touchcancel', onTouchCancel, { passive: true });
     hit.addEventListener('mousedown', onMouseDown);
     // Keyboard still activates the <button>.
     button.addEventListener('click', onClick);
@@ -183,7 +191,7 @@ export function TapTarget({
       hit.removeEventListener('touchstart', onTouchStart);
       hit.removeEventListener('touchmove', onTouchMove);
       hit.removeEventListener('touchend', finishTouch);
-      hit.removeEventListener('touchcancel', finishTouch);
+      hit.removeEventListener('touchcancel', onTouchCancel);
       hit.removeEventListener('mousedown', onMouseDown);
       button.removeEventListener('click', onClick);
     };

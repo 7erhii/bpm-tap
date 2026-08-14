@@ -661,6 +661,7 @@ export default function StudioApp({
               spectrum={spectrum}
               listening={listening}
               showFlash={showFlash}
+              scrollSafe
             />
           </div>
         </div>
