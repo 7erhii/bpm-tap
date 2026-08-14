@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+
+export type TapPadStage = 'idle' | 'counting' | 'stable' | 'listen';
 
 interface Props {
   title: string;
@@ -17,9 +19,25 @@ interface Props {
   scrollSafe?: boolean;
   /** Ignore further taps (e.g. stable pulse reading until Reset). */
   locked?: boolean;
+  /** Visual skin — music = V6 flat pad; pulse = P1 rose flat pad. */
+  variant?: 'music' | 'pulse';
+  stage?: TapPadStage;
+  /** Beat period in seconds — drives `--beat` / `--bar` flash. */
+  beatSec?: number;
+  spectrum?: number[];
+  listening?: boolean;
+  /** Stable reading: pad flashes as visual metronome. */
+  showFlash?: boolean;
+  /** Live beat index while audible metronome runs (0-based). */
+  activeBeat?: number | null;
+  /** Beats per bar for pad dots (default 4). */
+  beatCount?: number;
+  sub?: string;
+  subTouch?: string;
 }
 
 const SCROLL_CANCEL_PX = 12;
+const LEVEL_BARS = 11;
 
 /**
  * Mobile Safari is unreliable with React pointer/click combos on a large pad:
@@ -35,6 +53,16 @@ export function TapTarget({
   hintBelow = false,
   scrollSafe = false,
   locked = false,
+  variant = 'pulse',
+  stage = 'idle',
+  beatSec,
+  spectrum,
+  listening = false,
+  showFlash = false,
+  activeBeat = null,
+  beatCount = 4,
+  sub,
+  subTouch,
 }: Props) {
   const [pulse, setPulse] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -44,6 +72,9 @@ export function TapTarget({
   const lockedRef = useRef(locked);
   const scrollSafeRef = useRef(scrollSafe);
   const touchHint = hintTouch ?? hint;
+  const music = variant === 'music';
+  const pulseFlat = variant === 'pulse';
+  const flatPad = music || pulseFlat;
 
   onTapRef.current = onTap;
   lockedRef.current = locked;
@@ -164,6 +195,98 @@ export function TapTarget({
       <span className="tap-pad__hint-touch">{touchHint}</span>
     </span>
   );
+
+  if (flatPad) {
+    const beat = beatSec != null && beatSec > 0 ? beatSec : music ? 0.469 : 0.833;
+    const style = {
+      ['--beat']: `${beat}s`,
+      ['--bar']: `${beat * 4}s`,
+    } as CSSProperties;
+
+    const liveSpectrum = spectrum && spectrum.length > 0;
+    const bars = liveSpectrum
+      ? spectrum.slice(0, LEVEL_BARS)
+      : Array.from({ length: LEVEL_BARS }, () => 0.16);
+    // Upsample/downsample to LEVEL_BARS
+    const levelBars =
+      bars.length === LEVEL_BARS
+        ? bars
+        : Array.from({ length: LEVEL_BARS }, (_, i) => {
+            const src = Math.floor((i / LEVEL_BARS) * bars.length);
+            return bars[src] ?? 0.16;
+          });
+
+    const subDesk = sub ?? hint;
+    const subMobile = subTouch ?? hintTouch ?? subDesk;
+    const dots = Math.max(1, Math.min(12, Math.round(beatCount) || 4));
+    const metroLive = activeBeat != null;
+    // Restart CSS beat phase when tempo or a fresh tap lands
+    const beatAnimKey = `${beat.toFixed(4)}-${pulseToken}`;
+    const padClass = music ? 'tap-pad--music' : 'tap-pad--pulse';
+    const wrapClass = music ? 'tap-pad-wrap--music' : 'tap-pad-wrap--pulse';
+
+    return (
+      <div
+        className={`tap-pad-wrap ${wrapClass} stage-${stage}${
+          scrollSafe ? ' tap-pad-wrap--scroll-safe' : ''
+        }`}
+      >
+        <button
+          ref={buttonRef}
+          type="button"
+          className={`tap-pad ${padClass} is-${stage}${pulse ? ' is-pulse' : ''}${
+            locked ? ' is-locked' : ''
+          }${showFlash ? ' is-flash' : ''}${listening ? ' is-listening' : ''}${
+            metroLive ? ' is-metro' : ''
+          }${scrollSafe ? ' tap-pad--scroll-safe' : ''}`}
+          aria-label={title}
+          aria-disabled={locked || undefined}
+          aria-pressed={listening || undefined}
+          style={style}
+        >
+          {music ? (
+            <>
+              <span className="pad__flash" aria-hidden="true" />
+              <span className="pad__flash pad__flash--one" aria-hidden="true" />
+              <span className="pad__breath" aria-hidden="true" />
+              <span className="pad__beats" aria-hidden="true" key={beatAnimKey}>
+                {Array.from({ length: dots }, (_, i) => (
+                  <i
+                    key={i}
+                    className={`${i === 0 ? 'is-one' : ''}${activeBeat === i ? ' is-on' : ''}`.trim()}
+                  />
+                ))}
+              </span>
+              <span
+                className={`pad__level${liveSpectrum ? ' is-live' : ''}`}
+                aria-hidden="true"
+              >
+                {levelBars.map((v, i) => (
+                  <i
+                    key={i}
+                    style={
+                      liveSpectrum
+                        ? { transform: `scaleY(${Math.max(0.16, Math.min(1, v))})` }
+                        : undefined
+                    }
+                  />
+                ))}
+              </span>
+            </>
+          ) : (
+            <span className="pad__glow" aria-hidden="true" />
+          )}
+          {/* Full-pad hit target for flat skins */}
+          <span ref={hitRef} className="tap-pad__hit tap-pad__hit--full" aria-hidden="true" />
+          <span className="pad__label">{title}</span>
+          <span className="pad__sub">
+            <span className="pad__sub-desk">{subDesk}</span>
+            <span className="pad__sub-touch">{subMobile}</span>
+          </span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div

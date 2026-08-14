@@ -25,94 +25,105 @@ const { locale, title, description, canonicalPath, heading, lead, keywords } = A
   description={description}
   canonicalPath={canonicalPath}
   theme="pulse"
-  themeColor="#d92b3a"
+  themeColor="#e11d48"
   keywords={keywords}
 >
   <slot name="head" slot="head" />
   <SiteHeader locale={locale} theme="pulse" />
   <main class="container pulse-page">
-    <header class="pulse-intro">
-      <p class="eyebrow">{t(locale, 'pulse.brand')} · {locale === 'ru' ? 'ЧСС' : locale === 'es' ? 'Frecuencia cardíaca' : locale === 'fr' ? 'Fréquence cardiaque' : 'Heart rate'}</p>
-      <h1>{heading}</h1>
-      {lead ? <p class="lead">{lead}</p> : null}
-    </header>
-
     <div class="tool-slot">
       <slot name="tool" />
     </div>
 
-    <AdSlot locale={locale} slotId="below-tool" />
+    <div class="pulse-column">
+      <!-- H1 under the tool so the first viewport is the stage, not the title -->
+      <header class="pulse-intro pulse-intro--below">
+        <p class="eyebrow">{t(locale, 'pulse.brand')} · {locale === 'ru' ? 'ЧСС' : locale === 'es' ? 'Frecuencia cardíaca' : locale === 'fr' ? 'Fréquence cardiaque' : 'Heart rate'}</p>
+        <h1>{heading}</h1>
+        {lead ? <p class="lead">{lead}</p> : null}
+      </header>
 
-    <section class="below">
-      <slot />
-    </section>
+      <AdSlot locale={locale} slotId="below-tool" />
+
+      <section class="below">
+        <slot />
+      </section>
+    </div>
   </main>
   <SiteFooter locale={locale} theme="pulse" />
 </BaseLayout>
 
 <style>
   .pulse-page {
-    padding: var(--space-5) 0 var(--space-8);
+    padding: var(--space-3) 0 var(--space-8);
+  }
+  /* P1 `.page`: narrow centered column under the tool */
+  .pulse-column {
+    width: min(46rem, 100%);
+    margin-inline: auto;
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2rem);
   }
   .pulse-intro {
-    margin-bottom: var(--space-5);
-    max-width: 42rem;
+    max-width: none;
+  }
+  .pulse-intro--below {
+    margin: 0;
   }
   .eyebrow {
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.35rem;
     color: var(--text-muted);
     letter-spacing: 0.04em;
     text-transform: none;
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     font-weight: 600;
   }
   h1 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2.05rem, 5.2vw, 3.15rem);
-    line-height: 1.05;
+    font-size: clamp(1.35rem, 3.6vw, 1.85rem);
+    line-height: 1.15;
     letter-spacing: -0.03em;
   }
   .lead {
-    margin: 0.9rem 0 0;
+    margin: 0.45rem 0 0;
     color: var(--text-muted);
-    font-size: 1.08rem;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    max-width: none;
   }
   .tool-slot {
-    margin-bottom: var(--space-4);
+    margin-bottom: 0;
   }
   .below {
-    margin-top: var(--space-6);
+    margin-top: 0;
     display: grid;
-    gap: var(--space-6);
+    gap: clamp(1.75rem, 5vw, 2.75rem);
   }
 
   @media (max-width: 819px) {
     .pulse-page {
       padding: 0.35rem 0 max(2rem, env(safe-area-inset-bottom));
     }
-    .pulse-intro {
-      margin-bottom: 0.65rem;
-      max-width: none;
+    /* Let the pulse pad reach the screen edges like music V6 */
+    .tool-slot {
+      width: 100vw;
+      max-width: 100vw;
+      margin-inline: calc(50% - 50vw);
+    }
+    .pulse-column {
+      width: 100%;
+      padding-inline: 0;
+      gap: 1.35rem;
     }
     .eyebrow {
-      margin-bottom: 0.2rem;
       font-size: 0.8rem;
-      font-weight: 600;
     }
     h1 {
-      font-size: clamp(1.45rem, 6.2vw, 1.85rem);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-    }
-    .lead {
-      display: none;
-    }
-    .tool-slot {
-      margin-bottom: 0.75rem;
+      font-size: clamp(1.2rem, 4.5vw, 1.45rem);
+      line-height: 1.2;
     }
     .below {
-      margin-top: 1.35rem;
       gap: 1.35rem;
     }
   }

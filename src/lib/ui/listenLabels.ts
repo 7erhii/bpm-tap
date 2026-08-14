@@ -7,6 +7,9 @@ export function studioLabels(locale: Locale): StudioAppLabels {
     ...tapLabels(locale),
     modeTap: t(locale, 'studio.mode.tap'),
     modeListen: t(locale, 'studio.mode.listen'),
+    hintTap: t(locale, 'studio.hint.tap'),
+    hintListen: t(locale, 'studio.hint.listen'),
+    hintDenied: t(locale, 'studio.hint.denied'),
     listenStart: t(locale, 'listen.start'),
     listenStop: t(locale, 'listen.stop'),
     listenHint: t(locale, 'listen.hint'),
@@ -26,6 +29,10 @@ export function studioLabels(locale: Locale): StudioAppLabels {
     confidenceListenHigh: t(locale, 'listen.confidence.high'),
     listenThenTap: t(locale, 'listen.thenTap'),
     enterListenBpm: t(locale, 'listen.enterBpm'),
+    tapCtaListen: t(locale, 'tap.ctaListen'),
+    tapSubListen: t(locale, 'tap.subListen'),
+    tapCtaListenStart: t(locale, 'tap.ctaListenStart'),
+    tapSubListenStart: t(locale, 'tap.subListenStart'),
   };
 }
 

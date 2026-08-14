@@ -8,6 +8,12 @@ interface Props {
 
 const { locale } = Astro.props;
 const genresHref = localizedPath(locale, 'genres');
+const metronomePath = localizedPath(locale, 'metronome');
+
+function tempoLabel(item: (typeof popularTempos)[number], loc: Locale): string {
+  if (loc === 'ru') return item.label.ru;
+  return item.label.en;
+}
 ---
 
 <section class="popular-tempos">
@@ -18,16 +24,20 @@ const genresHref = localizedPath(locale, 'genres');
 
   <div class="popular-tempos__chips">
     {
-      popularTempos.map((item) => (
-        <a
-          class="tempo-chip"
-          href={localizedPath(locale, 'metronome')}
-          title={`${item.bpm} BPM — ${(item.label as Record<string, string>)[locale] ?? item.label.en}`}
-        >
-          <span class="tempo-chip__bpm">{item.bpm}</span>
-          <span class="tempo-chip__label">{item.label[locale]}</span>
-        </a>
-      ))
+      popularTempos.map((item) => {
+        const label = tempoLabel(item, locale);
+        return (
+          <a
+            class="tempo-chip"
+            href={`${metronomePath}?bpm=${item.bpm}`}
+            data-bpm={item.bpm}
+            title={`${item.bpm} BPM — ${label}`}
+          >
+            <span class="tempo-chip__bpm">{item.bpm}</span>
+            <span class="tempo-chip__label">{label}</span>
+          </a>
+        );
+      })
     }
   </div>
 
@@ -35,6 +45,25 @@ const genresHref = localizedPath(locale, 'genres');
     <a href={genresHref}>{t(locale, 'popular.genresCta')}</a>
   </p>
 </section>
+
+<script>
+  // Apply BPM into the live TapApp island without a full reload when possible.
+  document.querySelectorAll('a.tempo-chip[data-bpm]').forEach((chip) => {
+    chip.addEventListener('click', (event) => {
+      const bpm = Number(chip.getAttribute('data-bpm'));
+      if (!Number.isFinite(bpm)) return;
+      if (!document.querySelector('[data-tool-root]')) return;
+      event.preventDefault();
+      window.dispatchEvent(
+        new CustomEvent('bpm-tap:hydrate', { detail: { bpm } }),
+      );
+      const href = chip.getAttribute('href');
+      if (!href) return;
+      const url = new URL(href, window.location.href);
+      window.history.replaceState(null, '', url.pathname + url.search);
+    });
+  });
+</script>
 
 <style>
   .popular-tempos {

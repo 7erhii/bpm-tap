@@ -13,17 +13,18 @@ import { loadHistory, saveHistoryItem, type HistoryItem } from '@/lib/history/st
 import { localizedPath, type Locale } from '@/i18n/utils';
 import { createListenSession } from '@/lib/listen/session';
 import type { ListenStatus, TempoCandidate, TempoEstimate } from '@/lib/listen/types';
-import { createMetronome, type TimeSignatureId } from '@/lib/metronome/scheduler';
+import { createMetronome, getMeter, type TimeSignatureId } from '@/lib/metronome/scheduler';
 import { buildShareUrl, displayBpmInteger, parseBpmParam } from '@/lib/share/url';
 import { getBaseDocumentTitle, setDocumentTitleWithBpm } from '@/lib/seo/documentTitle';
 import type { TapAppLabels } from './TapApp';
 import { BpmReadout } from './BpmReadout';
-import { ListenPad } from './ListenPad';
-import { MetronomeBar } from './MetronomeBar';
+import { ConfidenceCue } from './ConfidenceCue';
+import { DelayFacts } from './DelayFacts';
 import { ModeSwitch } from './ModeSwitch';
 import { PrimaryControls } from './PrimaryControls';
 import { SidePanels } from './SidePanels';
-import { TapTarget } from './TapTarget';
+import { TapTarget, type TapPadStage } from './TapTarget';
+import { TempoAlts } from './TempoAlts';
 import './tool.css';
 
 export type StudioMode = 'tap' | 'listen';
@@ -31,6 +32,9 @@ export type StudioMode = 'tap' | 'listen';
 export interface StudioAppLabels extends TapAppLabels {
   modeTap: string;
   modeListen: string;
+  hintTap: string;
+  hintListen: string;
+  hintDenied: string;
   listenStart: string;
   listenStop: string;
   listenHint: string;
@@ -52,6 +56,10 @@ export interface StudioAppLabels extends TapAppLabels {
   listenThenTap: string;
   /** Readout idle hint while in Listen mode */
   enterListenBpm: string;
+  tapCtaListen: string;
+  tapSubListen: string;
+  tapCtaListenStart: string;
+  tapSubListenStart: string;
 }
 
 interface Props {
@@ -135,26 +143,14 @@ function confidenceLabel(
   }
 }
 
-function listenHint(
+function modeHintText(
+  mode: StudioMode,
   status: ListenStatus,
-  listening: boolean,
   labels: StudioAppLabels,
-): string {
-  if (!listening && status === 'idle') return labels.listenHint;
-  switch (status) {
-    case 'requesting':
-      return labels.statusRequesting;
-    case 'listening':
-      return labels.statusListening;
-    case 'denied':
-      return labels.statusDenied;
-    case 'unsupported':
-      return labels.statusUnsupported;
-    case 'error':
-      return labels.statusError;
-    default:
-      return labels.listenHint;
-  }
+): { text: string; warn: boolean } {
+  if (status === 'denied') return { text: labels.hintDenied, warn: true };
+  if (mode === 'listen') return { text: labels.hintListen, warn: false };
+  return { text: labels.hintTap, warn: false };
 }
 
 function applyListenEstimate(
@@ -170,9 +166,20 @@ function applyListenEstimate(
   };
 }
 
+function padStage(
+  mode: StudioMode,
+  listening: boolean,
+  snapshot: EngineSnapshot,
+): TapPadStage {
+  if (mode === 'listen' && listening) return 'listen';
+  if (snapshot.status === 'stable' && snapshot.bpm != null) return 'stable';
+  if (snapshot.status === 'measuring' || snapshot.tapCount > 0) return 'counting';
+  return 'idle';
+}
+
 /**
  * Unified BPM stage: Tap | Listen as equal input modes.
- * One LCD + swap pad/mic — spectrum lives as a slim EQ ribbon under the mic.
+ * V6 reading zone on top, thumb pad pinned to the bottom.
  */
 export default function StudioApp({
   locale,
@@ -358,6 +365,55 @@ export default function StudioApp({
     [canUseBpm, snapshot.bpm],
   );
   const candidates: TempoCandidate[] = estimate?.candidates ?? [];
+  const stage = padStage(mode, listening, snapshot);
+  const hint = modeHintText(mode, status, labels);
+  const beatSec =
+    snapshot.bpm != null && snapshot.inRange ? 60 / snapshot.bpm : undefined;
+  const showFlash = stage === 'stable' && canUseBpm;
+
+  const padCopy = (() => {
+    if (mode === 'listen') {
+      if (listening) {
+        return {
+          title: labels.tapCtaListen,
+          hint: labels.tapSubListen,
+          hintTouch: labels.tapSubListen,
+          sub: labels.tapSubListen,
+        };
+      }
+      return {
+        title: labels.tapCtaListenStart,
+        hint: labels.tapSubListenStart,
+        hintTouch: labels.tapSubListenStart,
+        sub: labels.listenPrivacy,
+      };
+    }
+    if (stage === 'stable') {
+      const bpmTxt =
+        snapshot.bpm != null ? displayBpmInteger(snapshot.bpm) : '';
+      const subDone = (labels.tapSubDone ?? '').replace('{bpm}', bpmTxt);
+      return {
+        title: labels.tapCtaDone ?? labels.tapCta,
+        hint: subDone,
+        hintTouch: subDone,
+        sub: subDone,
+      };
+    }
+    if (stage === 'counting') {
+      return {
+        title: labels.tapCtaCount ?? labels.tapCta,
+        hint: labels.tapSubCount ?? labels.tapHint,
+        hintTouch: labels.tapSubCount ?? labels.tapHintTouch,
+        sub: labels.tapSubCount ?? labels.tapHint,
+      };
+    }
+    return {
+      title: labels.tapCta,
+      hint: labels.tapHint,
+      hintTouch: labels.tapHintTouch,
+      sub: labels.tapHint,
+    };
+  })();
 
   const onCopy = async () => {
     if (snapshot.bpm == null) return;
@@ -430,158 +486,184 @@ export default function StudioApp({
   }, [labels]);
 
   return (
-    <div className={`tap-app${fullscreen ? ' is-fullscreen' : ''}`} data-tool-root>
+    <div
+      className={`tap-app${fullscreen ? ' is-fullscreen' : ''}`}
+      data-tool-root
+      data-skin="music"
+    >
       <div className="tap-stage">
-        <ModeSwitch
-          mode={mode}
-          labels={{ tap: labels.modeTap, listen: labels.modeListen }}
-          onChange={changeMode}
-        />
-
-        <BpmReadout
-          bpm={snapshot.bpm}
-          unit={labels.unit}
-          placeholder={labels.placeholder}
-          idleMark="note"
-          live={
-            (mode === 'tap' && snapshot.tapCount > 0) ||
-            (mode === 'listen' && listening)
-          }
-          outOfRange={snapshot.bpm != null && !snapshot.inRange}
-          outOfRangeLabel={labels.outOfRange}
-          confidenceLevel={snapshot.confidence}
-          confidenceLabel={confidenceLabel(snapshot, mode, listening, weak, labels)}
-          deviationBpm={mode === 'tap' ? snapshot.deviationBpm : null}
-          editable
-          enterLabel={mode === 'listen' ? labels.enterListenBpm : labels.enterBpm}
-          onCommitBpm={(value) => {
-            lockedRef.current = true;
-            setSnapshot(engineRef.current.hydrateBpm(value, 'manual'));
-          }}
-        />
-
-        <div className="studio-interact">
-          {mode === 'tap' ? (
-            <TapTarget
-              title={labels.tapCta}
-              hint={labels.tapHint}
-              hintTouch={labels.tapHintTouch}
-              onTap={registerTap}
-              pulseToken={pulseToken}
+        <div className="stage__inner">
+          <div className="readout">
+            <ModeSwitch
+              mode={mode}
+              labels={{ tap: labels.modeTap, listen: labels.modeListen }}
+              onChange={changeMode}
+              hint={hint.text}
+              hintWarn={hint.warn}
             />
-          ) : (
-            <ListenPad
-              listening={listening}
-              title={listening ? labels.listenStop : labels.listenStart}
-              hint={listenHint(status, listening, labels)}
-              level={signalLevel}
+
+            <BpmReadout
               bpm={snapshot.bpm}
-              spectrum={spectrum}
-              onToggle={() => void toggleListen()}
+              unit={labels.unit}
+              placeholder={labels.placeholder}
+              idleMark="dashes"
+              live={
+                (mode === 'tap' && snapshot.tapCount > 0) ||
+                (mode === 'listen' && listening) ||
+                snapshot.bpm != null
+              }
+              outOfRange={snapshot.bpm != null && !snapshot.inRange}
+              outOfRangeLabel={labels.outOfRange}
+              editable
+              enterLabel={mode === 'listen' ? labels.enterListenBpm : labels.enterBpm}
+              onCommitBpm={(value) => {
+                lockedRef.current = true;
+                setSnapshot(engineRef.current.hydrateBpm(value, 'manual'));
+              }}
             />
-          )}
-        </div>
 
-        {mode === 'listen' ? (
-          <>
-            <p className="listen-privacy">{labels.listenPrivacy}</p>
-            {candidates.length > 1 && snapshot.bpm != null ? (
-              <div className="listen-candidates" aria-label={labels.listenCandidates}>
-                <span className="listen-candidates__label">{labels.listenCandidates}</span>
-                <div className="listen-candidates__row">
-                  {candidates.slice(0, 4).map((c) => {
-                    const active = Math.abs(c.bpm - (snapshot.bpm ?? 0)) < 0.6;
-                    return (
-                      <button
-                        key={c.bpm}
-                        type="button"
-                        className={`btn${active ? ' btn--accent' : ''}`}
-                        onMouseDown={(e) => e.preventDefault()}
-                        onClick={() => pickCandidate(c.bpm)}
-                      >
-                        {Math.round(c.bpm)}
-                      </button>
-                    );
-                  })}
-                </div>
+            <TempoAlts
+              bpm={canUseBpm ? snapshot.bpm : null}
+              feelsOffLabel={labels.feelsOff ?? 'Feels off?'}
+              halfLabel={labels.half}
+              doubleLabel={labels.double}
+              onHalf={() => {
+                lockedRef.current = true;
+                setSnapshot(engineRef.current.half());
+              }}
+              onDouble={() => {
+                lockedRef.current = true;
+                setSnapshot(engineRef.current.double());
+              }}
+            />
+
+            <ConfidenceCue
+              level={snapshot.confidence}
+              label={confidenceLabel(snapshot, mode, listening, weak, labels)}
+              deviationBpm={mode === 'tap' ? snapshot.deviationBpm : null}
+              showMeter
+            />
+          </div>
+
+          <PrimaryControls
+            variant="quick"
+            bpm={snapshot.bpm}
+            labels={{
+              reset: labels.reset,
+              half: labels.half,
+              double: labels.double,
+              copy: labels.copy,
+              copied: labels.copied,
+              share: labels.share,
+              fullscreen: labels.fullscreen,
+              exitFullscreen: labels.exitFullscreen,
+              save: labels.favoritesAdd,
+              saved: labels.favoritesSaved,
+              metronomeStart: labels.metronomeStart,
+              metronomeStop: labels.metronomeStop,
+              meter: labels.meterLabel,
+            }}
+            canUseBpm={!!canUseBpm}
+            copied={copied}
+            fullscreen={fullscreen}
+            showSave
+            showFactor={false}
+            isFavorite={isFavorite}
+            metroOn={metroOn}
+            meterId={meterId}
+            onMetronome={() => void toggleMetronome()}
+            onMeterChange={onMeterChange}
+            onReset={() => {
+              lockedRef.current = false;
+              lastSavedBpm.current = null;
+              stopListen();
+              metroRef.current.stop();
+              setMetroOn(false);
+              setActiveBeat(null);
+              setSnapshot(engineRef.current.reset());
+              setEstimate(null);
+              setSpectrum([]);
+            }}
+            onHalf={() => {
+              lockedRef.current = true;
+              setSnapshot(engineRef.current.half());
+            }}
+            onDouble={() => {
+              lockedRef.current = true;
+              setSnapshot(engineRef.current.double());
+            }}
+            onCopy={onCopy}
+            onShare={onShare}
+            onToggleFullscreen={() => setFullscreen((v) => !v)}
+            onToggleFavorite={() => {
+              if (snapshot.bpm == null) return;
+              setFavorites(toggleFavorite(snapshot.bpm, meterId));
+            }}
+          />
+
+          <DelayFacts bpm={stage === 'stable' && canUseBpm ? snapshot.bpm : null} />
+
+          {mode === 'listen' && candidates.length > 1 && snapshot.bpm != null ? (
+            <div className="listen-candidates" aria-label={labels.listenCandidates}>
+              <span className="listen-candidates__label">{labels.listenCandidates}</span>
+              <div className="listen-candidates__row">
+                {candidates.slice(0, 4).map((c) => {
+                  const active = Math.abs(c.bpm - (snapshot.bpm ?? 0)) < 0.6;
+                  return (
+                    <button
+                      key={c.bpm}
+                      type="button"
+                      className={`btn${active ? ' btn--accent' : ''}`}
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={() => pickCandidate(c.bpm)}
+                    >
+                      {Math.round(c.bpm)}
+                    </button>
+                  );
+                })}
               </div>
-            ) : null}
-            {snapshot.bpm != null ? (
-              <p className="listen-refine">
-                <button
-                  type="button"
-                  className="listen-refine__btn"
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => changeMode('tap')}
-                >
-                  {labels.listenThenTap}
-                </button>
-              </p>
-            ) : null}
-          </>
-        ) : null}
+            </div>
+          ) : null}
 
-        <PrimaryControls
-          labels={{
-            reset: labels.reset,
-            half: labels.half,
-            double: labels.double,
-            copy: labels.copy,
-            copied: labels.copied,
-            share: labels.share,
-            fullscreen: labels.fullscreen,
-            exitFullscreen: labels.exitFullscreen,
-            save: labels.favoritesAdd,
-            saved: labels.favoritesSaved,
-          }}
-          canUseBpm={!!canUseBpm}
-          copied={copied}
-          fullscreen={fullscreen}
-          showSave
-          showFactor
-          isFavorite={isFavorite}
-          onReset={() => {
-            lockedRef.current = false;
-            lastSavedBpm.current = null;
-            stopListen();
-            metroRef.current.stop();
-            setMetroOn(false);
-            setActiveBeat(null);
-            setSnapshot(engineRef.current.reset());
-            setEstimate(null);
-            setSpectrum([]);
-          }}
-          onHalf={() => {
-            lockedRef.current = true;
-            setSnapshot(engineRef.current.half());
-          }}
-          onDouble={() => {
-            lockedRef.current = true;
-            setSnapshot(engineRef.current.double());
-          }}
-          onCopy={onCopy}
-          onShare={onShare}
-          onToggleFullscreen={() => setFullscreen((v) => !v)}
-          onToggleFavorite={() => {
-            if (snapshot.bpm == null) return;
-            setFavorites(toggleFavorite(snapshot.bpm, meterId));
-          }}
-        />
+          {mode === 'listen' && snapshot.bpm != null && !listening ? (
+            <p className="listen-refine">
+              <button
+                type="button"
+                className="listen-refine__btn"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => changeMode('tap')}
+              >
+                {labels.listenThenTap}
+              </button>
+            </p>
+          ) : null}
 
-        <MetronomeBar
-          meterId={meterId}
-          activeBeat={metroOn ? activeBeat : null}
-          running={metroOn}
-          disabled={!canUseBpm}
-          labels={{
-            start: labels.metronomeStart,
-            stop: labels.metronomeStop,
-            meter: labels.meterLabel,
-            accentHint: labels.accentHint,
-          }}
-          onToggle={() => void toggleMetronome()}
-          onMeterChange={onMeterChange}
-        />
+          <div className="studio-interact">
+            <TapTarget
+              variant="music"
+              stage={stage}
+              title={padCopy.title}
+              hint={padCopy.hint}
+              hintTouch={padCopy.hintTouch}
+              sub={padCopy.sub}
+              subTouch={padCopy.hintTouch}
+              onTap={() => {
+                if (mode === 'listen') {
+                  void toggleListen();
+                  return;
+                }
+                registerTap();
+              }}
+              pulseToken={pulseToken}
+              beatSec={beatSec}
+              beatCount={getMeter(meterId).beatsPerBar}
+              activeBeat={metroOn ? activeBeat : null}
+              spectrum={spectrum}
+              listening={listening}
+              showFlash={showFlash}
+            />
+          </div>
+        </div>
       </div>
 
       {!fullscreen ? (

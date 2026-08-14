@@ -9,6 +9,10 @@ export function pulseLabels(locale: Locale): TapAppLabels {
     tapCta: t(locale, 'pulse.cta'),
     tapHint: t(locale, 'pulse.hint'),
     tapHintTouch: t(locale, 'pulse.hintTouch'),
+    tapCtaCount: t(locale, 'pulse.ctaCount'),
+    tapCtaDone: t(locale, 'pulse.ctaDone'),
+    tapSubCount: t(locale, 'pulse.subCount'),
+    tapSubDone: t(locale, 'pulse.subDone'),
     tapLockedCta: t(locale, 'pulse.lockedCta'),
     tapLockedHint: t(locale, 'pulse.lockedHint'),
     unit: t(locale, 'pulse.unit'),
@@ -25,7 +29,14 @@ export function pulseLabels(locale: Locale): TapAppLabels {
       empty: t(locale, 'pulse.save.empty'),
       remove: t(locale, 'pulse.save.remove'),
       needBpm: t(locale, 'pulse.save.needBpm'),
+      clearAll: t(locale, 'pulse.save.clearAll'),
+      privacyNote: t(locale, 'pulse.save.privacyNote'),
       unit: t(locale, 'pulse.unit'),
+    },
+    pulseTheme: {
+      label: t(locale, 'pulse.themeLabel'),
+      lightLabel: t(locale, 'pulse.themeLight'),
+      darkLabel: t(locale, 'pulse.themeDark'),
     },
   };
 }

@@ -48,29 +48,44 @@ const ogImageAlt =
 const faviconHref = theme === 'pulse' ? '/favicon-pulse.svg' : '/favicon.svg';
 const resolvedThemeColor = themeColor ?? (theme === 'pulse' ? '#d92b3a' : '#0B0C10');
 const ogAlternates = LOCALES.filter((loc) => loc !== locale).map((loc) => OG_LOCALE[loc]);
+const htmlPulseMode = theme === 'pulse' ? 'light' : undefined;
 ---
 
 <!doctype html>
-<html lang={locale} data-theme={theme}>
+<html
+  lang={locale}
+  data-theme={theme}
+  {...(htmlPulseMode ? { 'data-pulse-mode': htmlPulseMode } : {})}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
-      if (location.search) {
-        var robots = document.querySelector('meta[name="robots"]');
-        if (robots) robots.setAttribute('content', 'noindex, follow');
-        else {
-          var m = document.createElement('meta');
-          m.name = 'robots';
-          m.content = 'noindex, follow';
-          document.head.appendChild(m);
+      (function () {
+        if (document.documentElement.getAttribute('data-theme') === 'pulse') {
+          var m = document.cookie.match(/(?:^|; )pulse-mode=([^;]+)/);
+          var mode = m ? decodeURIComponent(m[1]) : 'light';
+          if (mode !== 'dark' && mode !== 'light') mode = 'light';
+          document.documentElement.setAttribute('data-pulse-mode', mode);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', mode === 'dark' ? '#0b0c10' : '#d92b3a');
         }
-        var bpmMatch = location.search.match(/[?&]bpm=(\d{2,3})\b/i);
-        if (bpmMatch) {
-          var baseTitle = document.title.replace(/^\d+\s*BPM\s*[·•|—\-]\s*/i, '');
-          document.title = bpmMatch[1] + ' BPM · ' + baseTitle;
+        if (location.search) {
+          var robots = document.querySelector('meta[name="robots"]');
+          if (robots) robots.setAttribute('content', 'noindex, follow');
+          else {
+            var el = document.createElement('meta');
+            el.name = 'robots';
+            el.content = 'noindex, follow';
+            document.head.appendChild(el);
+          }
+          var bpmMatch = location.search.match(/[?&]bpm=(\d{2,3})\b/i);
+          if (bpmMatch) {
+            var baseTitle = document.title.replace(/^\d+\s*BPM\s*[·•|—\-]\s*/i, '');
+            document.title = bpmMatch[1] + ' BPM · ' + baseTitle;
+          }
         }
-      }
+      })();
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />

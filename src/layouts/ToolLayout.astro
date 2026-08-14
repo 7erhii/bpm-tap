@@ -26,16 +26,17 @@ const { locale, title, description, canonicalPath, heading, lead } = Astro.props
   <slot name="head" slot="head" />
   <SiteHeader locale={locale} />
   <main class="container tool-page">
-    <header class="tool-intro">
-      <h1>{heading}</h1>
-      {lead ? <p class="lead">{lead}</p> : null}
-    </header>
-
     <slot name="pretool" />
 
     <div class="tool-slot">
       <slot name="tool" />
     </div>
+
+    <!-- H1 under the tool so the first viewport is the stage, not the title -->
+    <header class="tool-intro tool-intro--below">
+      <h1>{heading}</h1>
+      {lead ? <p class="lead">{lead}</p> : null}
+    </header>
 
     <AdSlot locale={locale} slotId="below-tool" />
 
@@ -51,8 +52,10 @@ const { locale, title, description, canonicalPath, heading, lead } = Astro.props
     padding: var(--space-3) 0 var(--space-8);
   }
   .tool-intro {
-    margin-bottom: var(--space-3);
     max-width: 40rem;
+  }
+  .tool-intro--below {
+    margin: var(--space-5) 0 var(--space-3);
   }
   h1 {
     margin: 0;
@@ -64,36 +67,33 @@ const { locale, title, description, canonicalPath, heading, lead } = Astro.props
   .lead {
     margin: 0.35rem 0 0;
     color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.35;
+    font-size: 0.95rem;
+    line-height: 1.45;
     max-width: 36rem;
   }
   .tool-slot {
-    margin-bottom: var(--space-4);
+    margin-bottom: 0;
   }
   .below {
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
   }
 
   @media (max-width: 819px) {
     .tool-page {
       padding-top: var(--space-2);
     }
-    .tool-intro {
-      margin-bottom: var(--space-2);
+    /* Let the music pad reach the screen edges (V6). Intro/ads stay in the container. */
+    .tool-slot {
+      width: 100vw;
+      max-width: 100vw;
+      margin-inline: calc(50% - 50vw);
+    }
+    .tool-intro--below {
+      margin-top: var(--space-4);
     }
     h1 {
       font-size: clamp(1.2rem, 4.5vw, 1.4rem);
       line-height: 1.2;
-    }
-    .lead {
-      display: none;
-    }
-  }
-
-  @media (max-height: 780px) {
-    .lead {
-      display: none;
     }
   }
 </style>

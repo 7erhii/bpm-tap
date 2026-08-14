@@ -3,7 +3,7 @@ import type { Confidence } from '@/lib/bpm/types';
 import { clampBpm } from '@/lib/share/url';
 import { ConfidenceCue } from './ConfidenceCue';
 
-export type IdleMark = 'dash' | 'heart' | 'dot' | 'note' | 'timer' | 'metronome';
+export type IdleMark = 'dash' | 'heart' | 'dot' | 'note' | 'timer' | 'metronome' | 'dashes';
 
 interface Props {
   bpm: number | null;
@@ -19,10 +19,15 @@ interface Props {
   editable?: boolean;
   enterLabel?: string;
   onCommitBpm?: (bpm: number) => void;
+  /** Show confidence meter bar (music V6). */
+  showMeter?: boolean;
 }
 
 /** Tiny 8-bit idle sprite for the LCD when no BPM yet. */
 function IdlePixelAnim({ mark }: { mark: IdleMark }) {
+  if (mark === 'dashes') {
+    return <span className="bpm-idle-dashes" aria-hidden="true">– –</span>;
+  }
   if (mark === 'dot' || mark === 'heart') {
     return (
       <span className="bpm-pixel-pulse" aria-hidden="true">
@@ -63,6 +68,7 @@ export function BpmReadout({
   editable = false,
   enterLabel = 'BPM',
   onCommitBpm,
+  showMeter = false,
 }: Props) {
   const editRef = useRef<HTMLDivElement>(null);
   const blurTimer = useRef<number | null>(null);
@@ -229,6 +235,7 @@ export function BpmReadout({
             level={confidenceLevel}
             label={confidenceLabel}
             deviationBpm={deviationBpm}
+            showMeter={showMeter}
           />
         ) : null}
       </div>

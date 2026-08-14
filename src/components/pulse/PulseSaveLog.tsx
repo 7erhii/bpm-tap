@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
+  clearPulseLog,
   formatPulseCapturedAt,
-  formatPulseLine,
   loadPulseLog,
   removePulseReading,
-  savePulseReading,
   type PulseLogItem,
 } from '@/lib/pulse/storage';
 import './pulse-save.css';
@@ -18,64 +17,41 @@ export interface PulseSaveLabels {
   remove: string;
   needBpm: string;
   unit: string;
+  clearAll: string;
+  privacyNote: string;
 }
 
 interface Props {
-  bpm: number | null;
-  canSave: boolean;
   labels: PulseSaveLabels;
+  /** Bump after an external save (quick bar) so the list reloads. */
+  logRevision?: number;
   /** BCP-47 locale for date/time formatting (defaults to browser). */
   locale?: string;
 }
 
-export function PulseSaveLog({ bpm, canSave, labels, locale }: Props) {
-  const [name, setName] = useState('');
+export function PulseSaveLog({ labels, logRevision = 0, locale }: Props) {
   const [items, setItems] = useState<PulseLogItem[]>([]);
-  const [justSaved, setJustSaved] = useState(false);
 
   useEffect(() => {
     setItems(loadPulseLog());
-  }, []);
+  }, [logRevision]);
 
-  const onSave = () => {
-    if (!canSave || bpm == null || !name.trim()) return;
-    setItems(savePulseReading(name, bpm));
-    setName('');
-    setJustSaved(true);
-    window.setTimeout(() => setJustSaved(false), 1200);
+  const onClearAll = () => {
+    if (items.length === 0) return;
+    setItems(clearPulseLog());
   };
 
   return (
-    <section className="pulse-save" aria-label={labels.title}>
-      <h2 className="pulse-save__title">{labels.title}</h2>
-      <div className="pulse-save__form">
-        <label className="pulse-save__field">
-          <span className="sr-only">{labels.namePlaceholder}</span>
-          <input
-            type="text"
-            name="pulse-name"
-            maxLength={40}
-            autoComplete="name"
-            placeholder={labels.namePlaceholder}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                onSave();
-              }
-            }}
-          />
-        </label>
-        <button
-          type="button"
-          className="btn btn--accent"
-          disabled={!canSave || !name.trim()}
-          onClick={onSave}
-          title={!canSave ? labels.needBpm : undefined}
-        >
-          {justSaved ? labels.saved : labels.save}
-        </button>
+    <section className="pulse-save" aria-labelledby="pulse-saved-h">
+      <div className="pulse-save__head">
+        <h2 id="pulse-saved-h" className="pulse-save__title">
+          {labels.title}
+        </h2>
+        {items.length > 0 ? (
+          <button type="button" className="pulse-save__clear" onClick={onClearAll}>
+            {labels.clearAll}
+          </button>
+        ) : null}
       </div>
 
       {items.length === 0 ? (
@@ -86,29 +62,27 @@ export function PulseSaveLog({ bpm, canSave, labels, locale }: Props) {
             const when = formatPulseCapturedAt(item.capturedAt, locale);
             return (
               <li key={item.id}>
-                <span className="pulse-save__line" title={formatPulseLine(item, labels.unit, locale)}>
-                  <span className="pulse-save__line-main">
-                    {item.name} — {item.bpm} {labels.unit}
-                  </span>
-                  {when ? (
-                    <time className="pulse-save__line-when" dateTime={item.capturedAt}>
-                      {when}
-                    </time>
-                  ) : null}
+                <b>{item.name}</b>
+                <span className="pulse-save__bpm">
+                  {item.bpm}
+                  <span className="pulse-save__unit"> {labels.unit}</span>
                 </span>
+                {when ? <time dateTime={item.capturedAt}>{when}</time> : null}
                 <button
                   type="button"
                   className="pulse-save__remove"
                   onClick={() => setItems(removePulseReading(item.id))}
                   aria-label={`${labels.remove}: ${item.name}`}
                 >
-                  ✕
+                  {labels.remove}
                 </button>
               </li>
             );
           })}
         </ul>
       )}
+
+      <p className="pulse-save__note">{labels.privacyNote}</p>
     </section>
   );
 }

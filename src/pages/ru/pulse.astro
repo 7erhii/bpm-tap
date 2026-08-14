@@ -1,7 +1,7 @@
 ---
 import PulseLayout from '@/layouts/PulseLayout.astro';
 import TapApp from '@/components/tool/TapApp';
-import FaqSection from '@/components/seo/FaqSection.astro';
+import PulseBelowContent from '@/components/pulse/PulseBelowContent.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { t } from '@/i18n/utils';
 import { absoluteUrl } from '@/lib/site';
@@ -105,91 +105,5 @@ const howToSteps = [
     mode="pulse"
   />
 
-  <aside class="disclaimer" role="note">
-    <p>{t(locale, 'pulse.disclaimer')}</p>
-  </aside>
-
-  <section class="content-block">
-    <h2>{t(locale, 'pulse.howto.title')}</h2>
-    <ol>
-      {howToSteps.map((step) => <li>{step}</li>)}
-    </ol>
-  </section>
-
-  <section class="content-block rules">
-    <h2>{t(locale, 'pulse.rules.title')}</h2>
-    <ul>
-      <li>{t(locale, 'pulse.rules.1')}</li>
-      <li>{t(locale, 'pulse.rules.2')}</li>
-      <li>{t(locale, 'pulse.rules.3')}</li>
-      <li>{t(locale, 'pulse.rules.4')}</li>
-      <li>{t(locale, 'pulse.rules.5')}</li>
-    </ul>
-  </section>
-
-  <section class="content-block">
-    <h2>{t(locale, 'pulse.zones.title')}</h2>
-    <p>{t(locale, 'pulse.zones.lead')}</p>
-    <ul class="zones">
-      <li>{t(locale, 'pulse.zones.rest')}</li>
-      <li>{t(locale, 'pulse.zones.light')}</li>
-      <li>{t(locale, 'pulse.zones.exercise')}</li>
-    </ul>
-  </section>
-
-  <section class="content-block">
-    <h2>{t(locale, 'pulse.faqTitle')}</h2>
-    <FaqSection items={faqs} />
-  </section>
+  <PulseBelowContent locale={locale} />
 </PulseLayout>
-
-<style>
-  .disclaimer {
-    max-width: 42rem;
-    padding: 0.95rem 1.1rem;
-    border-left: 3px solid var(--accent);
-    background: rgba(217, 43, 58, 0.07);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  }
-  .disclaimer p {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 0.94rem;
-    line-height: 1.45;
-  }
-  .content-block {
-    max-width: 42rem;
-  }
-  .content-block h2 {
-    margin: 0 0 0.75rem;
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
-  }
-  .content-block p,
-  .content-block li {
-    color: var(--text-muted);
-  }
-  .content-block ol,
-  .content-block ul {
-    margin: 0;
-    padding-left: 1.2rem;
-    display: grid;
-    gap: 0.5rem;
-  }
-  .rules {
-    padding: 1.15rem 1.2rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--bg-elevated);
-  }
-  .zones {
-    list-style: none;
-    padding-left: 0;
-  }
-  .zones li {
-    padding: 0.55rem 0.75rem;
-    border-radius: var(--radius-sm);
-    background: rgba(217, 43, 58, 0.06);
-  }
-</style>

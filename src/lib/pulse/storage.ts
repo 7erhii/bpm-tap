@@ -35,12 +35,32 @@ function safeParse(raw: string | null): PulseLogItem[] {
   }
 }
 
-/** Compact local stamp for saved readings, e.g. `8 Aug, 20:31`. */
+/** Compact local stamp, e.g. `today 09:14` / `yesterday 20:02` / `8 Aug, 20:31`. */
 export function formatPulseCapturedAt(iso: string, locale?: string): string {
   const parsed = new Date(iso);
   if (Number.isNaN(parsed.getTime())) return '';
+
+  const loc = locale || undefined;
   try {
-    return new Intl.DateTimeFormat(locale || undefined, {
+    const time = new Intl.DateTimeFormat(loc, {
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(parsed);
+
+    const now = new Date();
+    const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const startThat = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+    const dayDiff = Math.round((startToday.getTime() - startThat.getTime()) / 86_400_000);
+
+    if (dayDiff === 0 || dayDiff === 1) {
+      const relative = new Intl.RelativeTimeFormat(loc, { numeric: 'auto' }).format(
+        -dayDiff,
+        'day',
+      );
+      return `${relative} ${time}`;
+    }
+
+    return new Intl.DateTimeFormat(loc, {
       day: 'numeric',
       month: 'short',
       hour: '2-digit',
@@ -89,6 +109,15 @@ export function removePulseReading(id: string): PulseLogItem[] {
     // ignore
   }
   return next;
+}
+
+export function clearPulseLog(): PulseLogItem[] {
+  try {
+    localStorage.removeItem(KEY);
+  } catch {
+    // ignore
+  }
+  return [];
 }
 
 /** Display line: `Alex — 72 BPM · 8 Aug, 20:31` */

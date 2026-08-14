@@ -17,8 +17,8 @@ interface Props {
 const { locale, theme = 'studio' } = Astro.props;
 const pathAfterLocale = Astro.url.pathname.replace(localePathRegex(), '') || '/';
 const onPulse = pathAfterLocale === '/pulse' || pathAfterLocale.startsWith('/pulse/');
-const brandHref = theme === 'pulse' ? localizedPath(locale, 'pulse') : localizedPath(locale);
-const brandLabel = theme === 'pulse' ? t(locale, 'pulse.brand') : t(locale, 'brand');
+const brandHref = localizedPath(locale);
+const brandLabel = t(locale, 'brand');
 const pathSuffix = pathAfterLocale.replace(/^\//, '');
 const menuId = `locale-menu-${locale}`;
 ---
@@ -108,20 +108,21 @@ const menuId = `locale-menu-${locale}`;
 
 <script>
   function initLocaleDropdowns() {
-    document.querySelectorAll<HTMLElement>('[data-locale-dropdown]').forEach((root) => {
-      if (root.dataset.localeReady === 'true') return;
-      root.dataset.localeReady = 'true';
+    document.querySelectorAll('[data-locale-dropdown]').forEach((root) => {
+      const el = root as HTMLElement;
+      if (el.dataset.localeReady === 'true') return;
+      el.dataset.localeReady = 'true';
 
-      const trigger = root.querySelector<HTMLButtonElement>('.locale-trigger');
+      const trigger = el.querySelector('.locale-trigger') as HTMLButtonElement | null;
       if (!trigger) return;
 
       const setOpen = (open: boolean) => {
-        root.classList.toggle('is-open', open);
+        el.classList.toggle('is-open', open);
         trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
       };
 
       const close = () => setOpen(false);
-      const toggle = () => setOpen(!root.classList.contains('is-open'));
+      const toggle = () => setOpen(!el.classList.contains('is-open'));
 
       trigger.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -129,7 +130,7 @@ const menuId = `locale-menu-${locale}`;
       });
 
       document.addEventListener('click', (event) => {
-        if (!root.contains(event.target as Node)) close();
+        if (!el.contains(event.target as Node)) close();
       });
 
       document.addEventListener('keydown', (event) => {

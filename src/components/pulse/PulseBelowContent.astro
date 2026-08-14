@@ -1,0 +1,163 @@
+---
+import { localizedPath, t, type Locale } from '@/i18n/utils';
+import './pulse-below.css';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const faqs = [
+  { q: t(locale, 'pulse.faq.q1'), a: t(locale, 'pulse.faq.a1') },
+  { q: t(locale, 'pulse.faq.q2'), a: t(locale, 'pulse.faq.a2') },
+  { q: t(locale, 'pulse.faq.q3'), a: t(locale, 'pulse.faq.a3') },
+  { q: t(locale, 'pulse.faq.q4'), a: t(locale, 'pulse.faq.a4') },
+  {
+    q: t(locale, 'pulse.faq.q5'),
+    a: t(locale, 'pulse.faq.a5'),
+    before: t(locale, 'pulse.faq.a5Before'),
+    link: t(locale, 'pulse.faq.a5Link'),
+    after: t(locale, 'pulse.faq.a5After'),
+    hasRangesLink: true as const,
+  },
+  { q: t(locale, 'pulse.faq.q6'), a: t(locale, 'pulse.faq.a6') },
+];
+
+const rangeRows = [
+  { who: t(locale, 'pulse.ranges.who.children13'), val: t(locale, 'pulse.ranges.row.children13') },
+  { who: t(locale, 'pulse.ranges.who.children46'), val: t(locale, 'pulse.ranges.row.children46') },
+  { who: t(locale, 'pulse.ranges.who.children79'), val: t(locale, 'pulse.ranges.row.children79') },
+  { who: t(locale, 'pulse.ranges.who.adults'), val: t(locale, 'pulse.ranges.row.adults') },
+  { who: t(locale, 'pulse.ranges.who.athletes'), val: t(locale, 'pulse.ranges.row.athletes') },
+] as const;
+
+const moreTools = [
+  {
+    href: localizedPath(locale),
+    title: t(locale, 'pulse.moreTools.home.title'),
+    body: t(locale, 'pulse.moreTools.home.body'),
+  },
+  {
+    href: localizedPath(locale, 'metronome'),
+    title: t(locale, 'pulse.moreTools.metronome.title'),
+    body: t(locale, 'pulse.moreTools.metronome.body'),
+  },
+  {
+    href: localizedPath(locale, 'delay'),
+    title: t(locale, 'pulse.moreTools.delay.title'),
+    body: t(locale, 'pulse.moreTools.delay.body'),
+  },
+] as const;
+---
+
+<div class="pulse-below">
+  <aside class="note" role="note">
+    <svg viewBox="0 0 24 24" aria-hidden="true"
+      ><circle cx="12" cy="12" r="9"></circle><path d="M12 8h.01M11 12h1v4h1"></path></svg
+    >
+    <p>
+      <b>{t(locale, 'pulse.disclaimer.lead')}</b>
+      {' '}{t(locale, 'pulse.disclaimer.body')}
+    </p>
+  </aside>
+
+  <section class="block">
+    <h2>{t(locale, 'pulse.intro.title')}</h2>
+    <p class="lead">{t(locale, 'pulse.intro.lead')}</p>
+  </section>
+
+  <section class="block" id="two-taps">
+    <h2>{t(locale, 'pulse.twoTaps.title')}</h2>
+    <div class="grid3">
+      <article class="tile">
+        <span class="tile__num">1</span>
+        <h3>{t(locale, 'pulse.twoTaps.1.title')}</h3>
+        <p>{t(locale, 'pulse.twoTaps.1.body')}</p>
+      </article>
+      <article class="tile">
+        <span class="tile__num">2</span>
+        <h3>{t(locale, 'pulse.twoTaps.2.title')}</h3>
+        <p>{t(locale, 'pulse.twoTaps.2.body')}</p>
+      </article>
+      <article class="tile">
+        <span class="tile__num">3</span>
+        <h3>{t(locale, 'pulse.twoTaps.3.title')}</h3>
+        <p>{t(locale, 'pulse.twoTaps.3.body')}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>{t(locale, 'pulse.feel.title')}</h2>
+    <div class="grid2">
+      <article class="tile tile--flat">
+        <h3>{t(locale, 'pulse.feel.wrist.title')}</h3>
+        <p>{t(locale, 'pulse.feel.wrist.body')}</p>
+      </article>
+      <article class="tile tile--flat">
+        <h3>{t(locale, 'pulse.feel.neck.title')}</h3>
+        <p>{t(locale, 'pulse.feel.neck.body')}</p>
+      </article>
+    </div>
+    <p class="aside-line">{t(locale, 'pulse.feel.noThumb')}</p>
+  </section>
+
+  <section class="block" id="ranges">
+    <h2>{t(locale, 'pulse.ranges.title')}</h2>
+    <div class="table-wrap">
+      <table>
+        <caption>{t(locale, 'pulse.ranges.caption')}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{t(locale, 'pulse.ranges.whoLabel')}</th>
+            <th scope="col">{t(locale, 'pulse.ranges.rangeLabel')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rangeRows.map((row) => (
+              <tr>
+                <th scope="row">{row.who}</th>
+                <td>{row.val}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p>{t(locale, 'pulse.ranges.note')}</p>
+  </section>
+
+  <section class="block faq" aria-labelledby="pulse-faq-h">
+    <h2 id="pulse-faq-h">{t(locale, 'pulse.faqTitle')}</h2>
+    {
+      faqs.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          {'hasRangesLink' in item && item.hasRangesLink ? (
+            <p>
+              {item.before}<a href="#ranges">{item.link}</a>{item.after}
+            </p>
+          ) : (
+            <p>{item.a}</p>
+          )}
+        </details>
+      ))
+    }
+  </section>
+
+  <section class="block">
+    <h2>{t(locale, 'pulse.moreTools.title')}</h2>
+    <div class="tiles-links">
+      {
+        moreTools.map((tool) => (
+          <a class="ltile" href={tool.href}>
+            <b>{tool.title}</b>
+            <span>{tool.body}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</div>
