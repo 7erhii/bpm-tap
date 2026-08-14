@@ -1,0 +1,109 @@
+---
+import PulseLayout from '@/layouts/PulseLayout.astro';
+import TapApp from '@/components/tool/TapApp';
+import PulseBelowContent from '@/components/pulse/PulseBelowContent.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import { t } from '@/i18n/utils';
+import { absoluteUrl } from '@/lib/site';
+import { pulseLabels } from '@/lib/ui/pulseLabels';
+
+const locale = 'zh' as const;
+const pageUrl = absoluteUrl('/zh/pulse/');
+const faqs = [
+  { q: t(locale, 'pulse.faq.q1'), a: t(locale, 'pulse.faq.a1') },
+  { q: t(locale, 'pulse.faq.q2'), a: t(locale, 'pulse.faq.a2') },
+  { q: t(locale, 'pulse.faq.q3'), a: t(locale, 'pulse.faq.a3') },
+  { q: t(locale, 'pulse.faq.q4'), a: t(locale, 'pulse.faq.a4') },
+  { q: t(locale, 'pulse.faq.q5'), a: t(locale, 'pulse.faq.a5') },
+  { q: t(locale, 'pulse.faq.q6'), a: t(locale, 'pulse.faq.a6') },
+];
+const howToSteps = [
+  t(locale, 'pulse.howto.1'),
+  t(locale, 'pulse.howto.2'),
+  t(locale, 'pulse.howto.3'),
+];
+---
+
+<PulseLayout
+  locale={locale}
+  title={t(locale, 'pulse.title')}
+  description={t(locale, 'pulse.description')}
+  keywords={t(locale, 'pulse.keywords')}
+  canonicalPath="/zh/pulse/"
+  heading={t(locale, 'pulse.h1')}
+  lead={t(locale, 'pulse.lead')}
+>
+  <JsonLd
+    slot="head"
+    data={[
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        name: '在线脉搏 / 心率计数器',
+        alternateName: ['脉搏点击计数器', '心率 BPM 点击工具'],
+        applicationCategory: 'HealthApplication',
+        operatingSystem: 'Any',
+        browserRequirements: 'Requires JavaScript',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        description: t(locale, 'pulse.description'),
+        url: pageUrl,
+        inLanguage: 'zh',
+        isAccessibleForFree: true,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: t(locale, 'pulse.howto.title'),
+        description: t(locale, 'pulse.lead'),
+        totalTime: 'PT1M',
+        tool: {
+          '@type': 'HowToTool',
+          name: '在线脉搏计数器',
+        },
+        step: howToSteps.map((text, index) => ({
+          '@type': 'HowToStep',
+          position: index + 1,
+          name: `第 ${index + 1} 步`,
+          text,
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'BPM Tap',
+            item: absoluteUrl('/zh/'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: t(locale, 'footer.pulse'),
+            item: pageUrl,
+          },
+        ],
+      },
+    ]}
+  />
+
+  <TapApp
+    client:idle={{ timeout: 200 }}
+    slot="tool"
+    locale={locale}
+    labels={pulseLabels(locale)}
+    mode="pulse"
+  />
+
+  <PulseBelowContent locale={locale} />
+</PulseLayout>

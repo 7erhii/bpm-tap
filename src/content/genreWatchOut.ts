@@ -10,6 +10,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Si el pad marca ~60–65, tocaste en half-time — usa ×2 para volver a la rejilla de pista.',
     fr: 'Si le pad affiche ~60–65, vous avez tapé en half-time — passez ×2 pour retrouver la grille club.',
     pt: 'Se o pad mostrar ~60–65, você tocou em half-time — aperte ×2 para voltar à grade de pista.',
+    zh: '如果面板显示 60–65 左右，说明你点的是半速 —— 按 ×2 回到舞池的网格。',
   },
   techno: {
     en: 'Warehouse grooves can feel slower than the written grid — confirm with the metronome.',
@@ -17,6 +18,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El groove warehouse puede sentirse más lento que la rejilla — confirma la lectura con el metrónomo.',
     fr: 'Un groove warehouse peut sembler plus lent que la grille — vérifiez la lecture au métronome.',
     pt: 'Groove warehouse pode parecer mais lento que a grade — confirme a leitura no metrônomo.',
+    zh: 'Warehouse 律动常常听起来比记谱网格更慢 —— 用节拍器核对一下读数。',
   },
   trance: {
     en: 'Long phrases fool early taps — wait 8–12 kicks before you trust the number.',
@@ -24,6 +26,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Las frases largas engañan en los primeros taps — espera 8–12 kicks antes de confiar en el número.',
     fr: 'Les longues phrases trompent sur les premiers taps — attendez 8–12 kicks avant de croire le chiffre.',
     pt: 'Frases longas enganam nos primeiros toques — espere 8–12 kicks antes de confiar no número.',
+    zh: '长乐句会骗过最初几次点击 —— 攒够 8–12 个底鼓再相信这个数字。',
   },
   'drum-and-bass': {
     en: 'Half-time feel often reads ~85 — hit ×2 to get the written 160–180 DnB tempo.',
@@ -31,6 +34,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El feel half-time suele marcar ~85 — usa ×2 para llegar a los 160–180 de la rejilla.',
     fr: 'Le feeling half-time affiche souvent ~85 — utilisez ×2 pour retrouver les 160–180 de la grille.',
     pt: 'O feel half-time costuma marcar ~85 — use ×2 para chegar aos 160–180 da grade.',
+    zh: '半速体感往往读出 85 左右 —— 按 ×2 才能得到网格上的 160–180。',
   },
   dubstep: {
     en: 'Decide early: written ~140 or felt ~70 — use ÷2 / ×2 after a stable tap.',
@@ -38,6 +42,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Decide pronto: 140 en la rejilla o ~70 sentido — cambia con ÷2 / ×2 cuando el tap esté estable.',
     fr: 'Choisissez tôt : 140 sur la grille ou ~70 ressentis — basculez avec ÷2 / ×2 après un tap stable.',
     pt: 'Decida cedo: 140 na grade ou ~70 no corpo — use ÷2 / ×2 depois de um tap estável.',
+    zh: '先决定要哪个：网格上的 140 还是体感的 70 —— 读数稳定后用 ÷2 / ×2 切换。',
   },
   trap: {
     en: 'Hi-hats lie — tap the kick/808 pulse, then ×2 if you landed in half-time.',
@@ -45,6 +50,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Los hats engañan — toca el pulso del kick/808 y usa ×2 si caíste en half-time.',
     fr: 'Les hats trompent — tapez le pulse kick/808, puis ×2 si vous êtes tombé en half-time.',
     pt: 'Hats enganam — toque o pulso do kick/808 e use ×2 se caiu em half-time.',
+    zh: '踩镲会骗人 —— 点底鼓 / 808 的脉冲，落到半速就按 ×2。',
   },
   'hip-hop': {
     en: 'If hats feel twice as fast as your taps, try ×2 for the DAW grid.',
@@ -52,6 +58,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Si los hats van al doble de rápido que tus taps, usa ×2 para la rejilla del DAW.',
     fr: 'Si les hats vont deux fois plus vite que vos taps, passez ×2 pour la grille du DAW.',
     pt: 'Se os hats forem o dobro dos seus toques, use ×2 para a grade do DAW.',
+    zh: '如果踩镲比你的点击快一倍，DAW 网格就需要按 ×2。',
   },
   pop: {
     en: 'Syncopated kicks throw taps off — lock to the snare backbeat, then check the metronome.',
@@ -59,6 +66,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Un kick sincopado desvía el tap — quédate en el backbeat del snare y confirma con el metrónomo.',
     fr: 'Un kick syncopé décale le tap — accrochez-vous au backbeat du snare, puis vérifiez au métronome.',
     pt: 'Kick sincopado bagunça o tap — fique no backbeat da caixa e confira no metrônomo.',
+    zh: '切分的底鼓会带偏点击 —— 咬住军鼓的反拍，再用节拍器核对。',
   },
   rock: {
     en: 'Fills wobble a reading — stick to kick/snare for 8–12 bars before copying BPM.',
@@ -66,6 +74,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Los fills desestabilizan la lectura — quédate en kick/snare 8–12 compases antes de copiar.',
     fr: 'Les fills font bouger la lecture — tenez le kick/snare sur 8–12 mesures avant de copier.',
     pt: 'Fills bagunçam a leitura — fique no kick e na caixa por 8–12 compassos antes de copiar.',
+    zh: '鼓手的加花会让读数晃动 —— 先跟着底鼓和军鼓打满 8–12 小节再复制 BPM。',
   },
   metal: {
     en: 'Double-kick can double the reading — tap the snare beat if the grid feels twice as fast.',
@@ -73,6 +82,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El double-kick puede doblar la lectura — toca el ritmo del snare si la rejilla va al doble.',
     fr: 'Le double-kick peut doubler la lecture — tapez le rythme du snare si la grille semble deux fois trop rapide.',
     pt: 'Double-kick pode dobrar a leitura — toque o ritmo da caixa se a grade parecer o dobro.',
+    zh: '双踩很容易把读数翻倍 —— 网格显得快一倍时，改点军鼓的拍子。',
   },
   'lo-fi': {
     en: 'Swing makes taps uneven — take 10–16 taps before you copy the BPM.',
@@ -80,6 +90,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El swing deja los taps irregulares — haz 10–16 toques antes de copiar el BPM.',
     fr: 'Le swing rend les taps irréguliers — prenez 10–16 taps avant de copier le BPM.',
     pt: 'Swing deixa o tap irregular — faça 10–16 toques antes de copiar o BPM.',
+    zh: '摇摆感会让点击变得不均匀 —— 攒够 10–16 次再复制 BPM。',
   },
   ambient: {
     en: 'Without a steady kick the number drifts — treat it as a ballpark, not a grid tempo.',
@@ -87,6 +98,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Sin un kick estable la lectura se mueve — tómala como referencia, no como tempo de rejilla.',
     fr: 'Sans kick régulier, la lecture bouge — prenez-la comme un ordre de grandeur, pas comme un tempo de grille.',
     pt: 'Sem kick constante a leitura oscila — trate o número como referência, não como tempo de grade.',
+    zh: '没有稳定的底鼓，数字就会飘 —— 把它当作大致参考，而不是网格速度。',
   },
   reggaeton: {
     en: 'Don’t tap every hi-hat tick — lock to the dembow “boom-ch-boom-chick” groove.',
@@ -94,6 +106,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'No toques cada tick del hi-hat — quédate en el dembow «boom-ch-boom-chick».',
     fr: 'Ne tapez pas chaque tick de hi-hat — restez sur le dembow « boom-ch-boom-chick ».',
     pt: 'Não toque cada tick do hi-hat — fique no dembow “boom-ch-boom-chick”.',
+    zh: '别每个踩镲都点 —— 咬住 dembow 的“咚-嚓-咚-嚓”律动。',
   },
   afrobeat: {
     en: 'Dense percussion hides the downbeat — lock to the kick or clap you’d actually count.',
@@ -101,6 +114,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'La percusión densa tapa el downbeat — quédate en el kick o en las palmas que contarías de verdad.',
     fr: 'Une percussion dense masque le downbeat — restez sur le kick ou les claps que vous compteriez vraiment.',
     pt: 'Percussão densa esconde o downbeat — fique no kick ou nas palmas que você contaria de verdade.',
+    zh: '密集的打击乐会盖住强拍 —— 咬住你真正会去数的那个底鼓或拍手声。',
   },
   'jersey-club': {
     en: 'Chopped swing feels uneven — keep tapping through chops until the pad says Stable.',
@@ -108,6 +122,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El swing picado va irregular — sigue tocando a través de los chops hasta que diga Estable.',
     fr: 'Le swing découpé est irrégulier — continuez à taper à travers les chops jusqu’à Stable.',
     pt: 'Swing picotado é irregular — continue tocando pelos chops até aparecer Estável.',
+    zh: '切碎的摇摆听起来不均匀 —— 别管那些切片，一直点到显示“已稳定”。',
   },
   phonk: {
     en: 'Cowbell melodies run double-time — trust the number only once the pad settles, then use ÷2/×2.',
@@ -115,6 +130,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'La melodía de cowbell va en double-time — confía en el número solo cuando se estabilice, luego ajusta con ÷2/×2.',
     fr: 'La mélodie de cowbell sonne en double-time — ne croyez le chiffre qu’une fois stabilisé, puis ajustez avec ÷2/×2.',
     pt: 'A melodia de cowbell soa em double-time — só confie no número depois que ele estabilizar, aí ajuste com ÷2/×2.',
+    zh: 'Cowbell 旋律走的是倍速 —— 等数字稳定后再相信它，然后用 ÷2/×2 调整。',
   },
   hardstyle: {
     en: 'Don’t tap reverse-bass decoration — count every main kick only.',
@@ -122,6 +138,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'No toques el adorno reverse-bass entre golpes — cuenta solo los kicks principales.',
     fr: 'Ne tapez pas la déco reverse-bass entre les coups — comptez uniquement les kicks principaux.',
     pt: 'Não toque o enfeite reverse-bass entre os golpes — conte só os kicks principais.',
+    zh: '别去点两拍之间的 reverse-bass 装饰音 —— 只数主底鼓。',
   },
   jazz: {
     en: 'Swing lands taps unevenly, and a rubato intro has no fixed tempo — start counting once the band settles.',
@@ -129,6 +146,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El swing hace que los taps caigan irregulares, y una intro en rubato no tiene tempo fijo — empieza a contar cuando la banda se asiente.',
     fr: 'Le swing fait tomber les taps de travers, et une intro en rubato n’a pas de tempo fixe — comptez une fois que le groupe est installé.',
     pt: 'O swing faz os toques caírem tortos, e uma intro em rubato não tem tempo fixo — comece a contar quando a banda assentar.',
+    zh: '摇摆会让点击落得不齐，而自由速度的前奏根本没有固定速度 —— 等乐队进入稳定速度再开始数。',
   },
   salsa: {
     en: 'If you land ~95–110, you may be feeling half the written tempo — try ×2 for DAW notation.',
@@ -136,6 +154,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Si caes en ~95–110, estás sintiendo la mitad del tempo escrito — usa ×2 para el DAW.',
     fr: 'Si vous tombez vers ~95–110, vous ressentez la moitié du tempo écrit — passez ×2 pour le DAW.',
     pt: 'Se cair em ~95–110, você está sentindo metade do tempo escrito — use ×2 para o DAW.',
+    zh: '测出 95–110 左右？那是记谱速度的一半 —— 在 DAW 里请按 ×2。',
   },
   bachata: {
     en: 'Ghost notes on the guitar can double your count — stay on the main beat.',
@@ -143,6 +162,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'Los ghost notes de la guitarra pueden duplicar tu conteo — quédate en el tiempo principal.',
     fr: 'Les ghost notes de la guitare peuvent doubler votre comptage — restez sur le temps principal.',
     pt: 'Ghost notes da guitarra podem dobrar sua contagem — fique no tempo principal.',
+    zh: '吉他的弱音会让你数出两倍 —— 守住主拍。',
   },
   gospel: {
     en: 'Organs and claps can hide the downbeat — find the bass/kick first.',
@@ -150,6 +170,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El órgano y las palmas tapan el downbeat — encuentra primero el bajo o el kick.',
     fr: 'L’orgue et les claps masquent le downbeat — trouvez d’abord la basse ou le kick.',
     pt: 'Órgão e palmas escondem o downbeat — ache primeiro o baixo ou o kick.',
+    zh: '管风琴和掌声会掩盖强拍 —— 先找到低音或底鼓。',
   },
   country: {
     en: 'Train-beat snare can feel double — tap the bass/kick for the song tempo.',
@@ -157,6 +178,7 @@ export const genreWatchOut: Record<string, GenreWatchOutCopy> = {
     es: 'El snare en train-beat parece ir al doble — toca el bajo o el kick para el tempo de la canción.',
     fr: 'Le snare en train-beat semble aller deux fois plus vite — tapez la basse ou le kick pour le tempo du morceau.',
     pt: 'A caixa em train-beat parece ir no dobro — toque o baixo ou o kick para o tempo da música.',
+    zh: 'Train-beat 的军鼓听起来快一倍 —— 点低音或底鼓才是歌曲速度。',
   },
 };
 

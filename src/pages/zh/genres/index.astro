@@ -1,0 +1,63 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { genres } from '@/content/genres';
+import { localizedPath, t } from '@/i18n/utils';
+
+const locale = 'zh' as const;
+const list = [...genres].sort((a, b) => a.order - b.order);
+---
+
+<ToolLayout
+  locale={locale}
+  title={t(locale, 'genres.title')}
+  description={t(locale, 'genres.description')}
+  canonicalPath="/zh/genres/"
+  heading={t(locale, 'genres.h1')}
+  lead={t(locale, 'genres.description')}
+>
+  <div slot="tool" class="genre-index">
+    {
+      list.map((genre) => (
+        <a class="genre-card" href={localizedPath(locale, `genres/${genre.slug}`)}>
+          <strong>{genre.zh.name}</strong>
+          <span>{t(locale, 'genres.range', { min: genre.bpmMin, max: genre.bpmMax })}</span>
+          <p>{genre.zh.summary}</p>
+        </a>
+      ))
+    }
+  </div>
+</ToolLayout>
+
+<style>
+  .genre-index {
+    display: grid;
+    gap: 0.85rem;
+  }
+  @media (min-width: 800px) {
+    .genre-index {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .genre-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(18, 20, 26, 0.85);
+    text-decoration: none;
+  }
+  .genre-card strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+  .genre-card span {
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  .genre-card p {
+    margin: 0.2rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+</style>

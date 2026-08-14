@@ -1,7 +1,7 @@
 ---
 import '@/styles/global.css';
 import type { Locale } from '@/i18n/utils';
-import { LOCALES, OG_LOCALE, localizedPath } from '@/i18n/utils';
+import { HTML_LANG, LOCALES, OG_LOCALE, localizedPath } from '@/i18n/utils';
 import { SITE_ORIGIN, absoluteUrl } from '@/lib/site';
 
 interface Props {
@@ -34,7 +34,10 @@ const canonicalPathNorm = withTrailingSlash(canonicalPath);
 const canonical = `${site}${canonicalPathNorm}`;
 
 /** Path after locale prefix, e.g. "delay/" or "" for home */
-const pathAfterLocale = canonicalPathNorm.replace(/^\/(en|ru|es|fr|pt)\/?/, '');
+const pathAfterLocale = canonicalPathNorm.replace(
+  new RegExp(`^/(${LOCALES.join('|')})/?`),
+  '',
+);
 
 const alternateUrls = Object.fromEntries(
   LOCALES.map((loc) => [loc, `${site}${withTrailingSlash(localizedPath(loc, pathAfterLocale))}`]),
@@ -53,7 +56,7 @@ const htmlPulseMode = theme === 'pulse' ? 'light' : undefined;
 
 <!doctype html>
 <html
-  lang={locale}
+  lang={HTML_LANG[locale]}
   data-theme={theme}
   {...(htmlPulseMode ? { 'data-pulse-mode': htmlPulseMode } : {})}
 >
@@ -93,7 +96,7 @@ const htmlPulseMode = theme === 'pulse' ? 'light' : undefined;
     <link rel="canonical" href={canonical} />
     {
       LOCALES.map((loc) => (
-        <link rel="alternate" hreflang={loc} href={alternateUrls[loc]} />
+        <link rel="alternate" hreflang={HTML_LANG[loc]} href={alternateUrls[loc]} />
       ))
     }
     <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />
@@ -134,9 +137,9 @@ const htmlPulseMode = theme === 'pulse' ? 'light' : undefined;
   </head>
   <body>
     <slot />
-    <script is:inline>
+    <script is:inline define:vars={{ localeCodes: LOCALES }}>
       (function () {
-        var m = location.pathname.match(/^\/(en|ru|es|fr|pt)(\/|$)/);
+        var m = location.pathname.match(new RegExp('^/(' + localeCodes.join('|') + ')(/|$)'));
         if (m) {
           document.cookie = 'locale=' + m[1] + ';path=/;max-age=31536000;samesite=lax';
         }

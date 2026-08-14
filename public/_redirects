@@ -4,6 +4,7 @@
 /es   /es/  301
 /fr   /fr/  301
 /pt   /pt/  301
+/zh   /zh/  301
 /en/delay  /en/delay/  301
 /en/listen  /en/listen/  301
 /en/metronome  /en/metronome/  301
@@ -19,9 +20,13 @@
 /pt/delay  /pt/delay/  301
 /pt/listen  /pt/listen/  301
 /pt/metronome  /pt/metronome/  301
+/zh/delay  /zh/delay/  301
+/zh/listen  /zh/listen/  301
+/zh/metronome  /zh/metronome/  301
 # Legacy slug redirects (do NOT recreate these pages — "tap tempo" is competitor brand)
 /en/guides/tap-tempo-accuracy/  /en/guides/bpm-accuracy/  301
 /ru/guides/tap-tempo-accuracy/  /ru/guides/bpm-accuracy/  301
 /es/guides/tap-tempo-accuracy/  /es/guides/bpm-accuracy/  301
 /fr/guides/tap-tempo-accuracy/  /fr/guides/bpm-accuracy/  301
 /pt/guides/tap-tempo-accuracy/  /pt/guides/bpm-accuracy/  301
+/zh/guides/tap-tempo-accuracy/  /zh/guides/bpm-accuracy/  301

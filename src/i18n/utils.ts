@@ -3,11 +3,12 @@ import ru from './ru.json';
 import es from './es.json';
 import fr from './fr.json';
 import pt from './pt.json';
+import zh from './zh.json';
 
-export type Locale = 'en' | 'ru' | 'es' | 'fr' | 'pt';
+export type Locale = 'en' | 'ru' | 'es' | 'fr' | 'pt' | 'zh';
 export type Messages = typeof en;
 
-export const LOCALES: Locale[] = ['en', 'ru', 'es', 'fr', 'pt'];
+export const LOCALES: Locale[] = ['en', 'ru', 'es', 'fr', 'pt', 'zh'];
 export const DEFAULT_LOCALE: Locale = 'en';
 
 export const LOCALE_LABELS: Record<Locale, string> = {
@@ -16,6 +17,7 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   es: 'ES',
   fr: 'FR',
   pt: 'PT',
+  zh: '中文',
 };
 
 export const LOCALE_NAMES: Record<Locale, string> = {
@@ -24,6 +26,7 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   es: 'Español',
   fr: 'Français',
   pt: 'Português',
+  zh: '简体中文',
 };
 
 export const OG_LOCALE: Record<Locale, string> = {
@@ -32,9 +35,20 @@ export const OG_LOCALE: Record<Locale, string> = {
   es: 'es_ES',
   fr: 'fr_FR',
   pt: 'pt_BR',
+  zh: 'zh_CN',
 };
 
-const catalogs: Record<Locale, Messages> = { en, ru, es, fr, pt };
+/** html[lang] / hreflang values (region-specific where it helps crawlers). */
+export const HTML_LANG: Record<Locale, string> = {
+  en: 'en',
+  ru: 'ru',
+  es: 'es',
+  fr: 'fr',
+  pt: 'pt',
+  zh: 'zh-CN',
+};
+
+const catalogs: Record<Locale, Messages> = { en, ru, es, fr, pt, zh };
 
 export function isLocale(value: string): value is Locale {
   return LOCALES.includes(value as Locale);

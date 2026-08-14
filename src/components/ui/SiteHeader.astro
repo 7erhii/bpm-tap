@@ -2,6 +2,7 @@
 import {
   localizedPath,
   t,
+  HTML_LANG,
   LOCALES,
   LOCALE_LABELS,
   LOCALE_NAMES,
@@ -89,8 +90,8 @@ const menuId = `locale-menu-${locale}`;
                 <a
                   class:list={['locale-option', { 'locale-option--active': code === locale }]}
                   href={localizedPath(code, pathSuffix)}
-                  hreflang={code}
-                  lang={code}
+                  hreflang={HTML_LANG[code]}
+                  lang={HTML_LANG[code]}
                   role="option"
                   aria-selected={code === locale ? 'true' : 'false'}
                 >

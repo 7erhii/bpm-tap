@@ -21,6 +21,7 @@ export default defineConfig({
           es: 'es',
           fr: 'fr',
           pt: 'pt',
+          zh: 'zh-CN',
         },
       },
     }),
@@ -71,7 +72,7 @@ export default defineConfig({
   ],
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ru', 'es', 'fr', 'pt'],
+    locales: ['en', 'ru', 'es', 'fr', 'pt', 'zh'],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,

@@ -12,6 +12,7 @@ const metronomePath = localizedPath(locale, 'metronome');
 
 function tempoLabel(item: (typeof popularTempos)[number], loc: Locale): string {
   if (loc === 'ru') return item.label.ru;
+  if (loc === 'zh') return item.label.zh;
   return item.label.en;
 }
 ---

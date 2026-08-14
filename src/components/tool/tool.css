@@ -637,7 +637,10 @@
   }
   .tap-pad,
   .tap-pad__content {
-    min-height: min(42vw, 220px);
+    min-height: min(50vw, 260px);
+  }
+  .tap-pad {
+    border-radius: var(--pad-radius) var(--pad-radius) 0 0;
   }
 }
 
@@ -2225,7 +2228,7 @@
     padding-inline: 0;
   }
 
-  /* Pad: full-bleed horizontally, rounded + gap so it’s not glued to Delay below */
+  /* Pad: full-bleed horizontally; square bottom edge on mobile */
   .tap-app[data-skin='music'] .panels {
     margin-inline: 0.85rem;
     margin-top: 0.15rem;
@@ -2235,10 +2238,11 @@
   .tap-app[data-skin='music'] .tap-pad-wrap--music {
     width: 100%;
     margin-inline: 0;
+    min-height: clamp(10rem, 28svh, 14.5rem);
   }
 
   .tap-app[data-skin='music'] .tap-pad--music {
-    border-radius: 24px;
+    border-radius: 24px 24px 0 0;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
   }
 
@@ -2828,6 +2832,7 @@
   .tap-app[data-skin='pulse'] .tap-pad-wrap--pulse {
     width: 100%;
     margin-inline: 0;
+    min-height: clamp(9.5rem, 24svh, 13.5rem);
   }
 
   .tap-app[data-skin='pulse'] .stage__inner {
@@ -2835,7 +2840,7 @@
   }
 
   .tap-app[data-skin='pulse'] .tap-pad--pulse {
-    border-radius: 24px;
+    border-radius: 24px 24px 0 0;
   }
 
   .tap-app[data-skin='pulse'] .pad__sub-desk {

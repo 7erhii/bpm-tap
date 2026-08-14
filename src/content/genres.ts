@@ -19,6 +19,7 @@ export interface Genre {
   es: GenreLocaleCopy;
   fr: GenreLocaleCopy;
   pt: GenreLocaleCopy;
+  zh: GenreLocaleCopy;
 }
 
 type GenreExtra = {
@@ -28,6 +29,7 @@ type GenreExtra = {
   es: Omit<GenreLocaleCopy, 'name'>;
   fr: Omit<GenreLocaleCopy, 'name'>;
   pt: Omit<GenreLocaleCopy, 'name'>;
+  zh: Omit<GenreLocaleCopy, 'name'>;
 };
 
 const extras: Record<string, GenreExtra> = {
@@ -66,6 +68,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Daft Punk. One More Time (~123 BPM)', 'Fisher. Losing It (~125 BPM)', 'Disclosure. Latch (~122 BPM)'],
       tip: 'Toque o kick em cada tempo. Quatro compassos já dão uma leitura estável.',
     },
+    zh: {
+      summary:
+        '每一拍都有底鼓的舞池音乐。经典 house 的 BPM 通常落在 120–130，律动平稳不急躁。',
+      subgenres: ['Deep House', 'Tech House', 'Progressive House', 'Afro House', 'Disco House'],
+      examples: ['Daft Punk《One More Time》（约 123 BPM）', 'Fisher《Losing It》（约 125 BPM）', 'Disclosure《Latch》（约 122 BPM）'],
+      tip: '每一拍都跟着底鼓点一下。通常四个小节就能得到稳定读数。',
+    },
   },
   techno: {
     related: ['house', 'trance', 'hardstyle'],
@@ -103,6 +112,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Charlotte de Witte. Heart of Mine (~138 BPM)', 'Amelie Lens. Follow (~132 BPM)', 'Clássicos Carl Cox (~128–135 BPM)'],
       tip: 'Fique no kick por 8 compassos: o techno segura um tempo só do começo ao fim.',
     },
+    zh: {
+      summary:
+        '密集而催眠的节奏，没有多余的东西。techno 的 BPM 多在 125–140，从 warehouse 到 peak-time 都在这个范围。',
+      subgenres: ['Peak-time Techno', 'Minimal', 'Industrial Techno', 'Melodic Techno', 'Hard Techno'],
+      examples: ['Charlotte de Witte《Heart of Mine》（约 138 BPM）', 'Amelie Lens《Follow》（约 132 BPM）', 'Carl Cox 的经典曲目（约 128–135 BPM）'],
+      tip: '咬住底鼓点满 8 个小节：techno 从头到尾都保持同一个速度。',
+    },
   },
   trance: {
     related: ['techno', 'house', 'hardstyle'],
@@ -135,6 +151,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Uplifting', 'Psytrance', 'Tech Trance', 'Vocal Trance', 'Progressive Trance'],
       examples: ['Hinos Armin van Buuren (~138 BPM)', 'Above & Beyond. Sun & Moon (~128–132 BPM)', 'Tiësto peak-time clássico (~140 BPM)'],
       tip: 'Toque o kick num trecho reto, não em cima de um build ou de um breakdown.',
+    },
+    zh: {
+      summary: '长乐句和大铺垫。trance 的 BPM 通常在 130–145 附近。',
+      subgenres: ['Uplifting', 'Psytrance', 'Tech Trance', 'Vocal Trance', 'Progressive Trance'],
+      examples: ['Armin van Buuren 的经典曲目（约 138 BPM）', 'Above & Beyond《Sun & Moon》（约 128–132 BPM）', 'Tiësto 早期 peak-time（约 140 BPM）'],
+      tip: '在平稳段落上点底鼓，别在铺垫段或 breakdown 上点。',
     },
   },
   'drum-and-bass': {
@@ -172,6 +194,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Pendulum. Propane Nightmares (~174 BPM)', 'Netsky liquid (~174 BPM)', 'Amen rollers clássicos (~170–175 BPM)'],
       tip: 'Toque junto com o break: quem carrega o tempo é a bateria, não a linha de baixo.',
     },
+    zh: {
+      summary:
+        '快速的碎拍。drum & bass 的 BPM 通常是 160–180，尽管身体常常按半速在点头。',
+      subgenres: ['Liquid', 'Neurofunk', 'Jump-Up', 'Jungle', 'Drumstep'],
+      examples: ['Pendulum《Propane Nightmares》（约 174 BPM）', 'Netsky 的 liquid 风格（约 174 BPM）', '经典 amen 碎拍（约 170–175 BPM）'],
+      tip: '跟着碎拍本身点：撑起速度的是鼓组，不是低音线。',
+    },
   },
   dubstep: {
     related: ['trap', 'drum-and-bass', 'phonk'],
@@ -204,6 +233,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Brostep', 'Deep Dubstep', 'Riddim', 'Melodic Dubstep', 'UK Garage'],
       examples: ['Drops da era Skrillex (~140 BPM)', 'Burial night-bus (~140 half-time)', 'Riddim atual (~140 BPM)'],
       tip: 'No drop, toque o pulso dos hats: eles seguram os 140 enquanto kick e caixa vão pela metade.',
+    },
+    zh: {
+      summary: '记谱通常在 140 BPM 左右，但半速的体感听起来更接近 70。',
+      subgenres: ['Brostep', 'Deep Dubstep', 'Riddim', 'Melodic Dubstep', 'UK Garage'],
+      examples: ['Skrillex 时期的高潮 drop（约 140 BPM）', 'Burial 的深夜氛围（140 的半速感）', '当代 riddim（约 140 BPM）'],
+      tip: '在 drop 里点踩镲的脉冲：底鼓和军鼓走一半速度时，踩镲仍然守着那 140。',
     },
   },
   trap: {
@@ -241,6 +276,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['808 no estilo Metro Boomin (~140 BPM)', 'Travis Scott arena (~150 BPM)', 'Drill (~140 half-time)'],
       tip: 'Toque as batidas principais do 808 e ignore os rolos de hats por cima.',
     },
+    zh: {
+      summary:
+        '细碎的踩镲配上厚重的低频。当代 trap 的 BPM 多为 130–160（按半速算就是 65–80 左右）。',
+      subgenres: ['Atlanta Trap', 'Rage', 'Latin Trap', 'Drill', 'Cloud Trap'],
+      examples: ['Metro Boomin 风格的 808 作品（约 140 BPM）', 'Travis Scott 的体育馆能量（约 150 BPM）', 'Drill 律动（140，半速体感）'],
+      tip: '只点 808 的主要重音，上面那些踩镲滚奏直接忽略。',
+    },
   },
   'hip-hop': {
     related: ['trap', 'pop', 'lo-fi'],
@@ -275,6 +317,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Boom-bap clássico ~90 BPM', 'Pocket J Dilla (~88–96 BPM)', 'Rap de rádio atual ~90–100 ou double-time'],
       tip: 'Toque o pocket de kick e caixa no passo da música. Oito compassos bastam.',
     },
+    zh: {
+      summary: '讲究 pocket 和摇摆。hip-hop 的 BPM 多在 80–100，按倍速算就是这个数的两倍。',
+      subgenres: ['Boom Bap', 'Trap-influenced', 'West Coast', 'Lo-fi Hip Hop', 'Conscious'],
+      examples: ['经典 boom-bap 约 90 BPM', 'J Dilla 式的 pocket（约 88–96 BPM）', '当代电台说唱常见 90–100 或倍速'],
+      tip: '按走路的速度点底鼓和军鼓的组合，八个小节就够了。',
+    },
   },
   pop: {
     related: ['house', 'hip-hop', 'rock', 'country'],
@@ -307,6 +355,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Dance Pop', 'Synth Pop', 'Indie Pop', 'K-Pop midtempo', 'Ballad'],
       examples: ['Hits midtempo no estilo The Weeknd (~90–110 BPM)', 'Refrões dance-pop (~110–120 BPM)', 'Baladas ~60–80 no feel'],
       tip: 'Toque no refrão, onde a bateria está mais cheia: a intro costuma ser vazia demais.',
+    },
+    zh: {
+      summary: '适合电台的中速。当代流行乐的 BPM 大多集中在 90–120。',
+      subgenres: ['Dance Pop', 'Synth Pop', 'Indie Pop', 'K-Pop 中速', 'Ballad'],
+      examples: ['The Weeknd 式的中速热单（约 90–110 BPM）', 'Dance-pop 副歌（约 110–120 BPM）', '抒情曲体感常在 60–80'],
+      tip: '在副歌上点，那里鼓最满；前奏往往太空，读不准。',
     },
   },
   rock: {
@@ -341,6 +395,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Hinos de arena ~110–120 BPM', 'Punk costuma passar de 160, acima desta faixa', 'Indie midtempo ~100–115 BPM'],
       tip: 'Toque o backbeat da caixa: numa mixagem de rock é o pulso mais fácil de ouvir.',
     },
+    zh: {
+      summary: '从中速颂歌到快速的 riff。摇滚的 BPM 多数落在 100–140。',
+      subgenres: ['Classic Rock', 'Indie Rock', 'Punk', 'Alternative', 'Hard Rock'],
+      examples: ['体育馆颂歌约 110–120 BPM', '朋克通常比这个区间更快（160+）', '独立摇滚中速约 100–115 BPM'],
+      tip: '点军鼓的反拍：在摇滚混音里它最好辨认。',
+    },
   },
   metal: {
     related: ['rock', 'hardstyle', 'drum-and-bass'],
@@ -374,6 +434,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Groove stomps ~120–140 BPM', 'Galopes thrash ~160–180 BPM', 'Breakdowns podem parecer half-time'],
       tip: 'Toque o backbeat da caixa numa parte de riff e fique longe dos blast beats.',
     },
+    zh: {
+      summary: '从 groove 的踏步到 thrash 的疾驰。金属的 BPM 大多落在 120–180。',
+      subgenres: ['Groove Metal', 'Thrash', 'Metalcore', 'Prog Metal', 'Doom（更慢）'],
+      examples: ['Groove 踏步约 120–140 BPM', 'Thrash 疾驰常在 160–180 BPM', 'Breakdown 段落常有半速感'],
+      tip: '在 riff 段落上点军鼓反拍，别去碰 blast beat。',
+    },
   },
   'lo-fi': {
     related: ['hip-hop', 'ambient', 'jazz', 'pop'],
@@ -406,6 +472,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Lo-fi Hip Hop', 'Chillhop', 'Jazzhop', 'Study Beats', 'Bedroom Beats'],
       examples: ['Playlists chillhop clássicas ~75–85 BPM', 'Loops com sample de jazz ~80 BPM', 'Beats de noite chuvosa ~70–78 BPM'],
       tip: 'Toque o kick e a caixa do pulso principal. Deixe passar o crackle e os hats soltos.',
+    },
+    zh: {
+      summary: '带着灰尘感的摇摆，安静的学习背景音。Lo-fi hip-hop 的 BPM 通常在 70–90。',
+      subgenres: ['Lo-fi Hip Hop', 'Chillhop', 'Jazzhop', 'Study Beats', 'Bedroom Beats'],
+      examples: ['经典 chillhop 歌单约 75–85 BPM', '爵士采样循环约 80 BPM', '雨夜风格的 beat 约 70–78 BPM'],
+      tip: '点主拍上的底鼓和军鼓，黑胶的沙沙声和飘忽的踩镲都别管。',
     },
   },
   ambient: {
@@ -443,6 +515,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Pads no estilo Brian Eno (tempo opcional)', 'Ambient techno ~80–100 BPM', 'Drones de filme sem grade fixa'],
       tip: 'Toque a coisa mais lenta que se repete: a subida de um pad, um ciclo de arpejo, a cauda de um delay.',
     },
+    zh: {
+      summary: '节奏很慢，甚至几乎没有节奏。如果能听出明确的脉动，ambient 通常在 60–90 BPM 之间呼吸。',
+      subgenres: ['Dark Ambient', 'Ambient Techno', 'Drone', 'New Age', 'Cinematic Ambient'],
+      examples: ['Brian Eno 式的铺底音色（速度可有可无）', 'Ambient techno 约 80–100 BPM', '没有固定网格的电影感 drone'],
+      tip: '点那个重复得最慢的东西：铺底音色的起伏、一圈琶音、一条延迟的尾音。',
+    },
   },
   reggaeton: {
     related: ['afrobeat', 'bachata', 'hip-hop', 'pop'],
@@ -475,6 +553,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Classic Dembow', 'Latin Trap blend', 'Old-school Reggaeton', 'Pop Reggaeton', 'Dembow Dominicano'],
       examples: ['Dembow da era Daddy Yankee ~95 BPM', 'Hits latinos atuais ~90–98 BPM', 'Reggaeton de clube ~96–100 BPM'],
       tip: 'Um toque por tempo no kick do dembow: o padrão se repete a cada compasso, quatro já bastam.',
+    },
+    zh: {
+      summary: '标志性的 dembow 律动。雷鬼顿的 BPM 通常锁在 90–100 之间。',
+      subgenres: ['Classic Dembow', 'Latin Trap 融合', 'Old-school Reggaeton', 'Pop Reggaeton', 'Dembow Dominicano'],
+      examples: ['Daddy Yankee 时期的 dembow 约 95 BPM', '当代拉丁热单约 90–98 BPM', '俱乐部雷鬼顿约 96–100 BPM'],
+      tip: '在 dembow 的底鼓上每拍点一下：这个型每小节重复一次，四小节就够。',
     },
   },
   afrobeat: {
@@ -513,6 +597,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Hits midtempo Wizkid / Burna Boy (~100–110 BPM)', 'Afro house ~120–125 BPM', 'Faixas de clube puxadas pela percussão ~115–128 BPM'],
       tip: 'Toque o kick no qual você dançaria. O refrão dá a leitura mais limpa.',
     },
+    zh: {
+      summary:
+        '多重节奏交织，舞池推力十足。当代 afrobeats 俱乐部曲目的 BPM 通常在 100–130。',
+      subgenres: ['Afrobeats', 'Afro House', 'Highlife 影响', 'Amapiano 相邻风格', 'Afrofusion'],
+      examples: ['Wizkid / Burna Boy 的中速热单（约 100–110 BPM）', 'Afro house 约 120–125 BPM', '打击乐主导的俱乐部曲目约 115–128 BPM'],
+      tip: '点那个你会跟着跳舞的底鼓。副歌部分给出的读数最干净。',
+    },
   },
   'jersey-club': {
     related: ['house', 'phonk', 'trap'],
@@ -547,6 +638,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Energia no estilo DJ Sliink ~140 BPM', 'Edits virais de clube ~132–138 BPM', 'Vocais cortados ~134–140 BPM'],
       tip: 'Toque quatro tempos retos por cima do padrão 3-3-2: um toque por tempo, não um por kick.',
     },
+    zh: {
+      summary: '切碎的采样加上标志性的摇摆。Jersey club 的 BPM 通常在 130–140 附近。',
+      subgenres: ['Classic Jersey', 'Baltimore Club', 'Bed Squeak', 'Hybrid Club', 'UK Club edits'],
+      examples: ['DJ Sliink 式的能量约 140 BPM', '爆火的俱乐部改编约 132–138 BPM', '切碎人声素材约 134–140 BPM'],
+      tip: '在 3-3-2 的底鼓型上打平稳的四拍：每拍点一下，不是每个底鼓点一下。',
+    },
   },
   phonk: {
     related: ['trap', 'jersey-club', 'hip-hop', 'dubstep'],
@@ -580,6 +677,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Edits drift phonk ~140–160 BPM', 'Tools de clube com cowbell ~140 BPM', 'Bases Memphis mais lentas ~120–130'],
       tip: 'Toque o kick: embaixo de toda a cowbell, o drift phonk mantém quatro tempos retos.',
     },
+    zh: {
+      summary: 'Drift 与 cowbell。Drift phonk 的 BPM 通常从 130 多一路走到 150–160。',
+      subgenres: ['Drift Phonk', 'Lo-fi Phonk', 'House Phonk', 'Cowbell Phonk', 'Memphis 风格'],
+      examples: ['赛道感的 drift phonk 约 140–160 BPM', 'Cowbell 俱乐部素材约 140 BPM', '较慢的 Memphis 风格铺底约 120–130'],
+      tip: '点底鼓：在满耳的 cowbell 之下，drift phonk 走的是平稳的四拍。',
+    },
   },
   hardstyle: {
     related: ['trance', 'techno', 'metal'],
@@ -612,6 +715,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Raw Hardstyle', 'Euphoric Hardstyle', 'Hardcore adjacent', 'Dubstyle', 'Early Hardstyle'],
       examples: ['Hinos de festival ~150 BPM', 'Kicks raw ~150–155 BPM', 'Builds euphoric ~150 BPM'],
       tip: 'Toque o kick principal no drop: é a coisa mais alta da mixagem, impossível errar.',
+    },
+    zh: {
+      summary: 'Reverse-bass 的冲击力和音乐节的能量。Hardstyle 的 BPM 通常锁在 150–160。',
+      subgenres: ['Raw Hardstyle', 'Euphoric Hardstyle', 'Hardcore 相邻风格', 'Dubstyle', 'Early Hardstyle'],
+      examples: ['音乐节主打曲约 150 BPM', 'Raw 系底鼓约 150–155 BPM', 'Euphoric 铺垫约 150 BPM'],
+      tip: '在 drop 里点主底鼓：它是混音里最响的东西，很难点错。',
     },
   },
   jazz: {
@@ -651,6 +760,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Baladas ~60–80 no feel', 'Medium swing ~120–140', 'Bebop costuma ser mais rápido'],
       tip: 'Siga o walking bass: um toque por semínima, e esse é o tempo.',
     },
+    zh: {
+      summary:
+        '摇摆、自由速度，速度跨度很大。实际使用中，爵士的 BPM 大约在 80–160，从抒情曲到快速摇摆都有。',
+      subgenres: ['Swing', 'Bebop', 'Jazz Ballad', 'Fusion', 'Acid Jazz'],
+      examples: ['抒情曲体感约 60–80', '中速摇摆约 120–140', 'Bebop 往往更快'],
+      tip: '跟着 walking bass 走：低音每走一步点一下，那就是速度。',
+    },
   },
   salsa: {
     related: ['bachata', 'afrobeat', 'pop'],
@@ -689,6 +805,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Salsa dura clássica ~200 BPM na grade', 'Salsa romântica um pouco mais lenta', 'Timba pode ir para o topo da faixa'],
       tip: 'Toque a campana: ela marca cada tempo, e é esse o tempo escrito.',
     },
+    zh: {
+      summary:
+        '由 clave 节奏型驱动的舞曲。按网格计算，salsa 数得很快，大约 180–220 BPM，而舞者感受到的只有一半。',
+      subgenres: ['Salsa Dura', 'Salsa Romántica', 'Timba', 'Mambo', 'Casino'],
+      examples: ['经典 salsa dura 记谱约 200 BPM', '抒情 salsa 略慢一些', 'Timba 可以冲到区间上限'],
+      tip: '点 campana 铜钟：它敲在每一拍上，那就是记谱速度。',
+    },
   },
   bachata: {
     related: ['reggaeton', 'salsa', 'pop'],
@@ -723,6 +846,12 @@ const extras: Record<string, GenreExtra> = {
       subgenres: ['Traditional Bachata', 'Bachata Sensual', 'Urban Bachata', 'Bachatón', 'Pop Bachata'],
       examples: ['Hits da era Aventura ~130 BPM', 'Bachata sensual ~120–128 BPM', 'Fusões urbanas ~128–140 BPM'],
       tip: 'Toque a contagem de quatro que você dançaria: a güira marca isso com clareza.',
+    },
+    zh: {
+      summary: '吉他在前的浪漫律动。当代 bachata 的 BPM 通常在 120–140 之间。',
+      subgenres: ['Traditional Bachata', 'Bachata Sensual', 'Urban Bachata', 'Bachatón', 'Pop Bachata'],
+      examples: ['Aventura 时期的热单约 130 BPM', 'Bachata sensual 约 120–128 BPM', '都市融合风格约 128–140 BPM'],
+      tip: '点你会跟着迈步的那个四拍：güira 沙锤把它标得很清楚。',
     },
   },
   gospel: {
@@ -760,6 +889,13 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Worship lento ~60–75 BPM', 'Drive de coral ~80–95 BPM', 'Praise uptempo pode passar de 100'],
       tip: 'Toque a linha de baixo na estrofe, antes de o coral e as palmas entrarem.',
     },
+    zh: {
+      summary:
+        '合唱的推力和扎实的 pocket。很多福音歌曲在 60–100 BPM 之间，快节奏的赞美歌会更高。',
+      subgenres: ['Traditional Gospel', 'Contemporary Gospel', 'Gospel Choir', 'Praise & Worship', 'Gospel Blues'],
+      examples: ['慢速敬拜铺底约 60–75 BPM', '合唱推进约 80–95 BPM', '快节奏赞美歌可以超过 100'],
+      tip: '在主歌上点低音线，趁合唱和掌声还没进来。',
+    },
   },
   country: {
     related: ['rock', 'pop', 'gospel', 'hip-hop'],
@@ -793,6 +929,12 @@ const extras: Record<string, GenreExtra> = {
       examples: ['Baladas ~70–85 BPM', 'Country-pop de rádio ~90–110 BPM', 'Two-step ~100–120'],
       tip: 'Toque o two-step que você dançaria: um toque por passo.',
     },
+    zh: {
+      summary: '以叙事为先的律动，从抒情曲到 two-step。乡村乐的 BPM 通常覆盖 80–120。',
+      subgenres: ['Country Ballad', 'Bro-Country', 'Outlaw', 'Country Pop', 'Bluegrass 影响'],
+      examples: ['抒情曲约 70–85 BPM', '电台乡村流行约 90–110 BPM', 'Two-step 体感常在 100–120'],
+      tip: '点你会跟着跳 two-step 的那个拍子：每迈一步点一下。',
+    },
   },
 };
 
@@ -812,6 +954,7 @@ export const genres: Genre[] = genreCatalog.map((core) => {
     es: { name: core.name.es, ...extra.es },
     fr: { name: core.name.fr, ...extra.fr },
     pt: { name: core.name.pt, ...extra.pt },
+    zh: { name: core.name.zh, ...extra.zh },
   };
 });
 
