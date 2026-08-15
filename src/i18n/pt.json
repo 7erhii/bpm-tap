@@ -230,8 +230,6 @@
   "pulse.hintTouch": "Dedos no pulso: toque o pad a cada batida",
   "pulse.subCount": "Cada toque afia a leitura",
   "pulse.subDone": "Bate no ritmo do seu pulso? Então {bpm} está certo.",
-  "pulse.lockedCta": "Leitura travada",
-  "pulse.lockedHint": "Já pode rolar a página. Toque em Reiniciar para medir de novo",
   "pulse.unit": "BPM",
   "pulse.enterBpm": "Toque ou digite o pulso",
   "pulse.confidence.none": "Comece a tocar seu pulso",

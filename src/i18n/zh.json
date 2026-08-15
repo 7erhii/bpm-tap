@@ -230,8 +230,6 @@
   "pulse.hintTouch": "两指按住脉搏 —— 每跳点一下",
   "pulse.subCount": "每点一下，读数就更准一分",
   "pulse.subDone": "闪动和手腕的跳动同步吗？那 {bpm} 就是对的。",
-  "pulse.lockedCta": "读数已锁定",
-  "pulse.lockedHint": "可以自由滚动 —— 点“重置”重新测量",
   "pulse.unit": "BPM",
   "pulse.enterBpm": "点击或输入脉搏",
   "pulse.confidence.none": "开始跟着脉搏点击",

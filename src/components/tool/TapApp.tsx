@@ -30,9 +30,6 @@ export interface TapAppLabels {
   tapCta: string;
   tapHint: string;
   tapHintTouch?: string;
-  /** Pulse: pad copy after a stable reading (until Reset). */
-  tapLockedCta?: string;
-  tapLockedHint?: string;
   tapCtaCount?: string;
   tapCtaDone?: string;
   tapSubDone?: string;
@@ -244,13 +241,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
     setDocumentTitleWithBpm(base, snapshot.bpm != null && snapshot.inRange ? snapshot.bpm : null);
   }, [snapshot.bpm, snapshot.inRange]);
 
-  const pulseLocked =
-    isPulse && snapshot.confidence === 'high' && snapshot.source === 'tap';
-  const pulseLockedRef = useRef(false);
-  pulseLockedRef.current = pulseLocked;
-
   const registerTap = () => {
-    if (pulseLockedRef.current) return;
     const next = engineRef.current.tap();
     // TODO: re-enable when we have a writable board backend
     // if (trackChallenge) {
@@ -478,7 +469,7 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
 
   if (isPulse) {
     const pulseStage: TapPadStage =
-      pulseLocked || (snapshot.status === 'stable' && snapshot.bpm != null)
+      snapshot.status === 'stable' && snapshot.bpm != null
         ? 'stable'
         : snapshot.status === 'measuring' || snapshot.tapCount > 0
           ? 'counting'
@@ -490,14 +481,11 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
       if (pulseStage === 'stable') {
         const bpmTxt =
           snapshot.bpm != null ? displayBpmInteger(snapshot.bpm) : '';
-        const subDone = (labels.tapSubDone ?? labels.tapLockedHint ?? labels.tapHint).replace(
-          '{bpm}',
-          bpmTxt,
-        );
+        const subDone = (labels.tapSubDone ?? labels.tapHint).replace('{bpm}', bpmTxt);
         return {
-          title: labels.tapLockedCta ?? labels.tapCtaDone ?? labels.tapCta,
-          hint: labels.tapLockedHint ?? subDone,
-          hintTouch: labels.tapLockedHint ?? subDone,
+          title: labels.tapCtaDone ?? labels.tapCta,
+          hint: subDone,
+          hintTouch: subDone,
           sub: subDone,
           subTouch: subDone,
         };
@@ -620,7 +608,6 @@ export default function TapApp({ locale, labels, mode = 'full' }: Props) {
                 pulseToken={pulseToken}
                 beatSec={pulseBeatSec}
                 scrollSafe
-                locked={pulseLocked}
               />
             </div>
           </div>

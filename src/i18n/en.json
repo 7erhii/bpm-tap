@@ -230,8 +230,6 @@
   "pulse.hintTouch": "Two fingers on your pulse — tap once per beat",
   "pulse.subCount": "Every tap sharpens the reading",
   "pulse.subDone": "Pulsing in time with your wrist? Then {bpm} is right.",
-  "pulse.lockedCta": "Reading locked",
-  "pulse.lockedHint": "Scroll freely — tap Reset to measure again",
   "pulse.unit": "BPM",
   "pulse.enterBpm": "Tap or type pulse",
   "pulse.confidence.none": "Start tapping your pulse",

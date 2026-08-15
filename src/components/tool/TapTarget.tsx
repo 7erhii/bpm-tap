@@ -17,8 +17,6 @@ interface Props {
    * Hit target is the pad face only (inset), not the chassis frame.
    */
   scrollSafe?: boolean;
-  /** Ignore further taps (e.g. stable pulse reading until Reset). */
-  locked?: boolean;
   /** Visual skin — music = V6 flat pad; pulse = P1 rose flat pad. */
   variant?: 'music' | 'pulse';
   stage?: TapPadStage;
@@ -52,7 +50,6 @@ export function TapTarget({
   pulseToken,
   hintBelow = false,
   scrollSafe = false,
-  locked = false,
   variant = 'pulse',
   stage = 'idle',
   beatSec,
@@ -69,7 +66,6 @@ export function TapTarget({
   const hitRef = useRef<HTMLSpanElement>(null);
   const onTapRef = useRef(onTap);
   const lastTapAt = useRef(0);
-  const lockedRef = useRef(locked);
   const scrollSafeRef = useRef(scrollSafe);
   const touchHint = hintTouch ?? hint;
   const music = variant === 'music';
@@ -77,7 +73,6 @@ export function TapTarget({
   const flatPad = music || pulseFlat;
 
   onTapRef.current = onTap;
-  lockedRef.current = locked;
   scrollSafeRef.current = scrollSafe;
 
   useEffect(() => {
@@ -93,7 +88,6 @@ export function TapTarget({
     if (!button || !hit) return;
 
     const fireTap = () => {
-      if (lockedRef.current) return;
       const now = performance.now();
       // Collapse only true duplicate deliveries (touch + compatibility mouse).
       if (now - lastTapAt.current < 35) return;
@@ -110,7 +104,6 @@ export function TapTarget({
     let track: TouchTrack | null = null;
 
     const onTouchStart = (event: TouchEvent) => {
-      if (lockedRef.current) return;
       // One finger = one beat. Extra contacts are ignored.
       if (event.touches.length !== 1) return;
       const touch = event.touches[0];
@@ -149,7 +142,7 @@ export function TapTarget({
       if (!ended) return;
       const wasTap = !track.cancelled;
       track = null;
-      if (!wasTap || lockedRef.current) return;
+      if (!wasTap) return;
       // Confirmed tap: block the ghost click that some WebViews still emit.
       event.preventDefault();
       fireTap();
@@ -164,7 +157,6 @@ export function TapTarget({
     };
 
     const onMouseDown = (event: MouseEvent) => {
-      if (lockedRef.current) return;
       if (event.button !== 0) return;
       // Skip compatibility mouse events that some WebViews still emit after touch.
       if (performance.now() - lastTapAt.current < 35) return;
@@ -174,7 +166,6 @@ export function TapTarget({
 
     // Keyboard activation (Enter) when the pad is focused — Space is handled globally.
     const onClick = (event: MouseEvent) => {
-      if (lockedRef.current) return;
       if (event.detail !== 0) return; // real pointer clicks already counted above
       fireTap();
     };
@@ -243,12 +234,11 @@ export function TapTarget({
           ref={buttonRef}
           type="button"
           className={`tap-pad ${padClass} is-${stage}${pulse ? ' is-pulse' : ''}${
-            locked ? ' is-locked' : ''
-          }${showFlash ? ' is-flash' : ''}${listening ? ' is-listening' : ''}${
-            metroLive ? ' is-metro' : ''
-          }${scrollSafe ? ' tap-pad--scroll-safe' : ''}`}
+            showFlash ? ' is-flash' : ''
+          }${listening ? ' is-listening' : ''}${metroLive ? ' is-metro' : ''}${
+            scrollSafe ? ' tap-pad--scroll-safe' : ''
+          }`}
           aria-label={title}
-          aria-disabled={locked || undefined}
           aria-pressed={listening || undefined}
           style={style}
         >
@@ -305,11 +295,10 @@ export function TapTarget({
       <button
         ref={buttonRef}
         type="button"
-        className={`tap-pad${pulse ? ' is-pulse' : ''}${locked ? ' is-locked' : ''}${
+        className={`tap-pad${pulse ? ' is-pulse' : ''}${
           scrollSafe ? ' tap-pad--scroll-safe' : ''
         }`}
         aria-label={title}
-        aria-disabled={locked || undefined}
       >
         <span className="tap-pad__chassis" aria-hidden="true">
           <span className="tap-pad__bay" />

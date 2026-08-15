@@ -230,8 +230,6 @@
   "pulse.hintTouch": "Doigts sur le pouls : tapez le pad à chaque battement",
   "pulse.subCount": "Chaque tap affine la lecture",
   "pulse.subDone": "Ça bat au rythme de votre poignet ? Alors {bpm} est juste.",
-  "pulse.lockedCta": "Lecture verrouillée",
-  "pulse.lockedHint": "Vous pouvez défiler. Appuyez sur Réinitialiser pour remesurer",
   "pulse.unit": "BPM",
   "pulse.enterBpm": "Tapez ou entrez le pouls",
   "pulse.confidence.none": "Commencez à taper votre pouls",

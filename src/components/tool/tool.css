@@ -440,11 +440,6 @@
   cursor: pointer;
 }
 
-.tap-pad--scroll-safe.is-locked .tap-pad__hit {
-  pointer-events: none;
-  cursor: default;
-}
-
 /* Flat skins set touch-action: manipulation — keep pan-y when scroll-safe */
 .tap-app[data-skin='music'] .tap-pad--music.tap-pad--scroll-safe,
 .tap-app[data-skin='pulse'] .tap-pad--pulse.tap-pad--scroll-safe {
@@ -456,15 +451,6 @@
 .tap-app[data-skin='pulse'] .tap-pad--pulse.tap-pad--scroll-safe .tap-pad__hit {
   pointer-events: auto;
   touch-action: pan-y;
-}
-
-.tap-pad.is-locked {
-  cursor: default;
-  opacity: 0.92;
-}
-
-.tap-pad.is-locked .tap-pad__plunger {
-  transform: none;
 }
 
 /* Hint-below layout; frame around the pad face is the scroll gutter */
@@ -2739,10 +2725,6 @@
   border-bottom-color: transparent;
   color: var(--text);
   box-shadow: none;
-}
-
-.tap-app[data-skin='pulse'] .tap-pad--pulse.is-locked {
-  cursor: default;
 }
 
 .tap-app[data-skin='pulse'] .tap-pad--pulse .pad__glow {
