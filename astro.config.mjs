@@ -7,6 +7,43 @@ import AstroPWA from '@vite-pwa/astro';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
+/** In `astro dev`, `trailingSlash: 'always'` 404s before routing. Redirect first. */
+function trailingSlashDevRedirect() {
+  /** @type {import('vite').Plugin} */
+  const plugin = {
+    name: 'trailing-slash-dev-redirect',
+    configureServer(server) {
+      /** @type {import('connect').NextHandleFunction} */
+      const handler = (req, res, next) => {
+        const raw = req.url ?? '/';
+        const q = raw.indexOf('?');
+        const pathname = q === -1 ? raw : raw.slice(0, q);
+        const search = q === -1 ? '' : raw.slice(q);
+        const skip =
+          pathname === '/' ||
+          pathname.endsWith('/') ||
+          pathname.startsWith('/@') ||
+          pathname.startsWith('/src/') ||
+          pathname.startsWith('/node_modules') ||
+          pathname.startsWith('/__') ||
+          pathname.includes(':') ||
+          /\.[a-zA-Z0-9]+$/.test(pathname);
+        if (skip) {
+          next();
+          return;
+        }
+        res.statusCode = 301;
+        res.setHeader('Location', `${pathname}/${search}`);
+        res.end();
+      };
+      return () => {
+        server.middlewares.stack.unshift({ route: '', handle: handler });
+      };
+    },
+  };
+  return plugin;
+}
+
 export default defineConfig({
   site: 'https://bpm-tap.com',
   trailingSlash: 'always',
@@ -112,6 +149,7 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [trailingSlashDevRedirect()],
     resolve: {
       alias: {
         '@': path.join(root, 'src'),
