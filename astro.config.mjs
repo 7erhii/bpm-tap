@@ -96,7 +96,9 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // MPA: unknown URLs must hit the real 404, not a cached homepage (soft 404).
         navigateFallback: '/en/',
+        navigateFallbackDenylist: [/.*/],
         globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2}'],
       },
     }),

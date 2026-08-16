@@ -1,0 +1,219 @@
+---
+import '@/styles/global.css';
+import {
+  DEFAULT_LOCALE,
+  HTML_LANG,
+  LOCALES,
+  detectLocaleFromPath,
+  localizedPath,
+  t,
+  type Locale,
+} from '@/i18n/utils';
+
+type Copy = {
+  title: string;
+  description: string;
+  h1: string;
+  lead: string;
+  home: string;
+  delay: string;
+  metronome: string;
+  listen: string;
+  guides: string;
+  brand: string;
+};
+
+const buildLocale = detectLocaleFromPath(Astro.url.pathname);
+
+const copy = Object.fromEntries(
+  LOCALES.map((locale) => [
+    locale,
+    {
+      title: t(locale, 'notFound.title'),
+      description: t(locale, 'notFound.description'),
+      h1: t(locale, 'notFound.h1'),
+      lead: t(locale, 'notFound.lead'),
+      home: t(locale, 'notFound.home'),
+      delay: t(locale, 'nav.delay'),
+      metronome: t(locale, 'nav.metronome'),
+      listen: t(locale, 'nav.listen'),
+      guides: t(locale, 'nav.guides'),
+      brand: t(locale, 'brand'),
+    } satisfies Copy,
+  ]),
+) as Record<Locale, Copy>;
+
+const initial = copy[buildLocale];
+---
+
+<!doctype html>
+<html lang={HTML_LANG[buildLocale]}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{initial.title}</title>
+    <meta name="description" content={initial.description} />
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#0B0C10" />
+    <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline define:vars={{ copy, localeCodes: LOCALES, htmlLang: HTML_LANG, defaultLocale: DEFAULT_LOCALE }}>
+      (function () {
+        function detect() {
+          var first = location.pathname.split('/').filter(Boolean)[0];
+          if (first && localeCodes.indexOf(first) !== -1) return first;
+          var m = document.cookie.match(/(?:^|; )locale=([^;]+)/);
+          var saved = m ? decodeURIComponent(m[1]) : '';
+          if (saved && localeCodes.indexOf(saved) !== -1) return saved;
+          return defaultLocale;
+        }
+
+        var locale = detect();
+        var c = copy[locale];
+        if (!c) return;
+
+        document.documentElement.lang = htmlLang[locale] || 'en';
+        document.title = c.title;
+        var desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', c.description);
+        window.__nf = { locale: locale, copy: c };
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="nf-header">
+      <div class="container nf-header__inner">
+        <a class="brand" data-nf="home" href={localizedPath(buildLocale)}>
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span data-nf-text="brand">{initial.brand}</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="container nf-main">
+      <p class="nf-code">404</p>
+      <h1 data-nf-text="h1">{initial.h1}</h1>
+      <p class="nf-lead" data-nf-text="lead">{initial.lead}</p>
+      <nav class="nf-links" aria-label="Tools">
+        <a class="nf-cta" data-nf="home" href={localizedPath(buildLocale)} data-nf-text="home">
+          {initial.home}
+        </a>
+        <a data-nf="delay" href={localizedPath(buildLocale, 'delay')} data-nf-text="delay">{initial.delay}</a>
+        <a data-nf="metronome" href={localizedPath(buildLocale, 'metronome')} data-nf-text="metronome">
+          {initial.metronome}
+        </a>
+        <a data-nf="listen" href={localizedPath(buildLocale, 'listen')} data-nf-text="listen">{initial.listen}</a>
+        <a data-nf="guides" href={localizedPath(buildLocale, 'guides')} data-nf-text="guides">{initial.guides}</a>
+      </nav>
+    </main>
+
+    <script is:inline>
+      (function () {
+        var nf = window.__nf;
+        if (!nf) return;
+        var locale = nf.locale;
+        var c = nf.copy;
+        var paths = {
+          home: '/' + locale + '/',
+          delay: '/' + locale + '/delay/',
+          metronome: '/' + locale + '/metronome/',
+          listen: '/' + locale + '/listen/',
+          guides: '/' + locale + '/guides/',
+        };
+
+        document.querySelectorAll('[data-nf]').forEach(function (el) {
+          var key = el.getAttribute('data-nf');
+          if (key && paths[key]) el.setAttribute('href', paths[key]);
+        });
+        document.querySelectorAll('[data-nf-text]').forEach(function (el) {
+          var key = el.getAttribute('data-nf-text');
+          if (key && c[key]) el.textContent = c[key];
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .nf-header {
+    border-bottom: 1px solid var(--line);
+    background: rgba(11, 12, 16, 0.72);
+    backdrop-filter: blur(12px);
+  }
+  .nf-header__inner {
+    min-height: var(--header-h);
+    display: flex;
+    align-items: center;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 750;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .brand__mark {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .nf-main {
+    padding: var(--space-8) 0;
+    max-width: 40rem;
+  }
+  .nf-code {
+    margin: 0;
+    font-family: var(--font-bpm);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  h1 {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  .nf-lead {
+    margin: 0.75rem 0 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  .nf-links {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 0.85rem;
+    align-items: center;
+  }
+  .nf-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .nf-links a:hover {
+    color: var(--text);
+    border-bottom-color: var(--line);
+  }
+  .nf-cta {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--accent) !important;
+    background: var(--accent);
+    color: #0b0c10 !important;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    text-decoration: none !important;
+  }
+  .nf-cta:hover {
+    filter: brightness(1.05);
+  }
+</style>

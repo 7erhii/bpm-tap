@@ -73,6 +73,12 @@ export function localizedPath(locale: Locale, path = ''): string {
   return clean ? `/${locale}/${clean}/` : `/${locale}/`;
 }
 
+/** Locale from a URL path (`/ru/nope/` → `ru`). Unknown prefixes fall back to English. */
+export function detectLocaleFromPath(pathname: string): Locale {
+  const segment = pathname.split('/').filter(Boolean)[0];
+  return segment && isLocale(segment) ? segment : DEFAULT_LOCALE;
+}
+
 /** Match browser Accept-Language to the best supported locale. */
 export function detectLocaleFromHeader(acceptLanguage: string | null): Locale {
   if (!acceptLanguage) return DEFAULT_LOCALE;

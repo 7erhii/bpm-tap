@@ -23,6 +23,24 @@
 /zh/delay  /zh/delay/  301
 /zh/listen  /zh/listen/  301
 /zh/metronome  /zh/metronome/  301
+/en/pulse  /en/pulse/  301
+/ru/pulse  /ru/pulse/  301
+/es/pulse  /es/pulse/  301
+/fr/pulse  /fr/pulse/  301
+/pt/pulse  /pt/pulse/  301
+/zh/pulse  /zh/pulse/  301
+/en/genres  /en/genres/  301
+/ru/genres  /ru/genres/  301
+/es/genres  /es/genres/  301
+/fr/genres  /fr/genres/  301
+/pt/genres  /pt/genres/  301
+/zh/genres  /zh/genres/  301
+/en/guides  /en/guides/  301
+/ru/guides  /ru/guides/  301
+/es/guides  /es/guides/  301
+/fr/guides  /fr/guides/  301
+/pt/guides  /pt/guides/  301
+/zh/guides  /zh/guides/  301
 # Legacy slug redirects (do NOT recreate these pages — "tap tempo" is competitor brand)
 /en/guides/tap-tempo-accuracy/  /en/guides/bpm-accuracy/  301
 /ru/guides/tap-tempo-accuracy/  /ru/guides/bpm-accuracy/  301
@@ -30,3 +48,5 @@
 /fr/guides/tap-tempo-accuracy/  /fr/guides/bpm-accuracy/  301
 /pt/guides/tap-tempo-accuracy/  /pt/guides/bpm-accuracy/  301
 /zh/guides/tap-tempo-accuracy/  /zh/guides/bpm-accuracy/  301
+# Pretty 404 for unmatched paths (Netlify / Cloudflare Pages)
+/*    /404.html   404
