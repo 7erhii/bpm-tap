@@ -33,19 +33,12 @@ PUBLIC_ADS_ENABLED=false
 
 The form posts to `/api/contact` (`src/cloudflare-worker.ts` on Workers) and sends mail with Resend. Locally, copy `.env.example` → `.env`. Do not commit `.env` or paste the Google account password into Cloudflare.
 
-Production secrets live in the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages), not in the repo:
+Production secrets live on the **Worker** named `bpm-tap` (this repo deploys with `npx wrangler deploy`, not classic Pages Functions). Pages-project env vars are ignored.
 
-1. **Workers & Pages** → the bpm-tap Pages project.
-2. **Settings** → **Environment variables** (sometimes **Variables and Secrets**).
-3. Add these for **Production** (and Preview if you want the form on branch deploys):
-
-| Variable | Value | Encrypt / Secret |
-|---|---|---|
-| `RESEND_API_KEY` | key from [resend.com/api-keys](https://resend.com/api-keys) | yes |
-| `RESEND_FROM` | `BPM Tap <onboarding@resend.dev>` until the domain is verified | no |
-| `CONTACT_TO_EMAIL` | inbox that should receive messages | no |
-
-4. Save, then **Retry deployment** / redeploy. Pages Functions pick up env only on a new deploy.
+1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) → **bpm-tap** (Workers, not a Pages project).
+2. **Settings** → **Variables and Secrets**.
+3. Add `RESEND_API_KEY` as a **Secret** (Encrypt). `RESEND_FROM` and `CONTACT_TO_EMAIL` ship in `wrangler.toml`.
+4. Save / deploy that Worker version, then send a test from `/en/contact/`.
 
 Never prefix these with `PUBLIC_`. After deploy, send a test from `/en/contact/` and check the inbox (and spam).
 
