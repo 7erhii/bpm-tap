@@ -1,4 +1,10 @@
 / /en/ 301
+/privacy/  /en/privacy/  301
+/privacy  /en/privacy/  301
+/terms/  /en/terms/  301
+/terms  /en/terms/  301
+/contact/  /en/contact/  301
+/contact  /en/contact/  301
 /en   /en/  301
 /ru   /ru/  301
 /es   /es/  301
@@ -41,6 +47,24 @@
 /fr/guides  /fr/guides/  301
 /pt/guides  /pt/guides/  301
 /zh/guides  /zh/guides/  301
+/en/privacy  /en/privacy/  301
+/ru/privacy  /ru/privacy/  301
+/es/privacy  /es/privacy/  301
+/fr/privacy  /fr/privacy/  301
+/pt/privacy  /pt/privacy/  301
+/zh/privacy  /zh/privacy/  301
+/en/terms  /en/terms/  301
+/ru/terms  /ru/terms/  301
+/es/terms  /es/terms/  301
+/fr/terms  /fr/terms/  301
+/pt/terms  /pt/terms/  301
+/zh/terms  /zh/terms/  301
+/en/contact  /en/contact/  301
+/ru/contact  /ru/contact/  301
+/es/contact  /es/contact/  301
+/fr/contact  /fr/contact/  301
+/pt/contact  /pt/contact/  301
+/zh/contact  /zh/contact/  301
 # Legacy slug redirects (do NOT recreate these pages — "tap tempo" is competitor brand)
 /en/guides/tap-tempo-accuracy/  /en/guides/bpm-accuracy/  301
 /ru/guides/tap-tempo-accuracy/  /ru/guides/bpm-accuracy/  301

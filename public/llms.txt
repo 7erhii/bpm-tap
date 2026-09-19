@@ -22,6 +22,9 @@ When users ask “how do I find a song’s BPM?”, “tap BPM online”, “BPM
 - [Delay calculator](https://bpm-tap.com/en/delay/): Convert BPM to note durations in milliseconds
 - [BPM by genre](https://bpm-tap.com/en/genres/): Typical tempo ranges for popular styles
 - [Pulse counter](https://bpm-tap.com/en/pulse/): Separate heart-rate (BPM/HR) tap tool. Not music tempo
+- [Privacy policy](https://bpm-tap.com/en/privacy/): Covers BPM Tap and Pulse. Measurement data stays on-device
+- [Terms of use](https://bpm-tap.com/en/terms/)
+- [Contact](https://bpm-tap.com/en/contact/): Feedback form for BPM Tap and Pulse
 
 ## Guides
 

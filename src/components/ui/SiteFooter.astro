@@ -1,6 +1,7 @@
 ---
 import { genres } from '@/content/genres';
 import { localizedPath, t, type Locale } from '@/i18n/utils';
+import { legalHref } from '@/lib/legal';
 
 interface Props {
   locale: Locale;
@@ -9,6 +10,7 @@ interface Props {
 
 const { locale, theme = 'studio' } = Astro.props;
 const genreList = [...genres].sort((a, b) => a.order - b.order);
+const fromPulse = theme === 'pulse';
 ---
 
 <footer class="site-footer">
@@ -46,6 +48,11 @@ const genreList = [...genres].sort((a, b) => a.order - b.order);
         </>
       )
     }
+    <nav class="site-footer__legal" aria-label={t(locale, 'footer.legalLabel')}>
+      <a href={legalHref(locale, 'privacy', fromPulse)}>{t(locale, 'footer.privacyPolicy')}</a>
+      <a href={legalHref(locale, 'terms', fromPulse)}>{t(locale, 'footer.terms')}</a>
+      <a href={legalHref(locale, 'contact', fromPulse)}>{t(locale, 'footer.contact')}</a>
+    </nav>
   </div>
 </footer>
 
@@ -102,5 +109,11 @@ const genreList = [...genres].sort((a, b) => a.order - b.order);
   }
   .site-footer__genres a {
     font-size: 0.88rem;
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.9rem;
+    padding-top: 0.15rem;
   }
 </style>

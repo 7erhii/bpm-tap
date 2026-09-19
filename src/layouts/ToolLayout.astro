@@ -10,7 +10,7 @@ interface Props {
   title: string;
   description: string;
   canonicalPath: string;
-  heading: string;
+  heading?: string;
   lead?: string;
 }
 
@@ -32,11 +32,14 @@ const { locale, title, description, canonicalPath, heading, lead } = Astro.props
       <slot name="tool" />
     </div>
 
-    <!-- H1 under the tool so the first viewport is the stage, not the title -->
-    <header class="tool-intro tool-intro--below">
-      <h1>{heading}</h1>
-      {lead ? <p class="lead">{lead}</p> : null}
-    </header>
+    {
+      heading ? (
+        <header class="tool-intro tool-intro--below">
+          <h1>{heading}</h1>
+          {lead ? <p class="lead">{lead}</p> : null}
+        </header>
+      ) : null
+    }
 
     <AdSlot locale={locale} slotId="below-tool" />
 

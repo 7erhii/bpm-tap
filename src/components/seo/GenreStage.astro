@@ -1,0 +1,67 @@
+---
+import type { Genre } from '@/content/genres';
+import { getGenrePatternSet } from '@/content/genrePatterns';
+import type { Locale } from '@/i18n/utils';
+import GenreHero from '@/components/seo/GenreHero.astro';
+import GenrePatternGrid from '@/components/seo/GenrePatternGrid.astro';
+
+interface Props {
+  locale: Locale;
+  genre: Genre;
+  bpm: number;
+}
+
+const { locale, genre, bpm } = Astro.props;
+const patternSet = getGenrePatternSet(genre.slug, locale);
+const pageHeading = patternSet?.heading;
+---
+
+<div class:list={['genre-stage', patternSet && 'has-patterns']}>
+  {pageHeading ? <h1 class="genre-stage__title">{pageHeading}</h1> : null}
+  <div class="genre-stage__hero">
+    <GenreHero locale={locale} genre={genre} bpm={bpm} />
+  </div>
+  {
+    patternSet ? <GenrePatternGrid locale={locale} set={patternSet} bpm={bpm} /> : null
+  }
+</div>
+
+<style>
+  .genre-stage {
+    display: grid;
+    gap: 1rem;
+  }
+  .genre-stage__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3.6vw, 1.85rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+  @media (min-width: 900px) {
+    .genre-stage.has-patterns {
+      grid-template-columns: minmax(17.5rem, 23.5rem) minmax(0, 1fr);
+      align-items: start;
+    }
+    .genre-stage.has-patterns .genre-stage__title {
+      grid-column: 1 / -1;
+    }
+    .genre-stage.has-patterns .genre-stage__hero {
+      position: sticky;
+      top: calc(var(--header-h) + 0.75rem);
+    }
+    .genre-stage.has-patterns :global(.range) {
+      font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+    }
+  }
+  @media (max-width: 819px) {
+    .genre-stage.has-patterns {
+      gap: 0.85rem;
+      padding-inline: 1rem;
+    }
+    .genre-stage__title {
+      font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+      line-height: 1.2;
+    }
+  }
+</style>

@@ -1,0 +1,313 @@
+---
+import type { GenrePatternSet } from '@/content/genrePatterns';
+import { laneHitList } from '@/content/genrePatterns';
+import GenrePatternPlay from '@/components/seo/GenrePatternPlay';
+import { t, type Locale } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  set: GenrePatternSet;
+  bpm: number;
+  /** When the grid sits in the first viewport, use H1 so the outline stays valid. */
+  asPageHeading?: boolean;
+}
+
+const { locale, set, bpm, asPageHeading = false } = Astro.props;
+const beats = [1, 2, 3, 4];
+const TitleTag = asPageHeading ? 'h1' : 'h2';
+---
+
+<section class="patterns" aria-labelledby="genre-patterns-title">
+  <div class="patterns__intro">
+    <TitleTag id="genre-patterns-title">{set.title}</TitleTag>
+    <p>{set.lead}</p>
+    <p class="patterns__meta">
+      <span>{set.meter}</span>
+      <span>{set.resolution}</span>
+      <span>{bpm} BPM</span>
+      <span>{t(locale, 'genres.patternChClosed')}</span>
+      <span>{t(locale, 'genres.patternOhOpen')}</span>
+    </p>
+    <p class="patterns__disclaimer">{set.disclaimer}</p>
+    <p class="patterns__daw">{t(locale, 'genres.patternDawHint')}</p>
+  </div>
+
+  {
+    set.patterns.map((pattern) => (
+      <article class="pattern">
+        <header class="pattern__head">
+          <div class="pattern__head-row">
+            <h3>{pattern.name}</h3>
+            <GenrePatternPlay
+              client:load
+              id={pattern.id}
+              name={pattern.name}
+              bpm={bpm}
+              lanes={pattern.lanes.map((lane) => ({ id: lane.id, steps: lane.steps }))}
+              playLabel={t(locale, 'genres.patternPlay')}
+              stopLabel={t(locale, 'genres.patternStop')}
+              playAria={t(locale, 'genres.patternPlayAria', { name: pattern.name, bpm })}
+              stopAria={t(locale, 'genres.patternStopAria', { name: pattern.name })}
+              midiLabel={t(locale, 'genres.patternMidi')}
+              midiDone={t(locale, 'genres.patternMidiDone')}
+              midiAria={t(locale, 'genres.patternMidiAria', { name: pattern.name })}
+            />
+          </div>
+          <p>{pattern.summary}</p>
+        </header>
+
+        <div class="pattern__scroll">
+          <div class="seq" role="table" aria-label={t(locale, 'genres.patternGridAria', { name: pattern.name })}>
+            <div class="seq__corner" role="columnheader"></div>
+            {beats.map((beat) => (
+              <div class="seq__beat" role="columnheader" style="grid-column: span 4">
+                {beat}
+              </div>
+            ))}
+
+            {pattern.lanes.map((lane) => {
+              const hitSteps = laneHitList(lane);
+              return (
+                <>
+                  <div class="seq__lane" role="rowheader" title={`${lane.name}${lane.label !== lane.name ? ` (${lane.label})` : ''}`}>
+                    {lane.label}
+                    <span class="sr-only">
+                      {lane.label === lane.name
+                        ? `hits on steps ${hitSteps.join(', ') || 'none'}`
+                        : `${lane.name}, hits on steps ${hitSteps.join(', ') || 'none'}`}
+                    </span>
+                  </div>
+                  {lane.steps.map((on, index) => {
+                    const step = index + 1;
+                    const downbeat = index % 4 === 0;
+                    return (
+                      <div
+                        class:list={['seq__cell', { 'is-on': on, 'is-beat': downbeat }]}
+                        data-step={index}
+                        role="cell"
+                        aria-hidden="true"
+                        title={`${lane.label} · step ${step}${on ? ' · hit' : ''}`}
+                      >
+                        {on ? <span class="seq__hit" /> : null}
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            })}
+          </div>
+        </div>
+      </article>
+    ))
+  }
+
+  {
+    set.searchFaqs?.length ? (
+      <div class="patterns__faq">
+        {set.searchFaqs.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    ) : null
+  }
+</section>
+
+<style>
+  .patterns {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .patterns__intro :global(h1),
+  .patterns__intro :global(h2) {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+  .patterns__intro p {
+    margin: 0.35rem 0 0;
+    color: var(--text-muted);
+    line-height: 1.45;
+    font-size: 0.92rem;
+  }
+  .patterns__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem !important;
+  }
+  .patterns__meta span {
+    font-family: var(--font-bpm);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    background: var(--bg-elevated);
+  }
+  .patterns__disclaimer,
+  .patterns__daw {
+    padding: 0.55rem 0.75rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-dim);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: var(--text) !important;
+    font-size: 0.85rem;
+  }
+  .patterns__daw {
+    border-left-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    background: var(--bg-elevated);
+  }
+  .pattern {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0.85rem 0.9rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg-elevated);
+  }
+  .pattern__head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .pattern__head h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .seq__cell.is-now {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 70%, transparent);
+  }
+  .seq__cell.is-now .seq__hit {
+    transform: scale(1.08);
+  }
+  .pattern.is-playing {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+  .pattern__head p {
+    margin: 0.3rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .pattern__scroll {
+    overflow-x: auto;
+    margin-inline: -0.15rem;
+    padding-bottom: 0.15rem;
+  }
+  .seq {
+    --lane: 3.4rem;
+    display: grid;
+    grid-template-columns: var(--lane) repeat(16, minmax(0.85rem, 1fr));
+    gap: 0.22rem 0.18rem;
+    min-width: 22.5rem;
+    align-items: stretch;
+  }
+  .seq__corner {
+    min-height: 1.1rem;
+  }
+  .seq__beat {
+    font-family: var(--font-bpm);
+    font-size: 0.7rem;
+    font-weight: 650;
+    color: var(--text-muted);
+    text-align: center;
+    padding-bottom: 0.15rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .seq__lane {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-bpm);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    padding-right: 0.35rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .seq__cell {
+    aspect-ratio: 1;
+    min-height: 1.15rem;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 78%, #000);
+    display: grid;
+    place-items: center;
+  }
+  .seq__cell.is-beat {
+    border-color: color-mix(in srgb, var(--line) 70%, var(--accent) 30%);
+    background: color-mix(in srgb, var(--bg-tap) 88%, var(--accent) 6%);
+  }
+  .seq__hit {
+    width: 68%;
+    height: 68%;
+    border-radius: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .seq__cell.is-on {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  .patterns__faq {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .patterns__faq details {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    background: var(--bg-elevated);
+  }
+  .patterns__faq summary {
+    cursor: pointer;
+    font-weight: 650;
+    font-family: var(--font-display);
+    list-style-position: inside;
+  }
+  .patterns__faq summary::-webkit-details-marker {
+    color: var(--accent);
+  }
+  .patterns__faq p {
+    margin: 0.65rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 819px) {
+    .pattern {
+      padding: 0.85rem 0.75rem 0.9rem;
+    }
+    .seq {
+      --lane: 2.7rem;
+      gap: 0.14rem 0.08rem;
+      min-width: 0;
+    }
+    .seq__lane {
+      font-size: 0.62rem;
+    }
+    .seq__cell {
+      min-height: 0.95rem;
+      border-radius: 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seq__cell.is-now .seq__hit {
+      transform: none;
+    }
+  }
+</style>

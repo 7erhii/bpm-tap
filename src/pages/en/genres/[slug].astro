@@ -1,9 +1,10 @@
 ---
 import ToolLayout from '@/layouts/ToolLayout.astro';
-import GenreHero from '@/components/seo/GenreHero.astro';
+import GenreStage from '@/components/seo/GenreStage.astro';
 import GenreArticle from '@/components/seo/GenreArticle.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { genres, getGenre } from '@/content/genres';
+import { resolveGenrePatternSeo } from '@/content/genrePatterns';
 import { suggestedBpmForGenre } from '@/lib/genres/match';
 import { absoluteUrl } from '@/lib/site';
 import { t } from '@/i18n/utils';
@@ -20,18 +21,20 @@ if (!genre) throw new Error('Genre not found');
 const bpm = suggestedBpmForGenre(genre);
 const copy = genre.en;
 const pageUrl = absoluteUrl(`/en/genres/${genre.slug}/`);
-const pageTitle = trimTitle(
-  t(locale, 'genres.pageTitle', { name: copy.name, min: genre.bpmMin, max: genre.bpmMax }),
-);
-const pageDescription = trimMetaDescription(
-  t(locale, 'genres.pageDescription', {
+const seo = resolveGenrePatternSeo(genre.slug, locale, {
+  title: t(locale, 'genres.pageTitle', { name: copy.name, min: genre.bpmMin, max: genre.bpmMax }),
+  description: t(locale, 'genres.pageDescription', {
     name: copy.name,
     min: genre.bpmMin,
     max: genre.bpmMax,
     summary: copy.summary,
   }),
-);
-const pageHeading = t(locale, 'genres.heading', { name: copy.name });
+  heading: t(locale, 'genres.heading', { name: copy.name }),
+});
+const pageTitle = trimTitle(seo.title);
+const pageDescription = trimMetaDescription(seo.description);
+const pageHeading = seo.hasPattern ? undefined : seo.heading;
+const pageLead = seo.hasPattern ? undefined : copy.summary;
 ---
 
 <ToolLayout
@@ -40,23 +43,25 @@ const pageHeading = t(locale, 'genres.heading', { name: copy.name });
   description={pageDescription}
   canonicalPath={`/en/genres/${genre.slug}/`}
   heading={pageHeading}
-  lead={copy.summary}
+  lead={pageLead}
 >
   <JsonLd
     slot="head"
     data={{
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: pageHeading,
-      description: t(locale, 'genres.rangeLead', {
-        name: copy.name,
-        min: genre.bpmMin,
-        max: genre.bpmMax,
-      }),
+      headline: seo.heading,
+      description: seo.hasPattern
+        ? seo.description
+        : t(locale, 'genres.rangeLead', {
+            name: copy.name,
+            min: genre.bpmMin,
+            max: genre.bpmMax,
+          }),
       url: pageUrl,
       inLanguage: 'en',
     }}
   />
-  <GenreHero slot="tool" locale={locale} genre={genre} bpm={bpm} />
+  <GenreStage slot="tool" locale={locale} genre={genre} bpm={bpm} />
   <GenreArticle locale={locale} genre={genre} bpm={bpm} />
 </ToolLayout>

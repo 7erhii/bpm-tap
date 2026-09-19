@@ -1,0 +1,29 @@
+---
+import LegalLayout from '@/layouts/LegalLayout.astro';
+import LegalSections from '@/components/legal/LegalSections.astro';
+import { termsSections } from '@/content/legal';
+import { LOCALES, isLocale, localizedPath, t, type Locale } from '@/i18n/utils';
+import { legalHref } from '@/lib/legal';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const raw = Astro.params.locale ?? 'en';
+const locale: Locale = isLocale(raw) ? raw : 'en';
+const fromPulse = Astro.url.searchParams.get('from') === 'pulse';
+---
+
+<LegalLayout
+  locale={locale}
+  title={t(locale, 'terms.title')}
+  description={t(locale, 'terms.description')}
+  canonicalPath={localizedPath(locale, 'terms')}
+  heading={t(locale, 'terms.h1')}
+  lead={t(locale, 'terms.lead')}
+>
+  <LegalSections sections={termsSections(locale)} />
+  <p>
+    <a href={legalHref(locale, 'contact', fromPulse)}>{t(locale, 'legal.contactCta')}</a>
+  </p>
+</LegalLayout>

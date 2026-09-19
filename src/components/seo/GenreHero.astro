@@ -118,15 +118,15 @@ const quarterMs = Math.round(60000 / bpm);
   .advice__item {
     margin: 0;
     padding: 0.85rem 1rem;
-    border-left: 3px solid var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
     background: var(--accent-dim);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    border-radius: var(--radius-md);
     color: var(--text-muted);
     line-height: 1.45;
     font-size: 0.95rem;
   }
   .advice__item--warn {
-    border-left-color: color-mix(in srgb, var(--accent) 55%, #c45c26);
+    border-color: color-mix(in srgb, var(--accent) 40%, #c45c26);
     background: color-mix(in srgb, var(--accent-dim) 70%, rgba(196, 92, 38, 0.12));
   }
   .advice__item strong {

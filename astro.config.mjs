@@ -4,8 +4,96 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
+import { loadEnv } from 'vite';
+import { BODY_MAX } from './src/lib/contact/limits';
+import { clientIp, contactDeliveryFromEnv, handleContactPost } from './src/lib/contact/handler';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
+const loadedEnv = loadEnv(process.env.NODE_ENV ?? 'development', root, '');
+
+function isContactApiPath(pathname) {
+  return pathname === '/api/contact' || pathname === '/api/contact/';
+}
+
+/** Local POST /api/contact for `astro dev` and `astro preview`. */
+function contactApiPlugin() {
+  const delivery = () =>
+    contactDeliveryFromEnv({
+      RESEND_API_KEY: process.env.RESEND_API_KEY || loadedEnv.RESEND_API_KEY,
+      RESEND_FROM: process.env.RESEND_FROM || loadedEnv.RESEND_FROM,
+      CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL || loadedEnv.CONTACT_TO_EMAIL,
+    });
+
+  /** @param {import('vite').ViteDevServer | import('vite').PreviewServer} server */
+  function attach(server) {
+    /** @type {import('connect').NextHandleFunction} */
+    const handler = async (req, res, next) => {
+      const raw = req.url ?? '/';
+      const pathname = raw.split('?')[0] ?? '/';
+      if (!isContactApiPath(pathname)) {
+        next();
+        return;
+      }
+      if (req.method === 'OPTIONS') {
+        res.statusCode = 204;
+        res.end();
+        return;
+      }
+      if (req.method !== 'POST') {
+        res.statusCode = 405;
+        res.setHeader('content-type', 'application/json; charset=utf-8');
+        res.end(JSON.stringify({ ok: false, error: 'invalid' }));
+        return;
+      }
+
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      const text = Buffer.concat(chunks).toString('utf8');
+      if (text.length > BODY_MAX) {
+        res.statusCode = 413;
+        res.setHeader('content-type', 'application/json; charset=utf-8');
+        res.end(JSON.stringify({ ok: false, error: 'invalid' }));
+        return;
+      }
+
+      let body = null;
+      try {
+        body = text ? JSON.parse(text) : null;
+      } catch {
+        body = null;
+      }
+
+      const headers = new Headers();
+      for (const [key, value] of Object.entries(req.headers)) {
+        if (typeof value === 'string') headers.set(key, value);
+      }
+
+      const result = await handleContactPost({
+        body,
+        ip: clientIp(headers),
+        ...delivery(),
+      });
+      res.statusCode = result.status;
+      res.setHeader('content-type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify(result.body));
+    };
+
+    return () => {
+      server.middlewares.stack.unshift({ route: '', handle: handler });
+    };
+  }
+
+  /** @type {import('vite').Plugin} */
+  return {
+    name: 'contact-api',
+    configureServer(server) {
+      return attach(server);
+    },
+    configurePreviewServer(server) {
+      return attach(server);
+    },
+  };
+}
 
 /** In `astro dev`, `trailingSlash: 'always'` 404s before routing. Redirect first. */
 function trailingSlashDevRedirect() {
@@ -23,6 +111,7 @@ function trailingSlashDevRedirect() {
           pathname === '/' ||
           pathname.endsWith('/') ||
           pathname.startsWith('/@') ||
+          pathname.startsWith('/api') ||
           pathname.startsWith('/src/') ||
           pathname.startsWith('/node_modules') ||
           pathname.startsWith('/__') ||
@@ -149,7 +238,7 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [trailingSlashDevRedirect()],
+    plugins: [contactApiPlugin(), trailingSlashDevRedirect()],
     resolve: {
       alias: {
         '@': path.join(root, 'src'),

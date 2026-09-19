@@ -65,6 +65,9 @@ const htmlPulseMode = theme === 'pulse' ? 'light' : undefined;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
       (function () {
+        if (/[?&]from=pulse(?:&|$)/.test(location.search)) {
+          document.documentElement.setAttribute('data-theme', 'pulse');
+        }
         if (document.documentElement.getAttribute('data-theme') === 'pulse') {
           var m = document.cookie.match(/(?:^|; )pulse-mode=([^;]+)/);
           var mode = m ? decodeURIComponent(m[1]) : 'light';

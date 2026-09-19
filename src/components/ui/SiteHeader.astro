@@ -17,10 +17,15 @@ interface Props {
 
 const { locale, theme = 'studio' } = Astro.props;
 const pathAfterLocale = Astro.url.pathname.replace(localePathRegex(), '') || '/';
-const onPulse = pathAfterLocale === '/pulse' || pathAfterLocale.startsWith('/pulse/');
+const onPulse =
+  pathAfterLocale === '/pulse' ||
+  pathAfterLocale.startsWith('/pulse/') ||
+  Astro.url.searchParams.get('from') === 'pulse';
+const onGenres = pathAfterLocale === '/genres' || pathAfterLocale.startsWith('/genres/');
 const brandHref = localizedPath(locale);
 const brandLabel = t(locale, 'brand');
 const pathSuffix = pathAfterLocale.replace(/^\//, '');
+const fromPulseQuery = Astro.url.searchParams.get('from') === 'pulse' ? '?from=pulse' : '';
 const menuId = `locale-menu-${locale}`;
 ---
 
@@ -56,18 +61,31 @@ const menuId = `locale-menu-${locale}`;
         )
       }
     </nav>
-    {
-      onPulse ? (
-        <a class="nav-studio nav-studio--mobile" href={localizedPath(locale)}>
-          <span class="nav-studio__mark" aria-hidden="true"></span>
-          {t(locale, 'brand')}
-        </a>
-      ) : (
-        <a class="nav-pulse nav-pulse--mobile" href={localizedPath(locale, 'pulse')}>
-          {t(locale, 'nav.pulse')}
-        </a>
-      )
-    }
+    <div class="header-mobile">
+      {
+        theme === 'pulse' ? null : (
+          <a
+            class="nav-genres nav-genres--mobile"
+            href={localizedPath(locale, 'genres')}
+            aria-current={onGenres ? 'page' : undefined}
+          >
+            {t(locale, 'nav.genres')}
+          </a>
+        )
+      }
+      {
+        onPulse ? (
+          <a class="nav-studio nav-studio--mobile" href={localizedPath(locale)}>
+            <span class="nav-studio__mark" aria-hidden="true"></span>
+            {t(locale, 'brand')}
+          </a>
+        ) : (
+          <a class="nav-pulse nav-pulse--mobile" href={localizedPath(locale, 'pulse')}>
+            {t(locale, 'nav.pulse')}
+          </a>
+        )
+      }
+    </div>
     <div class="locale-dropdown" data-locale-dropdown>
       <button
         type="button"
@@ -89,7 +107,7 @@ const menuId = `locale-menu-${locale}`;
               <li role="presentation">
                 <a
                   class:list={['locale-option', { 'locale-option--active': code === locale }]}
-                  href={localizedPath(code, pathSuffix)}
+                  href={`${localizedPath(code, pathSuffix)}${fromPulseQuery}`}
                   hreflang={HTML_LANG[code]}
                   lang={HTML_LANG[code]}
                   role="option"
@@ -204,9 +222,32 @@ const menuId = `locale-menu-${locale}`;
     color: #fff;
     border-color: var(--pulse-nav);
   }
-  .nav-pulse--mobile,
-  .nav-studio--mobile {
+  .header-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     margin-left: auto;
+  }
+  .nav-genres {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 650;
+    border: 1px solid var(--line);
+    background: var(--bg-elevated);
+    border-radius: 999px;
+    padding: 0.32rem 0.75rem;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    line-height: 1;
+    min-height: 2rem;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav-genres:hover,
+  .nav-genres[aria-current='page'] {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    color: var(--accent);
   }
   .nav-studio {
     --studio-nav: #c8f542;
@@ -343,12 +384,18 @@ const menuId = `locale-menu-${locale}`;
   .locale-option__name {
     font-size: 0.86rem;
   }
+  @media (max-width: 419px) {
+    .nav-genres--mobile,
+    .nav-pulse--mobile {
+      padding-inline: 0.6rem;
+      font-size: 0.8rem;
+    }
+  }
   @media (min-width: 820px) {
     .nav {
       display: inline-flex;
     }
-    .nav-pulse--mobile,
-    .nav-studio--mobile {
+    .header-mobile {
       display: none;
     }
   }

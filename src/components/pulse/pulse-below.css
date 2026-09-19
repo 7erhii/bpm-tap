@@ -28,8 +28,7 @@ html[data-theme='pulse']:not([data-pulse-mode='dark']) .pulse-below {
   max-width: none;
   padding: 0.85rem 1rem;
   border: 1px solid var(--accent-edge);
-  border-left: 3px solid var(--accent);
-  border-radius: 4px 14px 14px 4px;
+  border-radius: 16px;
   background: var(--accent-tint);
 }
 
@@ -139,10 +138,10 @@ html[data-theme='pulse']:not([data-pulse-mode='dark']) .pulse-below {
   color: var(--text-muted);
 }
 
-.pulse-below .aside-line {
+.pulse-below .feel-hint {
   margin: 0.9rem 0 0;
-  padding-left: 0.8rem;
-  border-left: 2px solid var(--accent-edge);
+  border: 0;
+  padding-left: 0;
   font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.55;
