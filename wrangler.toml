@@ -12,10 +12,8 @@ not_found_handling = "404-page"
 html_handling = "force-trailing-slash"
 run_worker_first = ["/api/*"]
 
-# Non-secret contact delivery. RESEND_API_KEY is a dashboard Secret (not a Variable).
+# Non-secret contact delivery. Runtime RESEND_API_KEY is written on deploy
+# from the Cloudflare *build* secret of the same name (see npm run deploy:cf).
 [vars]
 RESEND_FROM = "BPM Tap <onboarding@resend.dev>"
 CONTACT_TO_EMAIL = "bpmtapcom@gmail.com"
-
-[secrets]
-required = ["RESEND_API_KEY"]
