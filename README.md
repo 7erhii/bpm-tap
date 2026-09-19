@@ -31,7 +31,7 @@ PUBLIC_ADS_ENABLED=false
 
 ## Contact form (Cloudflare Pages)
 
-The form posts to `/api/contact` (`functions/api/contact.ts`) and sends mail with Resend. Locally, copy `.env.example` → `.env`. Do not commit `.env` or paste the Google account password into Cloudflare.
+The form posts to `/api/contact` (`src/cloudflare-worker.ts` on Workers) and sends mail with Resend. Locally, copy `.env.example` → `.env`. Do not commit `.env` or paste the Google account password into Cloudflare.
 
 Production secrets live in the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages), not in the repo:
 
