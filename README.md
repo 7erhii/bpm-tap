@@ -37,8 +37,8 @@ Production secrets live on the **Worker** named `bpm-tap` (this repo deploys wit
 
 1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) → **bpm-tap** (Workers, not a Pages project).
 2. **Settings** → **Variables and Secrets**.
-3. Add `RESEND_API_KEY` as a **Secret** (Encrypt). `RESEND_FROM` and `CONTACT_TO_EMAIL` ship in `wrangler.toml`.
-4. Save / deploy that Worker version, then send a test from `/en/contact/`.
+3. Add `RESEND_API_KEY` as a **Secret** (not a plaintext Variable — those get wiped on deploy). `RESEND_FROM` and `CONTACT_TO_EMAIL` ship in `wrangler.toml`. `keep_vars = true` keeps dashboard values across `wrangler deploy`.
+4. Save, then send a test from `/en/contact/`.
 
 Never prefix these with `PUBLIC_`. After deploy, send a test from `/en/contact/` and check the inbox (and spam).
 

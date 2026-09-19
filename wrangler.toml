@@ -1,6 +1,8 @@
 name = "bpm-tap"
 main = "./src/cloudflare-worker.ts"
 compatibility_date = "2026-09-19"
+# Keep dashboard secrets (RESEND_API_KEY) across wrangler deploy.
+keep_vars = true
 
 # Custom 404 from dist/404.html. /api/* hits the Worker first (contact form).
 [assets]
@@ -10,8 +12,8 @@ not_found_handling = "404-page"
 html_handling = "force-trailing-slash"
 run_worker_first = ["/api/*"]
 
-# Non-secret contact delivery. Put RESEND_API_KEY on the Worker as a secret
-# (Workers & Pages → bpm-tap Worker → Settings → Variables and Secrets).
+# Non-secret contact delivery. Put RESEND_API_KEY on the Worker as a Secret
+# (not a Variable) so deploy does not wipe it.
 [vars]
 RESEND_FROM = "BPM Tap <onboarding@resend.dev>"
 CONTACT_TO_EMAIL = "bpmtapcom@gmail.com"
