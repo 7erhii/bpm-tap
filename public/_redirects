@@ -72,5 +72,3 @@
 /fr/guides/tap-tempo-accuracy/  /fr/guides/bpm-accuracy/  301
 /pt/guides/tap-tempo-accuracy/  /pt/guides/bpm-accuracy/  301
 /zh/guides/tap-tempo-accuracy/  /zh/guides/bpm-accuracy/  301
-# Pretty 404 for unmatched paths (Netlify / Cloudflare Pages)
-/*    /404.html   404

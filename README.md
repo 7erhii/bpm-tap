@@ -29,6 +29,28 @@ Reserved slots only. Keep off until traffic exists:
 PUBLIC_ADS_ENABLED=false
 ```
 
+## Contact form (Cloudflare Pages)
+
+The form posts to `/api/contact` (`functions/api/contact.ts`) and sends mail with Resend. Locally, copy `.env.example` → `.env`. Do not commit `.env` or paste the Google account password into Cloudflare.
+
+Production secrets live in the [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages), not in the repo:
+
+1. **Workers & Pages** → the bpm-tap Pages project.
+2. **Settings** → **Environment variables** (sometimes **Variables and Secrets**).
+3. Add these for **Production** (and Preview if you want the form on branch deploys):
+
+| Variable | Value | Encrypt / Secret |
+|---|---|---|
+| `RESEND_API_KEY` | key from [resend.com/api-keys](https://resend.com/api-keys) | yes |
+| `RESEND_FROM` | `BPM Tap <onboarding@resend.dev>` until the domain is verified | no |
+| `CONTACT_TO_EMAIL` | inbox that should receive messages | no |
+
+4. Save, then **Retry deployment** / redeploy. Pages Functions pick up env only on a new deploy.
+
+Never prefix these with `PUBLIC_`. After deploy, send a test from `/en/contact/` and check the inbox (and spam).
+
+Workers `_redirects` only allow 200/301/302/303/307/308 — do not use a `404` splat. Unknown URLs are served by `404.html` from the build.
+
 ## Spec Kit
 
 Product specs live in `specs/001-studio-tap-bpm/`.
