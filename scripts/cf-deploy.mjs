@@ -17,6 +17,7 @@ function run(args, { input } = {}) {
   });
 }
 
+// Cloudflare Builds: npm run deploy:cf (not raw wrangler deploy).
 const key = process.env.RESEND_API_KEY?.trim();
 
 await run(['deploy', '--keep-vars']);
