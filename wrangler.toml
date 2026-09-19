@@ -1,0 +1,10 @@
+name = "bpm-tap"
+compatibility_date = "2026-09-19"
+
+# Serve Astro's dist/404.html for unknown URLs (Workers do not infer this).
+# /api/* still hits functions/api/contact.ts before the 404 fallback.
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
+html_handling = "force-trailing-slash"
+run_worker_first = ["/api/*"]

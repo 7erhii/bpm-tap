@@ -49,7 +49,7 @@ Production secrets live in the [Cloudflare dashboard](https://dash.cloudflare.co
 
 Never prefix these with `PUBLIC_`. After deploy, send a test from `/en/contact/` and check the inbox (and spam).
 
-Workers `_redirects` only allow 200/301/302/303/307/308 — do not use a `404` splat. Unknown URLs are served by `404.html` from the build.
+Workers `_redirects` only allow 200/301/302/303/307/308 — do not use a `404` splat. Custom 404 is `src/pages/404.astro` via `wrangler.toml` (`not_found_handling = "404-page"`).
 
 ## Spec Kit
 
