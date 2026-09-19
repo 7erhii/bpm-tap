@@ -4,6 +4,7 @@ import { EMAIL_MAX, MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits';
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 const DEFAULT_FROM = 'BPM Tap <onboarding@resend.dev>';
+const DEFAULT_TO = 'bpmtapcom@gmail.com';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SOURCES = new Set<ContactSource>(['bpm-tap', 'pulse']);
@@ -23,7 +24,7 @@ export interface ContactRequestBody {
 
 export interface ContactResult {
   status: number;
-  body: { ok: boolean; error?: ContactErrorCode };
+  body: { ok: boolean; error?: ContactErrorCode; missing?: string[] };
 }
 
 export interface ContactDeliveryConfig {
@@ -117,9 +118,9 @@ export async function handleContactPost(opts: {
   hits.set(ip, recent);
 
   const apiKey = opts.resendApiKey?.trim();
-  const to = opts.contactToEmail?.trim();
-  if (!apiKey || !to) {
-    return { status: 503, body: { ok: false, error: 'config' } };
+  const to = opts.contactToEmail?.trim() || DEFAULT_TO;
+  if (!apiKey) {
+    return { status: 503, body: { ok: false, error: 'config', missing: ['RESEND_API_KEY'] } };
   }
 
   const from = opts.resendFrom?.trim() || DEFAULT_FROM;

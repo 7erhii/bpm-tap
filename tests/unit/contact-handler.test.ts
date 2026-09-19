@@ -76,6 +76,7 @@ describe('handleContactPost', () => {
     });
     expect(result.status).toBe(503);
     expect(result.body.error).toBe('config');
+    expect(result.body.missing).toEqual(['RESEND_API_KEY']);
   });
 
   it('posts a Resend payload for a valid Pulse message', async () => {

@@ -12,8 +12,10 @@ not_found_handling = "404-page"
 html_handling = "force-trailing-slash"
 run_worker_first = ["/api/*"]
 
-# Non-secret contact delivery. Put RESEND_API_KEY on the Worker as a Secret
-# (not a Variable) so deploy does not wipe it.
+# Non-secret contact delivery. RESEND_API_KEY is a dashboard Secret (not a Variable).
 [vars]
 RESEND_FROM = "BPM Tap <onboarding@resend.dev>"
 CONTACT_TO_EMAIL = "bpmtapcom@gmail.com"
+
+[secrets]
+required = ["RESEND_API_KEY"]
