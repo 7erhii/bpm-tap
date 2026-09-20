@@ -2,7 +2,7 @@ import type { GenrePatternCopyMap } from '../types';
 
 export const es: GenrePatternCopyMap = {
   house: {
-    title: 'Ritmo house · patrón de batería de 16 pasos',
+    title: 'House BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería house típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El house vive en el skip y los hats, no en copiar esto 1:1.',
     faqs: [
@@ -27,7 +27,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   techno: {
-    title: 'Ritmo Techno · patrón de batería de 16 pasos',
+    title: 'Techno BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Techno típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el four-on-the-floor hipnótico y los hats de contratiempo.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El techno vive en los hats offbeat y el kick repetido, no en copiar esto 1:1.',
     faqs: [
@@ -52,7 +52,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   trance: {
-    title: 'Ritmo Trance · patrón de batería de 16 pasos',
+    title: 'Trance BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Trance típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello son los hats de corchea offbeat y el snare roll hacia el drop.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El trance vive en el roll y las frases largas, no en copiar esto 1:1.',
     faqs: [
@@ -77,7 +77,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   'drum-and-bass': {
-    title: 'Ritmo Drum & Bass · patrón de batería de 16 pasos',
+    title: 'Drum & Bass BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Drum & Bass típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el two-step a 160–180, a menudo sentido en half-time.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El drum & bass vive en el two-step y el amen, no en copiar esto 1:1.',
     faqs: [
@@ -102,7 +102,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   dubstep: {
-    title: 'Ritmo Dubstep · patrón de batería de 16 pasos',
+    title: 'Dubstep BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Dubstep típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el half-time: escrito a 135–145, sentido cerca de 70.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El dubstep vive en el half-time y el wobble, no en copiar esto 1:1.',
     faqs: [
@@ -127,7 +127,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   trap: {
-    title: 'Ritmo Trap · patrón de batería de 16 pasos',
+    title: 'Trap BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Trap típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el bounce del 808 y el hat roll.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El trap vive en el 808 y los rolls, no en copiar esto 1:1.',
     faqs: [
@@ -152,7 +152,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   'hip-hop': {
-    title: 'Ritmo Hip Hop · patrón de batería de 16 pasos',
+    title: 'Hip Hop BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Hip Hop típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el pocket: boom bap a 80–100.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El hip hop vive en el pocket y el swing, no en copiar esto 1:1.',
     faqs: [
@@ -177,7 +177,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   pop: {
-    title: 'Ritmo Pop · patrón de batería de 16 pasos',
+    title: 'Pop BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Pop típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el backbeat de radio, a veces four-on-the-floor.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El pop vive en el estribillo y el backbeat, no en copiar esto 1:1.',
     faqs: [
@@ -202,7 +202,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   rock: {
-    title: 'Ritmo Rock · patrón de batería de 16 pasos',
+    title: 'Rock BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Rock típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el backbeat de snare en 2 y 4.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El rock vive en el snare y el riff, no en copiar esto 1:1.',
     faqs: [
@@ -227,7 +227,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   metal: {
-    title: 'Ritmo Metal · patrón de batería de 16 pasos',
+    title: 'Metal BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Metal típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el double kick y el galope.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El metal vive en el double kick y el gallop, no en copiar esto 1:1.',
     faqs: [
@@ -252,7 +252,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   'lo-fi': {
-    title: 'Ritmo Lo-fi · patrón de batería de 16 pasos',
+    title: 'Lo-fi BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Lo-fi típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el boom bap polvoriento y el skip perezoso a 70–90.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El lo-fi vive en el dust y el swing flojo, no en copiar esto 1:1.',
     faqs: [
@@ -277,7 +277,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   ambient: {
-    title: 'Ritmo Ambient · patrón de batería de 16 pasos',
+    title: 'Ambient BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Ambient típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es un pulso lento, a menudo sin clap, a 60–90.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El ambient vive en el espacio y el pulso, no en copiar esto 1:1.',
     faqs: [
@@ -302,7 +302,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   reggaeton: {
-    title: 'Ritmo Reggaeton · patrón de batería de 16 pasos',
+    title: 'Reggaeton BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Reggaeton típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el dembow a 90–100.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El reggaeton vive en el dembow, no en copiar esto 1:1.',
     faqs: [
@@ -327,7 +327,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   afrobeat: {
-    title: 'Ritmo Afrobeat · patrón de batería de 16 pasos',
+    title: 'Afrobeat BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Afrobeat típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el kick tipo clave y los hats highlife, a 100–130.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El afrobeat vive en la clave y la percusión, no en copiar esto 1:1.',
     faqs: [
@@ -352,7 +352,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   'jersey-club': {
-    title: 'Ritmo Jersey Club · patrón de batería de 16 pasos',
+    title: 'Jersey Club BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Jersey Club típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el club kick a 130–140: pasos 1, 4, 7, 10 y 13.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El jersey club vive en el stutter del kick, no en copiar esto 1:1.',
     faqs: [
@@ -377,7 +377,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   phonk: {
-    title: 'Ritmo Phonk · patrón de batería de 16 pasos',
+    title: 'Phonk BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Phonk típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el Memphis y el cowbell en el hat abierto, a 130–160.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El phonk vive en el cowbell y el drift, no en copiar esto 1:1.',
     faqs: [
@@ -402,7 +402,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   hardstyle: {
-    title: 'Ritmo Hardstyle · patrón de batería de 16 pasos',
+    title: 'Hardstyle BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Hardstyle típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el reverse-bass a 150–160, con kick four-on-the-floor.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El hardstyle vive en el reverse-bass y el drive de hats, no en copiar esto 1:1.',
     faqs: [
@@ -427,7 +427,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   jazz: {
-    title: 'Ritmo Jazz · patrón de batería de 16 pasos',
+    title: 'Jazz BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Jazz típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el ride; aquí los hats hacen de ride, y no es swing real.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El jazz vive en el ride y el swing, no en copiar esto 1:1.',
     faqs: [
@@ -452,7 +452,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   salsa: {
-    title: 'Ritmo Salsa · patrón de batería de 16 pasos',
+    title: 'Salsa BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Salsa típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el tumbao, escrito a 180–220.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. La salsa vive en la clave y la percusión, no en copiar esto 1:1.',
     faqs: [
@@ -477,7 +477,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   bachata: {
-    title: 'Ritmo Bachata · patrón de batería de 16 pasos',
+    title: 'Bachata BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Bachata típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el 1-2-3-tap, clap en el 4, a 120–140.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. La bachata vive en el 1-2-3-tap y la güira, no en copiar esto 1:1.',
     faqs: [
@@ -502,7 +502,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   gospel: {
-    title: 'Ritmo Gospel · patrón de batería de 16 pasos',
+    title: 'Gospel BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Gospel típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el church clap en 2 y 4, a 60–100.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El gospel vive en el clap de iglesia y el shout, no en copiar esto 1:1.',
     faqs: [
@@ -527,7 +527,7 @@ export const es: GenrePatternCopyMap = {
     ],
   },
   country: {
-    title: 'Ritmo Country · patrón de batería de 16 pasos',
+    title: 'Country BPM · patrón de batería de 16 pasos',
     lead: 'El BPM solo dice lo rápido. Luego va el beat: un patrón de batería Country típico que puedes programar en cualquier DAW — kick, clap, hats, un compás de dieciseisavos. El sello es el train beat o el two-step, a 80–120.',
     disclaimer: 'Grids de partida populares: no te quedes congelado en ellos. El country vive en el train y el two-step, no en copiar esto 1:1.',
     faqs: [

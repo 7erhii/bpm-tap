@@ -2,7 +2,7 @@ import type { GenrePatternCopyMap } from '../types';
 
 export const en: GenrePatternCopyMap = {
   house: {
-    title: 'House rhythm · 16-step drum pattern',
+    title: 'House BPM · 16-step drum pattern',
     lead: 'BPM is only how fast. Next is the beat: a typical house drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths.',
     disclaimer: 'Popular starting grids — don’t freeze on them. House lives in the skip and the hats, not in copying this 1:1.',
     faqs: [
@@ -28,7 +28,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   techno: {
-    title: 'Techno rhythm · 16-step drum pattern',
+    title: 'Techno BPM · 16-step drum pattern',
     lead: 'BPM is only the speed. Then comes the beat: a typical techno drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. The hypnotic part is a four-on-the-floor kick and those offbeat hats.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Techno lives in the grind and the offbeat hats, not in copying this 1:1.',
     faqs: [
@@ -55,7 +55,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   trance: {
-    title: 'Trance rhythm · 16-step drum pattern',
+    title: 'Trance BPM · 16-step drum pattern',
     lead: 'BPM only sets the speed. Next is the beat: a typical trance drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Trance leans on a four-on-the-floor kick and a snare roll that lifts the bar.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Trance lives in the lift and the snare roll, not in copying this 1:1.',
     faqs: [
@@ -82,7 +82,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   'drum-and-bass': {
-    title: 'Drum & Bass rhythm · 16-step drum pattern',
+    title: 'Drum & Bass BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the clock runs. Then the beat: a typical drum and bass drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. The feel is two-step: snare on 3, not a four-floor kick.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Drum & Bass lives in the two-step skip and the break, not in copying this 1:1.',
     faqs: [
@@ -109,7 +109,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   dubstep: {
-    title: 'Dubstep rhythm · 16-step drum pattern',
+    title: 'Dubstep BPM · 16-step drum pattern',
     lead: 'BPM is only a number. Then comes the beat: a typical dubstep drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. The drop is half-time: snare on 3, not on 2 and 4.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Dubstep lives in the half-time drop, not in copying this 1:1.',
     faqs: [
@@ -136,7 +136,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   trap: {
-    title: 'Trap rhythm · 16-step drum pattern',
+    title: 'Trap BPM · 16-step drum pattern',
     lead: 'BPM is just the speed. Next is the beat: a typical trap drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Trap bounce is 808 kicks plus a hat roll at the end of the bar.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Trap lives in the 808 bounce and the hat roll, not in copying this 1:1.',
     faqs: [
@@ -163,7 +163,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   'hip-hop': {
-    title: 'Hip Hop rhythm · 16-step drum pattern',
+    title: 'Hip Hop BPM · 16-step drum pattern',
     lead: 'BPM is only the pocket’s speed. Then the beat: a typical hip hop drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Boom bap is kick on 1 and the & of 3, snare on 2 and 4.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Hip Hop lives in the pocket and the snare, not in copying this 1:1.',
     faqs: [
@@ -190,7 +190,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   pop: {
-    title: 'Pop rhythm · 16-step drum pattern',
+    title: 'Pop BPM · 16-step drum pattern',
     lead: 'BPM tells you speed, not the groove. Next is the beat: a typical pop drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Radio pop is a backbeat: snare on 2 and 4, kick pushing the bars.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Pop lives in the backbeat and the chorus lift, not in copying this 1:1.',
     faqs: [
@@ -217,7 +217,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   rock: {
-    title: 'Rock rhythm · 16-step drum pattern',
+    title: 'Rock BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the band is counting. Then the beat: a typical rock drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Rock is a backbeat: kick on 1 and 3, snare on 2 and 4.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Rock lives in the backbeat and the drive, not in copying this 1:1.',
     faqs: [
@@ -244,7 +244,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   metal: {
-    title: 'Metal rhythm · 16-step drum pattern',
+    title: 'Metal BPM · 16-step drum pattern',
     lead: 'BPM is only the speed of the count. Next is the beat: a typical metal drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Metal is double kick and gallop, not a lazy backbeat.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Metal lives in the double kick and the gallop, not in copying this 1:1.',
     faqs: [
@@ -271,7 +271,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   'lo-fi': {
-    title: 'Lo-fi rhythm · 16-step drum pattern',
+    title: 'Lo-fi BPM · 16-step drum pattern',
     lead: 'BPM is only how slow the loop feels. Then the beat: a typical lo-fi drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Lo-fi is dusty boom bap with space, not busy hats.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Lo-fi lives in the dust and the lazy pocket, not in copying this 1:1.',
     faqs: [
@@ -298,7 +298,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   ambient: {
-    title: 'Ambient rhythm · 16-step drum pattern',
+    title: 'Ambient BPM · 16-step drum pattern',
     lead: 'BPM is only a slow clock. Then the beat: a typical ambient drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Ambient is a pulse with space, often no backbeat at all.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Ambient lives in space, not in copying this 1:1.',
     faqs: [
@@ -324,7 +324,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   reggaeton: {
-    title: 'Reggaeton rhythm · 16-step drum pattern',
+    title: 'Reggaeton BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the dembow walks. Next is the beat: a typical reggaeton drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Dembow is the spine: kicks on 1, the & of 2, and the & of 3.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Reggaeton lives in the dembow, not in copying this 1:1.',
     faqs: [
@@ -351,7 +351,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   afrobeat: {
-    title: 'Afrobeat rhythm · 16-step drum pattern',
+    title: 'Afrobeat BPM · 16-step drum pattern',
     lead: 'BPM is only the dance speed. Then the beat: a typical afrobeat drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. The kick follows a clave grouping, and highlife hats keep it moving.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Afrobeat lives in the clave and the highlife hats, not in copying this 1:1.',
     faqs: [
@@ -378,7 +378,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   'jersey-club': {
-    title: 'Jersey Club rhythm · 16-step drum pattern',
+    title: 'Jersey Club BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the chop runs. Next is the beat: a typical jersey club drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Jersey club is clustered kicks, not four-on-the-floor.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Jersey Club lives in the clustered kicks, not in copying this 1:1.',
     faqs: [
@@ -405,7 +405,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   phonk: {
-    title: 'Phonk rhythm · 16-step drum pattern',
+    title: 'Phonk BPM · 16-step drum pattern',
     lead: 'BPM is only the drift speed. Then the beat: a typical phonk drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Memphis phonk is trap-like, with a cowbell tick (open hat stands in).',
     disclaimer: 'Popular starting grids — don’t freeze on them. Phonk lives in the cowbell and the drift, not in copying this 1:1.',
     faqs: [
@@ -432,7 +432,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   hardstyle: {
-    title: 'Hardstyle rhythm · 16-step drum pattern',
+    title: 'Hardstyle BPM · 16-step drum pattern',
     lead: 'BPM is only how hard the clock hits. Next is the beat: a typical hardstyle drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. The kick is reverse bass; this grid is still four-on-the-floor hits.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Hardstyle lives in the reverse-bass punch, not in copying this 1:1.',
     faqs: [
@@ -459,7 +459,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   jazz: {
-    title: 'Jazz rhythm · 16-step drum pattern',
+    title: 'Jazz BPM · 16-step drum pattern',
     lead: 'BPM is only a wide clock. Then the beat: a typical jazz drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Hats stand in for the ride. This grid is straight 16ths, not real swing.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Jazz lives in the ride and the time, not in copying this 1:1.',
     faqs: [
@@ -486,7 +486,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   salsa: {
-    title: 'Salsa rhythm · 16-step drum pattern',
+    title: 'Salsa BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the tumbao walks. Next is the beat: a typical salsa drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. This is a starter grid, not full salsa percussion.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Salsa lives in the tumbao and the percussion conversation, not in copying this 1:1.',
     faqs: [
@@ -513,7 +513,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   bachata: {
-    title: 'Bachata rhythm · 16-step drum pattern',
+    title: 'Bachata BPM · 16-step drum pattern',
     lead: 'BPM is only the dance speed. Then the beat: a typical bachata drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Bachata counts 1-2-3, then the clap on 4.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Bachata lives in the 1-2-3 guitar pulse, not in copying this 1:1.',
     faqs: [
@@ -540,7 +540,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   gospel: {
-    title: 'Gospel rhythm · 16-step drum pattern',
+    title: 'Gospel BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the choir is moving. Next is the beat: a typical gospel drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Gospel is church clap on 2 and 4, with a kick pickup into 3.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Gospel lives in the clap and the shout, not in copying this 1:1.',
     faqs: [
@@ -567,7 +567,7 @@ export const en: GenrePatternCopyMap = {
     ],
   },
   country: {
-    title: 'Country rhythm · 16-step drum pattern',
+    title: 'Country BPM · 16-step drum pattern',
     lead: 'BPM is only how fast the train is rolling. Then the beat: a typical country drum pattern you can program in any DAW — kick, clap, hats, one bar of 16ths. Country is a train beat: snare on 2 and 4, hats on every 16th.',
     disclaimer: 'Popular starting grids — don’t freeze on them. Country lives in the train beat and the two-step, not in copying this 1:1.',
     faqs: [

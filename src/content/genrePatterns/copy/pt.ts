@@ -2,7 +2,7 @@ import type { GenrePatternCopyMap } from '../types';
 
 export const pt: GenrePatternCopyMap = {
   house: {
-    title: 'Ritmo house · padrão de bateria de 16 passos',
+    title: 'House BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de house típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias.',
     disclaimer: 'Grids de partida populares — não congele nelas. House vive no skip e nos hats, não em copiar isto 1:1.',
     faqs: [
@@ -27,7 +27,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   techno: {
-    title: 'Ritmo Techno · padrão de bateria de 16 passos',
+    title: 'Techno BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Techno típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o four-on-the-floor hipnótico e os hats de contratempo.',
     disclaimer: 'Grids de partida populares — não congele nelas. Techno vive nos hats offbeat e no kick repetido, não em copiar isso 1:1.',
     faqs: [
@@ -52,7 +52,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   trance: {
-    title: 'Ritmo Trance · padrão de bateria de 16 passos',
+    title: 'Trance BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Trance típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca são os hats de colcheia offbeat e o snare roll rumo ao drop.',
     disclaimer: 'Grids de partida populares — não congele nelas. Trance vive no roll e nas frases longas, não em copiar isso 1:1.',
     faqs: [
@@ -77,7 +77,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   'drum-and-bass': {
-    title: 'Ritmo Drum & Bass · padrão de bateria de 16 passos',
+    title: 'Drum & Bass BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Drum & Bass típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o two-step a 160–180, muitas vezes sentido em half-time.',
     disclaimer: 'Grids de partida populares — não congele nelas. Drum & Bass vive no two-step e no amen, não em copiar isso 1:1.',
     faqs: [
@@ -102,7 +102,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   dubstep: {
-    title: 'Ritmo Dubstep · padrão de bateria de 16 passos',
+    title: 'Dubstep BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Dubstep típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o half-time: escrito a 135–145, sentido perto de 70.',
     disclaimer: 'Grids de partida populares — não congele nelas. Dubstep vive no half-time e no wobble, não em copiar isso 1:1.',
     faqs: [
@@ -127,7 +127,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   trap: {
-    title: 'Ritmo Trap · padrão de bateria de 16 passos',
+    title: 'Trap BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Trap típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o bounce do 808 e o hat roll.',
     disclaimer: 'Grids de partida populares — não congele nelas. Trap vive no 808 e nos rolls, não em copiar isso 1:1.',
     faqs: [
@@ -152,7 +152,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   'hip-hop': {
-    title: 'Ritmo Hip Hop · padrão de bateria de 16 passos',
+    title: 'Hip Hop BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Hip Hop típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o pocket: boom bap a 80–100.',
     disclaimer: 'Grids de partida populares — não congele nelas. Hip Hop vive no pocket e no swing, não em copiar isso 1:1.',
     faqs: [
@@ -177,7 +177,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   pop: {
-    title: 'Ritmo Pop · padrão de bateria de 16 passos',
+    title: 'Pop BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Pop típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o backbeat de rádio, às vezes four-on-the-floor.',
     disclaimer: 'Grids de partida populares — não congele nelas. Pop vive no refrão e no backbeat, não em copiar isso 1:1.',
     faqs: [
@@ -202,7 +202,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   rock: {
-    title: 'Ritmo Rock · padrão de bateria de 16 passos',
+    title: 'Rock BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Rock típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o backbeat de caixa no 2 e no 4.',
     disclaimer: 'Grids de partida populares — não congele nelas. Rock vive na caixa e no riff, não em copiar isso 1:1.',
     faqs: [
@@ -227,7 +227,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   metal: {
-    title: 'Ritmo Metal · padrão de bateria de 16 passos',
+    title: 'Metal BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Metal típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o double kick e o galope.',
     disclaimer: 'Grids de partida populares — não congele nelas. Metal vive no double kick e no gallop, não em copiar isso 1:1.',
     faqs: [
@@ -252,7 +252,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   'lo-fi': {
-    title: 'Ritmo Lo-fi · padrão de bateria de 16 passos',
+    title: 'Lo-fi BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Lo-fi típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o boom bap empoeirado e o skip preguiçoso a 70–90.',
     disclaimer: 'Grids de partida populares — não congele nelas. Lo-fi vive no dust e no swing frouxo, não em copiar isso 1:1.',
     faqs: [
@@ -277,7 +277,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   ambient: {
-    title: 'Ritmo Ambient · padrão de bateria de 16 passos',
+    title: 'Ambient BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Ambient típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é um pulso lento, muitas vezes sem clap, a 60–90.',
     disclaimer: 'Grids de partida populares — não congele nelas. Ambient vive no espaço e no pulso, não em copiar isso 1:1.',
     faqs: [
@@ -302,7 +302,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   reggaeton: {
-    title: 'Ritmo Reggaeton · padrão de bateria de 16 passos',
+    title: 'Reggaeton BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Reggaeton típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o dembow a 90–100.',
     disclaimer: 'Grids de partida populares — não congele nelas. Reggaeton vive no dembow, não em copiar isso 1:1.',
     faqs: [
@@ -327,7 +327,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   afrobeat: {
-    title: 'Ritmo Afrobeat · padrão de bateria de 16 passos',
+    title: 'Afrobeat BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Afrobeat típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o kick tipo clave e os hats highlife, a 100–130.',
     disclaimer: 'Grids de partida populares — não congele nelas. Afrobeat vive na clave e na percussão, não em copiar isso 1:1.',
     faqs: [
@@ -352,7 +352,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   'jersey-club': {
-    title: 'Ritmo Jersey Club · padrão de bateria de 16 passos',
+    title: 'Jersey Club BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Jersey Club típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o club kick a 130–140: passos 1, 4, 7, 10 e 13.',
     disclaimer: 'Grids de partida populares — não congele nelas. Jersey Club vive no stutter do kick, não em copiar isso 1:1.',
     faqs: [
@@ -377,7 +377,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   phonk: {
-    title: 'Ritmo Phonk · padrão de bateria de 16 passos',
+    title: 'Phonk BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Phonk típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o Memphis e o cowbell no hat aberto, a 130–160.',
     disclaimer: 'Grids de partida populares — não congele nelas. Phonk vive no cowbell e no drift, não em copiar isso 1:1.',
     faqs: [
@@ -402,7 +402,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   hardstyle: {
-    title: 'Ritmo Hardstyle · padrão de bateria de 16 passos',
+    title: 'Hardstyle BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Hardstyle típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o reverse-bass a 150–160, com kick four-on-the-floor.',
     disclaimer: 'Grids de partida populares — não congele nelas. Hardstyle vive no reverse-bass e no drive dos hats, não em copiar isso 1:1.',
     faqs: [
@@ -427,7 +427,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   jazz: {
-    title: 'Ritmo Jazz · padrão de bateria de 16 passos',
+    title: 'Jazz BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Jazz típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o ride; aqui os hats fazem de ride, e não é swing de verdade.',
     disclaimer: 'Grids de partida populares — não congele nelas. Jazz vive no ride e no swing, não em copiar isso 1:1.',
     faqs: [
@@ -452,7 +452,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   salsa: {
-    title: 'Ritmo Salsa · padrão de bateria de 16 passos',
+    title: 'Salsa BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Salsa típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o tumbao, escrito a 180–220.',
     disclaimer: 'Grids de partida populares — não congele nelas. Salsa vive na clave e na percussão, não em copiar isso 1:1.',
     faqs: [
@@ -477,7 +477,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   bachata: {
-    title: 'Ritmo Bachata · padrão de bateria de 16 passos',
+    title: 'Bachata BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Bachata típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o 1-2-3-tap, clap no 4, a 120–140.',
     disclaimer: 'Grids de partida populares — não congele nelas. Bachata vive no 1-2-3-tap e na güira, não em copiar isso 1:1.',
     faqs: [
@@ -502,7 +502,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   gospel: {
-    title: 'Ritmo Gospel · padrão de bateria de 16 passos',
+    title: 'Gospel BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Gospel típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o church clap no 2 e no 4, a 60–100.',
     disclaimer: 'Grids de partida populares — não congele nelas. Gospel vive no clap de igreja e no shout, não em copiar isso 1:1.',
     faqs: [
@@ -527,7 +527,7 @@ export const pt: GenrePatternCopyMap = {
     ],
   },
   country: {
-    title: 'Ritmo Country · padrão de bateria de 16 passos',
+    title: 'Country BPM · padrão de bateria de 16 passos',
     lead: 'BPM só diz a velocidade. Depois vem o beat: um drum pattern de Country típico para programar em qualquer DAW — kick, clap, hats, um compasso em semicolcheias. A marca é o train beat ou o two-step, a 80–120.',
     disclaimer: 'Grids de partida populares — não congele nelas. Country vive no train e no two-step, não em copiar isso 1:1.',
     faqs: [

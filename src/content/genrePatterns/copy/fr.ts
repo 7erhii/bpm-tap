@@ -2,7 +2,7 @@ import type { GenrePatternCopyMap } from '../types';
 
 export const fr: GenrePatternCopyMap = {
   house: {
-    title: 'Rythme house · pattern batterie 16 pas',
+    title: 'House BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern house typique à programmer dans n’importe quel DAW — kick, clap, hats, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La house vit dans le skip et les hats, pas dans une copie 1:1.',
     faqs: [
@@ -27,7 +27,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   techno: {
-    title: 'Rythme Techno · pattern batterie 16 pas',
+    title: 'Techno BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern techno typique à programmer dans n’importe quel DAW — kick four-on-the-floor, clap, hats en contretemps, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La techno vit dans l’hypnose des hats, pas dans une copie 1:1.',
     faqs: [
@@ -52,7 +52,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   trance: {
-    title: 'Rythme Trance · pattern batterie 16 pas',
+    title: 'Trance BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern trance typique à programmer dans n’importe quel DAW — kick four-on-the-floor, hats en contretemps, un roll de snare, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La trance vit dans les rolls et les montées, pas dans une copie 1:1.',
     faqs: [
@@ -77,7 +77,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   'drum-and-bass': {
-    title: 'Rythme Drum & Bass · pattern batterie 16 pas',
+    title: 'Drum & Bass BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern drum & bass typique à programmer dans n’importe quel DAW — two-step, clap sur 3, break Amen, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le drum & bass vit dans le break et le skip, pas dans une copie 1:1.',
     faqs: [
@@ -102,7 +102,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   dubstep: {
-    title: 'Rythme Dubstep · pattern batterie 16 pas',
+    title: 'Dubstep BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern dubstep typique à programmer dans n’importe quel DAW — kick sur 1, clap sur 3, feeling half-time, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le dubstep vit dans l’espace half-time, pas dans une copie 1:1.',
     faqs: [
@@ -127,7 +127,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   trap: {
-    title: 'Rythme Trap · pattern batterie 16 pas',
+    title: 'Trap BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern trap typique à programmer dans n’importe quel DAW — 808, clap sur 2 et 4, rolls de hats, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le trap vit dans le 808 et les rolls de hats, pas dans une copie 1:1.',
     faqs: [
@@ -152,7 +152,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   'hip-hop': {
-    title: 'Rythme Hip Hop · pattern batterie 16 pas',
+    title: 'Hip Hop BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern hip-hop typique à programmer dans n’importe quel DAW — boom bap, kick et clap en pocket, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le hip-hop vit dans le pocket, pas dans une copie 1:1.',
     faqs: [
@@ -177,7 +177,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   pop: {
-    title: 'Rythme Pop · pattern batterie 16 pas',
+    title: 'Pop BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern pop typique à programmer dans n’importe quel DAW — backbeat radio, kick, clap, hats, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La pop vit dans le backbeat et le refrain, pas dans une copie 1:1.',
     faqs: [
@@ -202,7 +202,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   rock: {
-    title: 'Rythme Rock · pattern batterie 16 pas',
+    title: 'Rock BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern rock typique à programmer dans n’importe quel DAW — kick 1 et 3, snare 2 et 4, hats en croches, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le rock vit dans le backbeat de snare, pas dans une copie 1:1.',
     faqs: [
@@ -227,7 +227,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   metal: {
-    title: 'Rythme Metal · pattern batterie 16 pas',
+    title: 'Metal BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern metal typique à programmer dans n’importe quel DAW — double kick, snare 2 et 4, gallop, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le metal vit dans le double kick et le gallop, pas dans une copie 1:1.',
     faqs: [
@@ -252,7 +252,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   'lo-fi': {
-    title: 'Rythme Lo-fi · pattern batterie 16 pas',
+    title: 'Lo-fi BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern lo-fi typique à programmer dans n’importe quel DAW — boom bap poussiéreux, hats épars, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le lo-fi vit dans la poussière et le skip paresseux, pas dans une copie 1:1.',
     faqs: [
@@ -277,7 +277,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   ambient: {
-    title: 'Rythme Ambient · pattern batterie 16 pas',
+    title: 'Ambient BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern ambient typique à programmer dans n’importe quel DAW — un pulse de kick, presque pas de clap, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. L’ambient vit dans l’espace et le pulse, pas dans une copie 1:1.',
     faqs: [
@@ -302,7 +302,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   reggaeton: {
-    title: 'Rythme Reggaeton · pattern batterie 16 pas',
+    title: 'Reggaeton BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern reggaeton typique à programmer dans n’importe quel DAW — dembow, kick, clap, hats, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le reggaeton vit dans le dembow, pas dans une copie 1:1.',
     faqs: [
@@ -327,7 +327,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   afrobeat: {
-    title: 'Rythme Afrobeat · pattern batterie 16 pas',
+    title: 'Afrobeat BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern afrobeat typique à programmer dans n’importe quel DAW — kick façon clave, hats highlife, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. L’afrobeat vit dans la clave et la percussion, pas dans une copie 1:1.',
     faqs: [
@@ -352,7 +352,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   'jersey-club': {
-    title: 'Rythme Jersey Club · pattern batterie 16 pas',
+    title: 'Jersey Club BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern jersey club typique à programmer dans n’importe quel DAW — kicks groupés, clap, hats, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le jersey club vit dans les kicks groupés, pas dans une copie 1:1.',
     faqs: [
@@ -377,7 +377,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   phonk: {
-    title: 'Rythme Phonk · pattern batterie 16 pas',
+    title: 'Phonk BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern phonk typique à programmer dans n’importe quel DAW — bounce Memphis, hat ouvert façon cowbell, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le phonk vit dans le cowbell et le drift, pas dans une copie 1:1.',
     faqs: [
@@ -402,7 +402,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   hardstyle: {
-    title: 'Rythme Hardstyle · pattern batterie 16 pas',
+    title: 'Hardstyle BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern hardstyle typique à programmer dans n’importe quel DAW — reverse-bass sur chaque temps, hats qui poussent, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le hardstyle vit dans le punch reverse-bass, pas dans une copie 1:1.',
     faqs: [
@@ -427,7 +427,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   jazz: {
-    title: 'Rythme Jazz · pattern batterie 16 pas',
+    title: 'Jazz BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern jazz typique à programmer dans n’importe quel DAW — hats à la place de la ride, kick, clap, une mesure en doubles croches. Pas un vrai swing.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le jazz vit dans la ride et le swing, pas dans une copie 1:1 de hats droits.',
     faqs: [
@@ -452,7 +452,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   salsa: {
-    title: 'Rythme Salsa · pattern batterie 16 pas',
+    title: 'Salsa BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern salsa typique à programmer dans n’importe quel DAW — tumbao, kick, clap, hats, une mesure en doubles croches. Starter, pas toute la percussion.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La salsa vit dans le tumbao et la section, pas dans une copie 1:1 de quatre pistes.',
     faqs: [
@@ -477,7 +477,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   bachata: {
-    title: 'Rythme Bachata · pattern batterie 16 pas',
+    title: 'Bachata BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern bachata typique à programmer dans n’importe quel DAW — 1-2-3 puis clap sur 4, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. La bachata vit dans le 1-2-3-tap, pas dans une copie 1:1.',
     faqs: [
@@ -502,7 +502,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   gospel: {
-    title: 'Rythme Gospel · pattern batterie 16 pas',
+    title: 'Gospel BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern gospel typique à programmer dans n’importe quel DAW — church claps sur 2 et 4, kick en pocket, une mesure en doubles croches.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le gospel vit dans les claps d’église, pas dans une copie 1:1.',
     faqs: [
@@ -527,7 +527,7 @@ export const fr: GenrePatternCopyMap = {
     ],
   },
   country: {
-    title: 'Rythme Country · pattern batterie 16 pas',
+    title: 'Country BPM · pattern batterie 16 pas',
     lead: 'Le BPM dit seulement la vitesse. Ensuite le beat : un drum pattern country typique à programmer dans n’importe quel DAW — train beat, snare 2 et 4, hats en doubles croches, une mesure.',
     disclaimer: 'Grilles de départ populaires — ne vous figez pas dessus. Le country vit dans le train beat et le two-step, pas dans une copie 1:1.',
     faqs: [

@@ -2,7 +2,7 @@ import type { GenrePatternCopyMap } from '../types';
 
 export const zh: GenrePatternCopyMap = {
   house: {
-    title: 'House 节奏 · 16 步鼓点',
+    title: 'House BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 house 鼓点，可在任何 DAW 里编 — 底鼓、拍手、踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。House 活在 skip 和踩镲里，而不是 1:1 照抄。',
     faqs: [
@@ -27,7 +27,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   techno: {
-    title: 'Techno 节奏 · 16 步鼓点',
+    title: 'Techno BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 techno 鼓点，可在任何 DAW 里编 — 每拍底鼓、拍手、弱拍踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Techno 活在催眠的踩镲里，而不是 1:1 照抄。',
     faqs: [
@@ -52,7 +52,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   trance: {
-    title: 'Trance 节奏 · 16 步鼓点',
+    title: 'Trance BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 trance 鼓点，可在任何 DAW 里编 — four-on-the-floor 底鼓、弱拍踩镲、军鼓滚奏，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Trance 活在滚奏和铺垫里，而不是 1:1 照抄。',
     faqs: [
@@ -77,7 +77,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   'drum-and-bass': {
-    title: 'Drum & Bass 节奏 · 16 步鼓点',
+    title: 'Drum & Bass BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 drum & bass 鼓点，可在任何 DAW 里编 — two-step、第 3 拍拍手、Amen 碎拍，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Drum & Bass 活在碎拍和 skip 里，而不是 1:1 照抄。',
     faqs: [
@@ -102,7 +102,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   dubstep: {
-    title: 'Dubstep 节奏 · 16 步鼓点',
+    title: 'Dubstep BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 dubstep 鼓点，可在任何 DAW 里编 — 底鼓在 1、拍手在 3、半速体感，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Dubstep 活在半速的空隙里，而不是 1:1 照抄。',
     faqs: [
@@ -127,7 +127,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   trap: {
-    title: 'Trap 节奏 · 16 步鼓点',
+    title: 'Trap BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 trap 鼓点，可在任何 DAW 里编 — 808 底鼓、2 和 4 拍手、踩镲滚奏，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Trap 活在 808 和踩镲滚奏里，而不是 1:1 照抄。',
     faqs: [
@@ -152,7 +152,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   'hip-hop': {
-    title: 'Hip Hop 节奏 · 16 步鼓点',
+    title: 'Hip Hop BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 Hip Hop 鼓点，可在任何 DAW 里编 — boom bap、底鼓和拍手的 pocket，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Hip Hop 活在 pocket 里，而不是 1:1 照抄。',
     faqs: [
@@ -177,7 +177,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   pop: {
-    title: 'Pop 节奏 · 16 步鼓点',
+    title: 'Pop BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型流行鼓点，可在任何 DAW 里编 — 电台反拍、底鼓、拍手、踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。流行活在反拍和副歌里，而不是 1:1 照抄。',
     faqs: [
@@ -202,7 +202,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   rock: {
-    title: 'Rock 节奏 · 16 步鼓点',
+    title: 'Rock BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型摇滚鼓点，可在任何 DAW 里编 — 底鼓 1 和 3、军鼓 2 和 4、八分音符踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。摇滚活在军鼓反拍里，而不是 1:1 照抄。',
     faqs: [
@@ -227,7 +227,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   metal: {
-    title: 'Metal 节奏 · 16 步鼓点',
+    title: 'Metal BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型金属鼓点，可在任何 DAW 里编 — 双底鼓、2 和 4 军鼓、疾驰型，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。金属活在双底鼓和疾驰里，而不是 1:1 照抄。',
     faqs: [
@@ -252,7 +252,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   'lo-fi': {
-    title: 'Lo-fi 节奏 · 16 步鼓点',
+    title: 'Lo-fi BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 lo-fi 鼓点，可在任何 DAW 里编 — 带灰的 boom bap、稀疏踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Lo-fi 活在灰尘感和懒 skip 里，而不是 1:1 照抄。',
     faqs: [
@@ -277,7 +277,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   ambient: {
-    title: 'Ambient 节奏 · 16 步鼓点',
+    title: 'Ambient BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 Ambient 鼓点，可在任何 DAW 里编 — 一下底鼓脉冲、几乎没有拍手，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Ambient 活在空间和脉冲里，而不是 1:1 照抄。',
     faqs: [
@@ -302,7 +302,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   reggaeton: {
-    title: 'Reggaeton 节奏 · 16 步鼓点',
+    title: 'Reggaeton BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 reggaeton 鼓点，可在任何 DAW 里编 — dembow、底鼓、拍手、踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Reggaeton 活在 dembow 里，而不是 1:1 照抄。',
     faqs: [
@@ -327,7 +327,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   afrobeat: {
-    title: 'Afrobeat 节奏 · 16 步鼓点',
+    title: 'Afrobeat BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 afrobeat 鼓点，可在任何 DAW 里编 — clave 式底鼓、highlife 踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Afrobeat 活在 clave 和打击乐里，而不是 1:1 照抄。',
     faqs: [
@@ -352,7 +352,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   'jersey-club': {
-    title: 'Jersey Club 节奏 · 16 步鼓点',
+    title: 'Jersey Club BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 Jersey Club 鼓点，可在任何 DAW 里编 — 成簇的底鼓、拍手、踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Jersey Club 活在成簇的底鼓里，而不是 1:1 照抄。',
     faqs: [
@@ -377,7 +377,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   phonk: {
-    title: 'Phonk 节奏 · 16 步鼓点',
+    title: 'Phonk BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 phonk 鼓点，可在任何 DAW 里编 — Memphis bounce、开镲当 cowbell，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Phonk 活在 cowbell 和 drift 里，而不是 1:1 照抄。',
     faqs: [
@@ -402,7 +402,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   hardstyle: {
-    title: 'Hardstyle 节奏 · 16 步鼓点',
+    title: 'Hardstyle BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 hardstyle 鼓点，可在任何 DAW 里编 — 每拍 reverse-bass 底鼓、往前推的踩镲，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Hardstyle 活在 reverse-bass 的冲击里，而不是 1:1 照抄。',
     faqs: [
@@ -427,7 +427,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   jazz: {
-    title: 'Jazz 节奏 · 16 步鼓点',
+    title: 'Jazz BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型爵士鼓点，可在任何 DAW 里编 — 踩镲代替 ride、底鼓、拍手，一小节十六分音符。这不是真正的 swing。',
     disclaimer: '这是常见起步网格，别死守。爵士活在 ride 和 swing 里，而不是 1:1 照抄一排直踩镲。',
     faqs: [
@@ -452,7 +452,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   salsa: {
-    title: 'Salsa 节奏 · 16 步鼓点',
+    title: 'Salsa BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 salsa 鼓点，可在任何 DAW 里编 — tumbao、底鼓、拍手、踩镲，一小节十六分音符。只是起步，不是整套打击乐。',
     disclaimer: '这是常见起步网格，别死守。Salsa 活在 tumbao 和整组打击乐里，而不是 1:1 照抄四条轨道。',
     faqs: [
@@ -477,7 +477,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   bachata: {
-    title: 'Bachata 节奏 · 16 步鼓点',
+    title: 'Bachata BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 bachata 鼓点，可在任何 DAW 里编 — 1-2-3，第 4 拍拍手，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Bachata 活在 1-2-3-tap 里，而不是 1:1 照抄。',
     faqs: [
@@ -502,7 +502,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   gospel: {
-    title: 'Gospel 节奏 · 16 步鼓点',
+    title: 'Gospel BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型 gospel 鼓点，可在任何 DAW 里编 — 2 和 4 的教堂拍手、pocket 里的底鼓，一小节十六分音符。',
     disclaimer: '这是常见起步网格，别死守。Gospel 活在教堂拍手里，而不是 1:1 照抄。',
     faqs: [
@@ -527,7 +527,7 @@ export const zh: GenrePatternCopyMap = {
     ],
   },
   country: {
-    title: 'Country 节奏 · 16 步鼓点',
+    title: 'Country BPM · 16 步鼓点',
     lead: 'BPM 只说明有多快。接下来是拍：一段典型乡村鼓点，可在任何 DAW 里编 — train beat、2 和 4 军鼓、铺满十六分的踩镲，一小节。',
     disclaimer: '这是常见起步网格，别死守。Country 活在 train beat 和 two-step 里，而不是 1:1 照抄。',
     faqs: [
