@@ -1,0 +1,100 @@
+/* Stable URL (not hashed). Used if /_astro/*.css is missing or / has no locale. */
+:root {
+  --bg: #0b0c10;
+  --bg-elevated: #12141a;
+  --text: #e8eaef;
+  --text-muted: #8b90a0;
+  --accent: #c8f542;
+  --line: rgba(232, 234, 239, 0.1);
+  --radius-md: 16px;
+  --font-body: 'Figtree', system-ui, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(1100px 560px at 78% -8%, rgba(200, 245, 66, 0.09), transparent 58%),
+    linear-gradient(180deg, #0d0f14 0%, var(--bg) 40%, #090a0d 100%);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+}
+
+.root-gate {
+  width: min(40rem, calc(100% - 2rem));
+  margin: 12vh auto 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.root-gate h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.root-gate p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.root-gate__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.root-gate__list a {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  text-decoration: none;
+}
+
+.root-gate__list a:hover {
+  border-color: var(--accent);
+}
+
+/* If this file is served in place of a missing /_astro/*.css, keep the shell readable. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+button {
+  color: var(--text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}

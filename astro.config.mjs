@@ -222,10 +222,13 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // MPA: unknown URLs must hit the real 404, not a cached homepage (soft 404).
-        navigateFallback: '/en/',
+        // MPA: never serve a cached HTML shell for `/` (that skips the locale redirect
+        // and can show the tap UI without CSS after a CSS-hash deploy).
+        globPatterns: ['**/*.{js,css,svg,png,ico,webp,woff2}'],
+        navigateFallback: null,
         navigateFallbackDenylist: [/.*/],
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2}'],
+        skipWaiting: true,
+        clientsClaim: true,
       },
     }),
   ],

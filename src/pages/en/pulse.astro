@@ -39,8 +39,8 @@ const howToSteps = [
       {
         '@context': 'https://schema.org',
         '@type': 'WebApplication',
-        name: 'Online Pulse / Heart Rate Counter',
-        alternateName: ['Pulse tap counter', 'Heart rate BPM tap tool'],
+        name: 'Check Pulse Online',
+        alternateName: ['Measure heart rate online', 'Pulse checker'],
         applicationCategory: 'HealthApplication',
         operatingSystem: 'Any',
         browserRequirements: 'Requires JavaScript',
@@ -58,7 +58,7 @@ const howToSteps = [
         totalTime: 'PT1M',
         tool: {
           '@type': 'HowToTool',
-          name: 'Online pulse counter',
+          name: 'Check pulse online',
         },
         step: howToSteps.map((text, index) => ({
           '@type': 'HowToStep',

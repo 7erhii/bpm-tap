@@ -20,6 +20,7 @@ Open `http://localhost:4321/en/`.
 | `npm run preview` | Preview build |
 | `npm test` | Vitest unit tests |
 | `npm run test:e2e` | Playwright (needs build/preview) |
+| `npm run deploy:cf` | Cloudflare Worker deploy + re-apply Resend secret |
 
 ## Ads
 
@@ -29,21 +30,11 @@ Reserved slots only. Keep off until traffic exists:
 PUBLIC_ADS_ENABLED=false
 ```
 
-## Contact form (Cloudflare Pages)
+## Contact form (Cloudflare Worker)
 
-The form posts to `/api/contact` (`src/cloudflare-worker.ts` on Workers) and sends mail with Resend. Locally, copy `.env.example` → `.env`. Do not commit `.env` or paste the Google account password into Cloudflare.
+Mail via Resend. **Ops runbook (secrets, deploy commands, 404): [`docs/cloudflare.md`](docs/cloudflare.md).**
 
-Git `wrangler deploy` overwrites runtime Variables. Keep `RESEND_API_KEY` as a **Builds** secret (you already have this). Set both **Deploy command** and **Version command** in Cloudflare to:
-
-```bash
-npm run deploy:cf
-```
-
-That deploy reapplies the build secret to the Worker after upload, so it is not wiped. Do not put the key in `wrangler.toml`.
-
-Never prefix these with `PUBLIC_`. After deploy, send a test from `/en/contact/` and check the inbox (and spam).
-
-Workers `_redirects` only allow 200/301/302/303/307/308 — do not use a `404` splat. Custom 404 is `src/pages/404.astro` via `wrangler.toml` (`not_found_handling = "404-page"`).
+Short version: keep `RESEND_API_KEY` as a **Builds** secret. Deploy/Version commands must be `npm run deploy:cf` — raw `npx wrangler deploy` wipes the runtime key. Do not commit `.env`.
 
 ## Spec Kit
 
