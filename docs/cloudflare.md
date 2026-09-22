@@ -48,10 +48,10 @@ If those two commands are still `npx wrangler deploy`, the runtime key will disa
 
 `src/pages/404.astro` builds to `dist/404.html`. Workers do not infer it.
 
-- `wrangler.toml`: `not_found_handling = "404-page"`, `run_worker_first = ["/", "/api/*", "/_astro/*"]`.
+- `wrangler.toml`: `not_found_handling = "404-page"`, `run_worker_first = ["/", "/api/*"]`.
 - `public/_redirects` must **not** use a `404` splat (`/* /404.html 404`). Workers only allow 200 / 3xx there — that line failed deploy with code 100324.
 
-`/` is redirected by `src/cloudflare-worker.ts` (cookie `locale` or `Accept-Language`, else `/en/`). If a stale service worker still shows `/` without a locale, `public/root.css` is a stable stylesheet (`/root.css`). Missing hashed `/_astro/*.css` files are served as `/root.css` so the shell is not unstyled. Hard-refresh once after this ships if the old SW is still stuck.
+`/` is redirected by `src/cloudflare-worker.ts` (cookie `locale` or `Accept-Language`, else `/en/`). `public/root.css` is only for that bare `/` shell (`/root.css`). Do not serve it in place of hashed `/_astro/*.css`: a 200 stand-in is precached by the service worker and then every page loads the wrong stylesheet. `/_astro/*` is served by the asset layer, not the Worker.
 
 ## Check it
 

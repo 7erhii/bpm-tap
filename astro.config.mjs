@@ -225,6 +225,11 @@ export default defineConfig({
         // MPA: never serve a cached HTML shell for `/` (that skips the locale redirect
         // and can show the tap UI without CSS after a CSS-hash deploy).
         globPatterns: ['**/*.{js,css,svg,png,ico,webp,woff2}'],
+        // Give hashed /_astro files a revision too. Without one, Workbox fetches
+        // them with cache:"default" and will keep a poisoned HTTP-cache body
+        // (an old CSS stand-in) for the life of that URL.
+        dontCacheBustURLsMatching: /^$/,
+        cacheId: 'bpm-tap-2',
         navigateFallback: null,
         navigateFallbackDenylist: [/.*/],
         skipWaiting: true,

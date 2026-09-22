@@ -7,22 +7,6 @@ function assets(env: Record<string, unknown>): AssetFetcher {
   return env.ASSETS as AssetFetcher;
 }
 
-export async function fallbackMissingCss(request: Request, env: Record<string, unknown>): Promise<Response | null> {
-  const url = new URL(request.url);
-  if (!url.pathname.startsWith('/_astro/') || !url.pathname.endsWith('.css')) return null;
-  const found = await assets(env).fetch(request);
-  if (found.ok) return found;
-  const fallback = await assets(env).fetch(new Request(new URL('/root.css', url.origin), request));
-  if (!fallback.ok) return found;
-  return new Response(fallback.body, {
-    status: 200,
-    headers: {
-      'content-type': 'text/css; charset=utf-8',
-      'cache-control': 'public, max-age=600',
-    },
-  });
-}
-
 export default {
   async fetch(request: Request, env: Record<string, unknown>): Promise<Response> {
     const url = new URL(request.url);
@@ -39,8 +23,10 @@ export default {
     if (isContactApiPath(url.pathname)) {
       return handleContactHttp(request, env as Record<string, string | undefined>);
     }
-    const css = await fallbackMissingCss(request, env);
-    if (css) return css;
+    // Hashed /_astro/* files are served by the asset layer (see wrangler
+    // run_worker_first). Never answer a missing stylesheet with another file
+    // and status 200: the service worker precaches that body under the hashed
+    // URL and the whole site stays unstyled.
     return assets(env).fetch(request);
   },
 };

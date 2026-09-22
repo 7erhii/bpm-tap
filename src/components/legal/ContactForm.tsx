@@ -1,7 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import type { ContactSource } from '@/lib/contact/types';
 import { EMAIL_MAX, MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from '@/lib/contact/limits';
-import './contact-form.css';
 
 export interface ContactFormLabels {
   name: string;

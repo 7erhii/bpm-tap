@@ -4,13 +4,15 @@ compatibility_date = "2026-09-19"
 # Keep dashboard secrets (RESEND_API_KEY) across wrangler deploy.
 keep_vars = true
 
-# Custom 404 from dist/404.html. /api/* hits the Worker first (contact form).
+# Custom 404 from dist/404.html. / and /api/* hit the Worker first.
+# Do not include /_astro/*: a Worker stand-in for missing CSS (status 200)
+# gets precached by the service worker and unstyles every page.
 [assets]
 directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "404-page"
 html_handling = "force-trailing-slash"
-run_worker_first = ["/", "/api/*", "/_astro/*"]
+run_worker_first = ["/", "/api/*"]
 
 # Non-secret contact delivery. Runtime RESEND_API_KEY is written on deploy
 # from the Cloudflare *build* secret of the same name (see npm run deploy:cf).
